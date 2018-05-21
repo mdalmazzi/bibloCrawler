@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Progetto -> Keywords</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <h4><span class="label label-primary">Keywords:</span></h4>
+            </div>
+            <div class="col-md-9">
+                <h4>
+                    <medium-editor [(editorModel)]="wordMedium" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="editorPlaceholder" (editorModelChange)="OneditorModelChangeWord($event)">
+                    </medium-editor>
+                </h4>
+            </div>
+            <div class="col-md-1">
+                <h4>
+                    <button type="button" class="btn btn-success" (click)="addWord()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                </button>
+                </h4>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    <app-word [indiceWord]="i" [word]="word" *ngFor="let word of words; let i = index" (deleteWords)='deleteWords($event)'>
+                    </app-word>
+
+                </h4>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-warning" (click)="onSubmit()">Conferma Keywords Progetto
+                    
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

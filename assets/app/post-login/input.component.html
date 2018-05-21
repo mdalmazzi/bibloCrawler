@@ -1,0 +1,97 @@
+<!-- <loaders-css [loader]="'square-spin'" [loaderClass]="'my-loader'"></loaders-css> -->
+<div class="row">
+    <div class="col-xs-5 col-md-offset-3">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Crawler for: {{word.word}}</h3>
+            </div>
+            <div class="panel-body">
+
+                <medium-editor [(editorModel)]="word.word" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeWord($event)">
+                </medium-editor>
+                <hr>
+
+
+                <medium-editor [(editorModel)]="word.titolo" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeTitolo($event)">
+                </medium-editor>
+                <hr>
+
+                <medium-editor [(editorModel)]="word.path" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangePath($event)">
+                </medium-editor>
+                <hr>
+
+                <a>
+                    <img class="media-object" [src]="word?.images[0]" alt="immagine" style="max-height:50px;">
+                </a>
+
+                <!--  <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="word?.images[0]"></iframe>
+                </div> -->
+
+                <medium-editor [(editorModel)]="word.images[0]" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeIMG($event)">
+                </medium-editor>
+
+
+
+            </div>
+            <div class="panel-footer">
+                <div class="row" style="margin:5px" *ngIf="word.meta1"><small>
+                        {{word.meta1?.name}}: </small>
+                    <medium-editor [(editorModel)]="word.meta1.content" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeMeta1($event)">
+                    </medium-editor>
+
+                </div>
+                <div class="row" style="margin:5px" *ngIf="word.meta2"><small>{{word.meta2?.name}}: </small>
+                    <medium-editor [(editorModel)]="word.meta2.content" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeMeta2($event)">
+                    </medium-editor>
+                </div>
+                <div class="row" style="margin:5px" *ngIf="word.meta3"><small>{{word.meta3?.name}}: </small>
+                    <medium-editor [(editorModel)]="word.meta3.content" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeMeta3($event)">
+                    </medium-editor>
+
+                </div>
+                <div class="row" style="margin:5px" *ngIf="word.licenza"><small>Licenza: </small>
+                    <medium-editor [(editorModel)]="word.licenza" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeLicenza($event)">
+                    </medium-editor>
+
+                </div>
+                <div class="row" style="margin:5px" *ngIf="word.licenza"><small>Scuola: </small>
+                    <medium-editor [(editorModel)]="word.scuola" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeScuola($event)">
+                    </medium-editor>
+
+                </div>
+
+
+                <div class="row" style="margin:5px"><small>Qualità: </small>
+                    <medium-editor [(editorModel)]="word.quality" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeQuality($event)">
+                    </medium-editor>
+
+                </div>
+
+                <div class="row" style="margin:5px"><small>Tipo media: </small>
+                    <medium-editor [(editorModel)]="word.type" [editorOptions]="{ 'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeType($event)">
+                    </medium-editor>
+
+
+
+                </div>
+                <!--  <div class="row" style="margin:5px"><small>{{word?.type}}: </small>
+                    <medium-editor [(editorModel)]="word.type" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeType($event)">
+                    </medium-editor>
+                </div> -->
+
+                <!-- Split button -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" (click)="onNavigate_Home()">Valida</button>
+                </div>
+
+                <span class="glyphicon glyphicon-remove-sign close" aria-hidden="true" (click)="ondeleteWord()"></span>
+                <a [href]=trustedUrl target="_blank">
+                    <span class="glyphicon glyphicon-arrow-right close " aria-hidden="true "></span>
+                </a>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="col-xs-12">
+
+    <h3>
+        <span class="label label-default" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='acqua') ? 'black' : 'white'" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[0])">{{this.progettoService.progetti[0].words[0]}}</span>
+
+        <span class="label label-primary" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='disequazioni') ? 'black' : 'white'" class="label label-primary" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[1])">{{this.progettoService.progetti[0].words[1]}}</span>
+
+        <span class="label label-success" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[2])">{{this.progettoService.progetti[0].words[2]}}</span>
+
+        <span class="label label-info" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[3])">{{this.progettoService.progetti[0].words[3]}}</span>
+
+        <span class="label label-warning" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[4])">{{this.progettoService.progetti[0].words[4]}}</span>
+
+        <!-- <span class="label label-danger" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch('italiano')">label</span> -->
+    </h3>
+    <hr>
+</div>
+
+<div class="row">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+<app-postlogin [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="10" [page]="p" *ngFor="let word of words | paginate: { itemsPerPage: 10, currentPage: p }; let i=index ">
+
+
+</app-postlogin>
+<div class="row">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+<!-- <app-dettaglio></app-dettaglio> -->

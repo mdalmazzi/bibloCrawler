@@ -1,0 +1,183 @@
+<!-- <hr> -->
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success" (click)="AddFonte()">
+           Inserisci dati nuova fonte</button>
+    </div>
+</div>
+<hr>
+<div class="row" *ngIf="addFonteVisibility">
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Inserimento Fonte</h3>
+            </div>
+            <div class="panel-body">
+                <!-- URL  -->
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h3><span class="label label-primary">URL Fonte:</span></h3>
+                            </div>
+                            <div class="col-md-10">
+                                <h3>
+                                    <medium-editor [(editorModel)]="fonteUrl" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="editorPlaceholder" (editorModelChange)="OneditorModelChangeUrl($event)">
+                                    </medium-editor>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tipo di scuola  -->
+
+                <div class="panel panel-default" (click)="closeSchool($event)">
+                    <div class="panel-body">
+
+                        <div class="dropdown">
+                            <button (click)="selectSchool($event)" class="dropbtn">Tipologie scuola: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                            <div id="myDropdownSchool" class="dropdown-content">
+                                <!-- Primaria -->
+                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[0])}" (click)="setSchool(typeSchoolValue[0])">{{typeSchoolValue[0]}} </a>
+
+                                <!-- //Secondaria 1 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[1])}" (click)="setSchool(typeSchoolValue[1])">{{typeSchoolValue[1]}}</a>
+
+                                <!-- //Secondaria 2 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[2])}" (click)="setSchool(typeSchoolValue[2])">{{typeSchoolValue[2]}}</a>
+
+                            </div>
+                        </div>
+
+                        <h3> <span class="label label-success">{{typeSchool2String }}</span></h3>
+                    </div>
+                </div>
+
+                <!--TYpe Language  -->
+
+                <div class="panel panel-default" (click)="closeLanguage($event)">
+                    <div class="panel-body">
+
+                        <div class="dropdown">
+                            <button (click)="selectLanguage($event)" class="dropbtn">Tipologie lingue: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+                            <div id="myDropdownLanguage" class="dropdown-content">
+                                <!-- Italiano -->
+                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[0])}" (click)="setLanguage(typeLanguageValue[0])">{{typeLanguageValue[0]}} </a>
+
+                                <!-- Francese -->
+                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[1])}" (click)="setLanguage(typeLanguageValue[1])">{{typeLanguageValue[1]}}</a>
+
+                                <!-- Inglese -->
+                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[2])}" (click)="setLanguage(typeLanguageValue[2])">{{typeLanguageValue[2]}}</a>
+
+                                <!-- Tedesco -->
+                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[3])}" (click)="setLanguage(typeLanguageValue[3])">{{typeLanguageValue[3]}}</a>
+
+                                <!-- Spagnolo -->
+                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[4])}" (click)="setLanguage(typeLanguageValue[4])">{{typeLanguageValue[4]}}</a>
+
+                            </div>
+                        </div>
+                        <h3> <span class="label label-success">{{typeLanguage2String }}</span></h3>
+
+                    </div>
+                </div>
+
+                <!-- Licenza  -->
+                <div class="panel panel-default">
+                    <div class="panel-body" (click)="closeLicenza($event)">
+
+                        <div class="dropdown">
+                            <button (click)="selectLicenza($event)" class="dropbtn">Tipologie licenze: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                            <div id="myDropdownLicenza" class="dropdown-content">
+                                <!-- Primaria -->
+                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[0])}" (click)="setLicenza(typeLicenzaValue[0])">{{typeLicenzaValue[0]}} </a>
+
+                                <!-- //Secondaria 1 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[1])}" (click)="setLicenza(typeLicenzaValue[1])">{{typeLicenzaValue[1]}}</a>
+
+                                <!-- //Secondaria 2 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[2])}" (click)="setLicenza(typeLicenzaValue[2])">{{typeLicenzaValue[2]}}</a>
+
+                            </div>
+                        </div>
+                        <h3> <span class="label label-success">{{typeLicenza2String }}</span></h3>
+                    </div>
+                </div>
+
+
+                <!-- Tipologia fonte  -->
+                <div class="panel panel-default">
+                    <div class="panel-body" (click)="closeFonte($event)">
+
+                        <div class="dropdown">
+                            <button (click)="selectFonte($event)" class="dropbtn">Tipologie fonte: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                            <div id="myDropdownFonte" class="dropdown-content">
+                                <!-- Primaria -->
+                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[0])}" (click)="setFonte(typeFonteValue[0])">{{typeFonteValue[0]}} </a>
+
+                                <!-- //Secondaria 1 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[1])}" (click)="setFonte(typeFonteValue[1])">{{typeFonteValue[1]}}</a>
+
+                                <!-- //Secondaria 2 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[2])}" (click)="setFonte(typeFonteValue[2])">{{typeFonteValue[2]}}</a>
+
+                            </div>
+                        </div>
+                        <h3> <span class="label label-success">{{typeFonte2String }}</span></h3>
+
+                    </div>
+                </div>
+
+                <!-- Tipologia Materia  -->
+                <div class="panel panel-default">
+                    <div class="panel-body" (click)="closeMateria($event)">
+
+                        <div class="dropdown">
+                            <button (click)="selectMateria($event)" class="dropbtn">Tipologie materia: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                            <div id="myDropdownMateria" class="dropdown-content">
+                                <!-- Primaria -->
+                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[0])}" (click)="setMateria(typeMateriaValue[0])">{{typeMateriaValue[0]}} </a>
+
+                                <!-- //Secondaria 1 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[1])}" (click)="setMateria(typeMateriaValue[1])">{{typeMateriaValue[1]}}</a>
+
+                                <!-- //Secondaria 2 Grado -->
+                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[2])}" (click)="setMateria(typeMateriaValue[2])">{{typeMateriaValue[2]}}</a>
+
+                            </div>
+                        </div>
+                        <h3> <span class="label label-success">{{typeMateria2String }}</span></h3>
+
+                    </div>
+                </div>
+
+
+                <!-- Completato crawler?  -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3><span class="label label-primary">Crawler SI/NO:</span></h3>
+                    </div>
+                </div>
+
+
+
+                <!-- Data last crawler -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3><span class="label label-primary">Crawler lat time:</span></h3>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-warning" (click)="onSubmit()">Conferma fonte al progetto</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+</div>

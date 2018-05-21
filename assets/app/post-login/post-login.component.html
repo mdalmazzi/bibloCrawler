@@ -1,0 +1,49 @@
+<!-- <div class="col-xs-3 "> -->
+
+
+<div class="panel panel-default ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Crawler for: {{word.word}} - N° {{index_word}} di {{length_word}}
+            <!-- {{percentuale}} -->
+        </h3>
+    </div>
+    <div class="panel-body">
+        <span class="glyphicon glyphicon-remove-sign close" aria-hidden="true"></span>
+        <a [href]=trustedUrl target="_blank">
+            <span class="glyphicon glyphicon-pencil close " aria-hidden="true "></span>
+        </a>
+
+        <a>
+
+            <img class="media-object" [src]="word?.images[0]" alt="immagine" style="max-height:50px;">
+        </a>
+
+        {{word.titolo}}
+    </div>
+    <div class="panel-footer">
+
+
+        <div class="row" style="margin:5px" *ngIf="word.meta1"><small>{{word.meta1?.name}}: {{word.meta1?.content}}</small>
+        </div>
+        <div class="row" style="margin:5px" *ngIf="word.meta2"><small>{{word.meta2?.name}}: {{word.meta2?.content}}</small></div>
+        <div class="row" style="margin:5px" *ngIf="word.meta3"><small>{{word.meta3?.name}}: {{word.meta3?.content}}</small></div>
+
+        <div class="row" style="margin:5px"><small>Licenza: {{word?.licenza}}</small></div>
+        <div class="row" style="margin:5px"><small>Qualità: {{word?.quality}}</small></div>
+        <div class="row" style="margin:5px"><small>Tipo Media: {{word?.type}}</small></div>
+        <div class="row" style="margin:5px"><small>Scuola: {{word?.scuola[0]}}</small></div>
+
+
+        <!-- Split button -->
+        <div class="btn-group">
+            <button type="button" [ngClass]="!(word.controllato) ? 'btn-danger' : 'btn-success'" class="btn" (click)="onNavigate_Dettaglio()" [innerText]="!(word.controllato) ?'Da validare' : 'Validato'"></button>
+
+            <!-- <button type="button" [ngClass]="!(word.controllato) ? 'btn-danger' : 'btn-success'" class="btn" (click)="onNavigate_Input(word)">New search input</button> -->
+
+        </div>
+
+
+
+    </div>
+</div>
+<!-- </div> -->
