@@ -15,7 +15,7 @@ import {Word} from "./word.model";
     styleUrls: ['./list-mappe.component.css']
 })
 export class ListMappeComponent implements  OnInit {
-    constructor( public router: Router, private route: ActivatedRoute, private boxService: PostLoginService, private progettoService: ProgettoService) {
+    constructor( public router: Router, private route: ActivatedRoute, private boxService: PostLoginService, public progettoService: ProgettoService) {
        
         this.route.params.subscribe (
             params => {

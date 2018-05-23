@@ -15,7 +15,7 @@ import {Word} from "./word.model";
     styleUrls: ['./post-login.component.css']
 })
 export class PostLoginComponent implements  OnInit {
-    constructor(public router: Router, private sanitizer: DomSanitizer, private boxService: PostLoginService) {
+    constructor(public router: Router, private sanitizer: DomSanitizer, public boxService: PostLoginService) {
 
        
     }
