@@ -14,6 +14,9 @@ var scalettaRoutes = require('./routes/scaletta');
 var postloginRoutes = require('./routes/postlogin');
 var progettoRoutes = require('./routes/progetto');
 
+var Page = require('./models/page');
+var Word = require('./models/word');
+
 var app = express();
 //mongoose.connect('dea-lab-user:pwd-dea-lab@ds161793.mlab.com:61793/dea-lab');
 //mongoose.connect('localhost:27017/bibblo');
@@ -47,12 +50,69 @@ app.use('/scaletta', scalettaRoutes);
 app.use('/dettaglio', postloginRoutes);
 app.use('/infoprogetto', progettoRoutes);
 
+app.get('/word/:id', (req, res) => {
+    console.log('Salvataggio word')
+    Page.find({
+        $text: {
+            $search: req.params.id,
+            // $language: <string>,
+            // $caseSensitive: <boolean>,
+            // $diacriticSensitive: <boolean>
+        }
+    }, {
+        body: 0
+    }).then((words) => {
+        var wordsave = words;
+
+        wordsave.forEach((word) => {
+            var word = new Word({
+                // Inserire tutto
+                titolo: word.titolo,
+                path: word.path,
+                meta1: word.meta1,
+                meta2: word.meta2,
+                meta3: word.meta3,
+                images: word.images,
+                type: word.type,
+                licenza: word.licenza,
+                scuola: word.scuola,
+                lingua: word.lingua,
+                materia: word.materia,
+                word: req.params.id
+                    //_creator: req.user._id
+            });
+
+            // word.save().then((doc) => {
+            //     res.send(doc);
+            // }, (e) => {
+            //     res.status(400).send(e);
+            // });
+            word.save(function(err, result) {
+
+                if (err) throw err;
+                else {
+                    //res.send(result);
+                    console.log('Salvataggio word da ricerca full text', result);
+                }
+            })
+        })
+
+        //var body = _.pick(req.body, ['email', 'password']);
+
+    }, (e) => {
+        res.status(400).send(e);
+    });
+
+});
+
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     return res.render('index');
 });
+
+
 
 
 module.exports = app;

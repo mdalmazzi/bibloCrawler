@@ -84,6 +84,8 @@ export class ProgettoComponent {
             error => console.error(error)
         );
 
+        this.nomeProgetto = '';
+
      }
 
     
