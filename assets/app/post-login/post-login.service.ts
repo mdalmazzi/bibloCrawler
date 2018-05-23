@@ -17,7 +17,7 @@ export class PostLoginService {
 
     //private path_to_server: string = 'http://localhost:4200';
 
-    private path_to_server: string = 'http://192.168.1.140:4200';
+    private path_to_server: string = 'http://192.168.1.139:4200';
   
     constructor(private http: Http) {}
 

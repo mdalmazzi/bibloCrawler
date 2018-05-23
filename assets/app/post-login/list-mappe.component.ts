@@ -26,8 +26,7 @@ export class ListMappeComponent implements  OnInit {
                 this.doSearch(this.search_word)      
             }
         );
-
-        console.log('Progetto Service')
+       
         this.progettoService.getProgetto()
         
             .subscribe(
