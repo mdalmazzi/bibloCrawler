@@ -8,8 +8,6 @@ const { ObjectID } = require('mongodb');
 var Todo = require('../models/todos');
 var Progetto = require('../models/progetto');
 
-
-
 router.get('/', function(req, res, next) {
 
     Todo.find({},
@@ -69,8 +67,12 @@ router.get('/', function(req, res, next) {
 //     });
 // });
 
+
+// uso questo ma ritorno tutti i progetti da separare i due router progetto e sito
+
 router.get('/:id', function(req, res, next) {
-    Progetto.find({ 'name': req.params.id },
+    // Progetto.find({ 'name': req.params.id },
+    Progetto.find({},
         function(err, messages) {
             if (err) {
                 return res.status(500).json({
@@ -98,6 +100,8 @@ router.get('/:id', function(req, res, next) {
 
 });
 
+/// Aggiunta Sito a Progetto
+
 router.post('/:id', /* authenticate, */ (req, res, next) => {
     var todo = new Todo({
         text: req.body.text,
@@ -116,7 +120,6 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
                 error: err
             })
         }
-
 
         //Aggiunta per aggiornare progetto
         Progetto.find({ 'name': req.params.id },
@@ -138,18 +141,45 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
 
         //Aggiunta per aggiornare progetto
 
-
-
         res.status(201).json({
             message: 'Fonte salvata',
             obj: result
         })
 
     });
+});
+
+/// Aggiunta Sito a Progetto
 
 
+/// Aggiunta Progetto
+
+
+router.post('/', /* authenticate, */ (req, res, next) => {
+    //Aggiunta per aggiornare progetto
+    var progetto = new Progetto({
+        name: req.body.name,
+        // titolo: req.body.titolo,
+        // path: req.body.path,
+
+    });
+    progetto.save(function(err, progetto) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occured',
+                error: err
+            })
+        }
+        res.status(201).json({
+            message: 'Fonte salvata',
+            obj: progetto
+        })
+    })
 
 });
+
+
+/// Aggiunta Progetto
 
 // router.use('/', function(req, res, next) {
 //     jwt.verify(req.query.token, 'secret', function(err, decoded) {

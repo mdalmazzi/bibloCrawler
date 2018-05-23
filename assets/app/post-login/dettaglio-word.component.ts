@@ -81,9 +81,6 @@ export class DettaglioWordComponent implements  OnInit {
 
      onSubmit_3() {
 
-        console.log(this.word);
-
-        // this.word.images[0] = this.word.images[0].replace(/<(?:.|\n)*?>/gm, '');
 
         if (this.word.titolo) {
             this.word.titolo = this.word.titolo.replace(/<(?:.|\n)*?>/gm, '');

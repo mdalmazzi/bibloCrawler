@@ -15,7 +15,7 @@ export class ProgettoService {
     
     //private path_to_server: string = 'http://localhost:4200';
 
-    private path_to_server: string = 'http://192.168.1.128:4200';
+    private path_to_server: string = 'http://192.168.1.140:4200';
   
     constructor(private http: Http) {}
 
@@ -53,11 +53,9 @@ export class ProgettoService {
                         this.siti.push(sito);
                 }
 
-                console.log('Service Elenco siti progetto: ', this.siti);
-
                 this.progetti = transformedProgetto;
-                console.log('Service progetto: ', this.progetti);
 
+                console.log('Service Elenco Progetti: ', this.progetti);           
                 return transformedProgetto;
                 
             })
@@ -82,6 +80,30 @@ export class ProgettoService {
                 console.log('Service progetto: ', this.progetti);
                 
                 return sito;
+
+                
+           })
+            .catch((error: Response) => Observable.throw(error.json()));   
+    }
+
+    addProgetto(progetto: Progetto) {
+        
+        const body = JSON.stringify(progetto);
+        // console.log(body);
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.path_to_server + '/infoprogetto', body, {headers: headers})
+            .map((response: Response) => {
+                
+                const result = response.json();
+                const progetto = new Progetto(result.obj.name);
+                
+                // this.siti.push(sito);
+                // console.log('Elenco siti progetto: ', this.siti);
+                // this.progetti[0].sito.push(sito);
+                // console.log('Service progetto: ', this.progetti);
+                
+                return progetto;
 
                 
            })

@@ -11,7 +11,7 @@
 
         <span class="label label-warning" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(progetti[0].words[4])">{{this.progettoService.progetti[0].words[4]}}</span>
 
-        <!-- <span class="label label-danger" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch('italiano')">label</span> -->
+        <span class="label label-danger" [ngStyle]="{'cursor': change_mouse}" [style.color]="(search_word=='riforma protestante') ? 'black' : 'white'" class="label label-success" (mouseenter)="OnMouseEnter($event)" (mouseleave)="OnMouseLeave($event)" (mouseup)="doSearch(this.progettoService.progetti[0].words[5])">{{this.progettoService.progetti[0].words[5]}}</span>
     </h3>
     <hr>
 </div>

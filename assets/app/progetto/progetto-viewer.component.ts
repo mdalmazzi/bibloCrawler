@@ -52,7 +52,7 @@ export class ProgettoViewerComponent {
             }
           }
         }  
-}
+    }
 
     setSottoProgetto(typeMateria: string) {
         
