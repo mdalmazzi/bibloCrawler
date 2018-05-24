@@ -23,7 +23,7 @@ var app = express();
 //mongoose.connect('localhost:27017/testYOUTube');
 //mongoose.connect('localhost:27017/SpaggiariPage');
 
-mongoose.connect('admin:abc123@localhost/SpaggiariPage');
+mongoose.connect('admin:abc123@localhost:27017/SpaggiariPage');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
