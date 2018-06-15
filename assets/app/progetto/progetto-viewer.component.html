@@ -3,46 +3,6 @@
     <!-- <h3>Crawler Biblò</h3> -->
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Sotto progetto</h3>
-    </div>
-    <div class="panel-body" (click)="closeSottoProgetto($event)">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="dropdown">
-                    <button (click)="selectSottoProgetto($event)" class="dropbtn">SottoProgetto: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
-                    <div id="myDropdownProgetto" class="dropdown-content">
-                        <!-- Primaria -->
-                        <a [ngStyle]="{ 'background-color': setColorSottoProgetto(typeMateriaValue[0])}" (click)="setSottoProgetto(typeMateriaValue[0])">{{typeMateriaValue[0]}} </a>
-
-                        <!-- //Secondaria 1 Grado -->
-                        <a [ngStyle]="{ 'background-color': setColorSottoProgetto(typeMateriaValue[1])}" (click)="setSottoProgetto(typeMateriaValue[1])">{{typeMateriaValue[1]}}</a>
-
-                        <!-- //Secondaria 2 Grado -->
-                        <a [ngStyle]="{ 'background-color': setColorSottoProgetto(typeMateriaValue[2])}" (click)="setSottoProgetto(typeMateriaValue[2])">{{typeMateriaValue[2]}}</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <h4>
-                    <medium-editor [(editorModel)]="progettoMedium" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="editorPlaceholder" (editorModelChange)="OneditorModelChangeWord($event)">
-                    </medium-editor>
-                </h4>
-            </div>
-            <div class="col-md-1">
-                <h4>
-                    <button type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
-                </button>
-                </h4>
-
-            </div>
-        </div>
-    </div>
-</div>
-
 <app-words [progetto]="progetto" [words]="progetto.words"></app-words>
 <!-- <app-add-fonte></app-add-fonte> -->
 
@@ -50,11 +10,11 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Fonti progetto</h3>
+                <h3 class="panel-title">Fonti sotto progetto</h3>
             </div>
             <div class="panel-body">
                 <app-add-fonte></app-add-fonte>
-                <h3><span class="label label-primary">Elenco fonti inserite nel progetto: </span>
+                <h3><span class="label label-primary">Elenco fonti inserite nel sotto progetto: </span>
                 </h3>
 
                 <ul class="list-group">
@@ -63,12 +23,8 @@
                     </li>
 
                 </ul>
-                <app-add-fonte></app-add-fonte>
+                <app-add-fonte [progetto]="progetto"></app-add-fonte>
             </div>
-
-
         </div>
     </div>
-
 </div>
-<!-- </div> -->

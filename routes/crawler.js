@@ -1,25 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+
 const { ObjectID } = require('mongodb');
 
 //var User = require('../models/user');
 
-var Todo = require('../models/todos');
 var Progetto = require('../models/progetto');
+var Crawler = require('../models/crawler');
 
 router.get('/', function(req, res, next) {
 
-    Todo.find({},
+    Crawler.find({}, function(err, messages) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occured',
+                error: err
+            })
+        }
+    })
 
-        function(err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occured',
-                    error: err
-                })
-            }
-        })
+    .populate({ path: 'progetti', populate: { path: 'sito' } })
 
     .exec(function(err, messages) {
         if (err) {
@@ -29,7 +30,7 @@ router.get('/', function(req, res, next) {
             });
         }
         res.status(200).json({
-            message: 'Elenco siti letto con successo!!',
+            message: 'Elenco crawlet letto con successo!!',
             obj: messages
         })
     });
@@ -110,8 +111,7 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
         scuola: req.body.scuola,
         lingua: req.body.lingua,
         materia: req.body.materia,
-        completed: req.body.completed
-            //_creator: req.user._id
+
     });
 
     todo.save(function(err, result) {
@@ -132,21 +132,20 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
                     })
                 }
 
+                // console.log('Fonte: ', result._id);
+                // console.log('Progetto: ', progetto);
                 progetto[0].sito.push(result._id);
                 progetto[0].save();
 
-                res.status(201).json({
-                    message: 'Fonte salvata',
-                    obj: result
-                })
+                // });
             })
 
         //Aggiunta per aggiornare progetto
 
-        // res.status(201).json({
-        //     message: 'Fonte salvata',
-        //     obj: result
-        // })
+        res.status(201).json({
+            message: 'Fonte salvata',
+            obj: result
+        })
 
     });
 });
@@ -156,24 +155,25 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
 
 /// Aggiunta Progetto
 
+
 router.post('/', /* authenticate, */ (req, res, next) => {
-    //Aggiunta per aggiornare progetto
-    var progetto = new Progetto({
+    //Aggiunta per aggiornare crawler
+
+    var crawler = new Crawler({
         name: req.body.name,
-        // titolo: req.body.titolo,
-        // path: req.body.path,
+        progetti: req.body.progetti
+
 
     });
-    progetto.save(function(err, progetto) {
+    crawler.save(function(err, progetto) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
                 error: err
             })
         }
-
         res.status(201).json({
-            message: 'Progetto salvata',
+            message: 'Crawler salvata',
             obj: progetto
         })
     })
@@ -243,7 +243,44 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 
 router.patch('/:id', function(req, res, next) {
 
-    Todo.findById(req.params.id, function(err, message) {
+    // Crawler.findById(req.params.id, function(err, message) {
+    Crawler.find({ 'name': req.body.name }, function(err, message) {
+
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!message) {
+            return res.status(500).json({
+                title: 'No Crawler Found',
+                error: { message: 'Fonte not FOUND' }
+            });
+        }
+        console.log('Risposta crawler: ', message, message[0].name, req.params.id);
+
+        message[0].progetti.push(req.params.id);
+        // message.progetti.push(null, req.params.id);
+
+        message[0].save(function(err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Errore nell aggiornamento',
+                    error: err
+                })
+            }
+            res.status(201).json({
+                message: 'Crawler Update',
+                obj: result
+            })
+        });
+    });
+});
+
+router.patch('/', function(req, res, next) {
+
+    Progetto.find({}, function(err, message) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -260,57 +297,16 @@ router.patch('/:id', function(req, res, next) {
         // message.sito.push(null, req.body.sito._id)
         //user.save();
 
-        message.scuola = req.body.scuola;
-        message.lingua = req.body.lingua;
-        message.materia = req.body.materia;
-        // message.text = req.body.text;
-        // message.text = req.body.text;
-
-        message.save(function(err, result) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'Errore nell aggiornamento',
-                    error: err
-                })
-            }
-            res.status(201).json({
-                message: 'Fonte Update',
-                obj: result
-            })
-        });
-    });
-});
-
-router.patch('/', function(req, res, next) {
-
-    Progetto.find({ 'name': req.body.name }, function(err, message) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        if (!message) {
-            return res.status(500).json({
-                title: 'No Fonte Found',
-                error: { message: 'Fonte not FOUND' }
-            });
-        }
-
-        console.log('Router message: ', message);
-
-        if (req.body.sito.length >= 6) {
-            message[0].sito = req.body.sito;
-        }
-
+        message[0].sito = req.body.sito;
         message[0].words = req.body.words;
-
-        console.log('Req Body: ', req.body);
+        // message[0].materia = req.body.materia;
+        // message.text = req.body.text;
+        // message.text = req.body.text;
 
         message[0].save(function(err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'Errore nell\'aggiornamento',
+                    title: 'Errore nell aggiornamento',
                     error: err
                 })
             }

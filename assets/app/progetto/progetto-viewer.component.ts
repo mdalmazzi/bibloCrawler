@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 
 import {Progetto} from "./progetto.model";
@@ -9,7 +9,7 @@ import {Progetto} from "./progetto.model";
     templateUrl: './progetto-viewer.component.html',
     styleUrls: ['./progetto-viewer.component.css']
 })
-export class ProgettoViewerComponent {
+export class ProgettoViewerComponent implements  OnInit{
     constructor() {}
 
     @Input() progetto: Progetto;
@@ -21,6 +21,10 @@ export class ProgettoViewerComponent {
     sottoProgetto = ["Area Scientifica"];
     typeMateriaValue: string[] = ["Area Scientifica", "Area Umanistica", "Area Tecnica"]; 
    
+
+    ngOnInit(){
+        console.log('Viewer this.progetto: ', this.progetto);  
+     }
 
     OneditorModelChangeWord(event) {
         // da inserire
@@ -56,15 +60,7 @@ export class ProgettoViewerComponent {
 
     setSottoProgetto(typeMateria: string) {
         
-        // if (this.typeMateria.indexOf(typeMateria) == -1 || this.typeMateria.length == 0 ) {
-        //     this.typeMateria.push(typeMateria);
-        //     this.typeMateria2String = this.typeMateria.join(', ');         
-
-        // } else {
-        //     this.typeMateria.splice(this.typeMateria.indexOf(typeMateria), 1);
-        //     this.typeMateria2String = this.typeMateria.join(', ');
-                   
-        // }
+      
     }
    
 }

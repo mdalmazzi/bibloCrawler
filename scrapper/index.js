@@ -6,7 +6,6 @@ module.exports.extractData = function(html, url, contentType, todo) {
 
     var $ = cheerio.load(html);
 
-
     var $images = $('img');
 
     var description = $('meta[name="description"]').attr('content');

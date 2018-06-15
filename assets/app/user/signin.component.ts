@@ -24,7 +24,9 @@ export class SigninComponent {
                     this.router.navigateByUrl('/');
                     console.log('Logging avvenuto', data);
                     // this.router.navigate(['/home/'+ this.empty_start]);
-                    this.router.navigate(['/progetto/']);
+                    
+                    // this.router.navigate(['/progetto/']);
+                    this.router.navigate(['/crawlers/']);
 
                 },
                 error => console.error(error)

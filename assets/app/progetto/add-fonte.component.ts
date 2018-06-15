@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
+import {Progetto} from "./progetto.model";
 import {ProgettoService} from "./progetto.service";
 import {Sito} from "./sito.model";
 
@@ -9,7 +10,8 @@ import {Sito} from "./sito.model";
     templateUrl: './add-fonte.component.html',
     styleUrls: ['./add-fonte.component.css']
 })
-export class AddFonteComponent {
+
+export class AddFonteComponent implements  OnInit{
     constructor(private progettoService: ProgettoService) {}
 
     editorPlaceholder = "Scrivi URL della fonte qui...";
@@ -41,8 +43,14 @@ export class AddFonteComponent {
     typeMateria2String: string = '';
     typeMateriaValue: string[] = ['Matematica', 'Fisica', 'Geografia']; 
     
-
+    @Input() progetto: Progetto;
     //@Input() sito: Sito[] = [];
+
+    ngOnInit(){
+       // console.log('Add this.progetto: ', this.progettoService.progetto);
+     }
+
+
     AddFonte() {
         this.addFonteVisibility = !this.addFonteVisibility;
     }
@@ -261,10 +269,17 @@ export class AddFonteComponent {
             
             const sito = new Sito(this.fonteUrl.replace(/<(?:.|\n)*?>/gm, ''), this.typeFonte[0], this.typeLicenza[0], this.typeSchool, this.typeLanguage, this.typeMateria);
 
-            const progettoName = this.progettoService.progetti[0].name;
+            sito.completed = false;
 
+            const progettoName = this.progettoService.progetto.name;
+            // console.log('this.progetto.name', progettoName, this.progetto, sito);
+            //const progettoName = this.progetto.name;
+            
+            this.progettoService.progetto.sito.push(sito);
+            this.progetto = this.progettoService.progetto;
             console.log('Submit: sito >>', sito);
-               this.progettoService.addTodo(sito, progettoName)
+
+            this.progettoService.addTodo(sito, progettoName)
                 .subscribe(
                     data => {
                         console.log(data);

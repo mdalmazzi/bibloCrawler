@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 
-var Mappa = require('../models/mappa');
+// var Mappa = require('../models/mappa');
 var Word = require('../models/word');
 
 router.get('/:id', function(req, res, next) {
@@ -74,7 +74,7 @@ router.post('/', function(req, res, next) {
             path: req.body.path,
             meta1: req.body.meta1,
             meta2: req.body.meta2,
-            meta3: req.body.meta2,
+            meta3: req.body.meta3,
             images: req.body.images,
             user: user,
             type: req.body.type,
@@ -189,7 +189,5 @@ router.delete('/:id', function(req, res, next) {
         });
     });
 });
-
-
 
 module.exports = router;

@@ -47,28 +47,40 @@ export class ModifyFonteComponent implements  OnInit{
 
     ngOnInit(){
 
-        this.fonteUrl = this.sito.text;
-
-        this.typeSchool = this.sito.scuola;
-        this.typeSchool2String = this.typeSchool.join(', ');
+        if (this.sito.text) {
+            this.fonteUrl = this.sito.text;
+        }
+        
+        if (this.sito.scuola) {
+            this.typeSchool = this.sito.scuola;
+            this.typeSchool2String = this.typeSchool.join(', ');
+        }
+        
+       
+       
       
         if (this.sito.licenza) {
             this.typeLicenza[0] = this.sito.licenza;
             this.typeLicenza2String = this.typeLicenza[0];
         }
         
+        if (this.sito.tipologia) {
+            this.typeFonte[0] = this.sito.tipologia;
+            this.typeFonte2String = this.typeFonte.join(', ');
+        }
 
-        this.typeFonte[0] = this.sito.tipologia;
-        this.typeFonte2String = this.typeFonte.join(', ');
-
-        if (this.sito.lingua) {}
-
-        this.typeLanguage = this.sito.lingua;
-        this.typeLanguage2String = this.typeLanguage[0];
-
-        this.typeMateria = this.sito.materia;
-        this.typeMateria2String = this.typeMateria.join(', ');
         
+
+        if (this.sito.lingua) {
+            this.typeLanguage = this.sito.lingua;
+            this.typeLanguage2String = this.typeLanguage[0];
+        }
+
+        if (this.sito.materia) {
+            this.typeMateria = this.sito.materia;
+            this.typeMateria2String = this.typeMateria.join(', ');
+        }
+     
         console.log('modifica fonte:', this.sito);
       
      }
@@ -300,6 +312,8 @@ export class ModifyFonteComponent implements  OnInit{
         }
 
     onDelete() {
+
+        this.progettoService.progetto.sito.splice(this.progettoService.progetto.sito.indexOf(this.sito), 1);
            
             this.progettoService.onDelete(this.sito._id)
                 .subscribe(

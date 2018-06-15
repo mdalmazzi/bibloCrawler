@@ -1,0 +1,137 @@
+<!-- <div class="col-xs-3 "> -->
+<!-- <div class="card" style="width: 20rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+
+</div> -->
+
+
+<div class="card bg-secondary-mod border border-light ">
+    <!--  <div class="card-header bg-secondary-mod text-white">
+        
+
+    </div> -->
+
+    <!-- <div class="card-header bg-primary text-white">
+        <div class="row">
+            <div class="col col-10">
+                 {{word.titolo | truncate : 16}} {{onthefly}}
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='video') || (word.type=='Video')">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='Immagine') || (word.type=='immagine')">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='Pagina Web') || (word.type=='pagina web') || (word.type=='Web Page') || (word.type=='web page') || (word.type=='Web page') || (word.type=='Pagina web') || (word.type=='webpage') || (word.type=='Web page, Video') || (word.type=='Pagina Web, Video')">
+                <i class="fa fa fa-link" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='PDF') || (word.type=='pdf') || (word.type=='Pdf')">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+            </div>
+
+
+        </div>
+Era la vecchia gestione per la dimensione , non mi piace
+          [style.max-height]="(height > width) ? '90px' : 'none' " 
+    [style.height]="(height > width) ? '90px' : 'auto' " 
+    [style.max-width]="(height > width) ? 'none' : '215px' " 
+    [style.width]="(height > width) ? 'auto' : '215px' "
+
+    </div> -->
+    <div class="row">
+        <div class="col col-10">
+        </div>
+        <div *ngIf="onthefly" class="col col-2 text-white rounded-circle bg-primary-mod ontheflypos">
+            B
+        </div>
+        <div *ngIf="!onthefly" class="col col-2 text-white rounded-circle bg-secondary-mod-bis ontheflypos">
+            W
+        </div>
+    </div>
+
+
+
+    <img *ngIf="imageUri; else Blocklivello1" class="card-img-top bg-secondary-mod" [src]="imageUri" alt="" (load)="handleImageLoad($event)">
+
+
+
+
+    <div class="card-block bg-secondary-mod">
+        <p class="card-text col col-12" style="margin:5px">
+            <small *ngIf="word.meta1.content != 'null'; else Blocklivello2">{{word.meta1?.content | truncate : 100}}</small></p>
+        <p class="card-text">
+
+            <div class="row" style="margin:5px">
+                <div class="col col-10">
+
+                </div>
+                <div class="col col-2" *ngIf="word.licenza=='Creative Commons'">
+                    <i class="fa fa-creative-commons text-light bg-secondary-mod" aria-hidden="true"></i>
+                </div>
+                <div class="col col-2" *ngIf="(word.licenza=='copyright') || (word.licenza=='Copyright')">
+                    <i class="fa fa-copyright text-light bg-secondary-mod" aria-hidden="true"></i>
+                </div>
+
+
+            </div>
+
+    </div>
+    <div class="card-footer bg-light-mod">
+        <div class="row">
+
+            <div class="col col-10">
+                <small>  {{word.titolo | truncate : 20}} </small>
+            </div>
+
+            <div class="col col-2" *ngIf="(word.type=='video') || (word.type=='Video')">
+                <i class="fa fa-video-camera text-secondary" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='Immagine') || (word.type=='immagine')">
+                <i class="fa fa-picture-o text-secondary" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='Pagina Web') || (word.type=='pagina web') || (word.type=='Web Page') || (word.type=='web page') || (word.type=='Web page') || (word.type=='Pagina web') || (word.type=='webpage') || (word.type=='Web page, Video') || (word.type=='Pagina Web, Video')">
+                <i class="fa fa fa-link text-secondary" aria-hidden="true"></i>
+            </div>
+            <div class="col col-2" *ngIf="(word.type=='PDF') || (word.type=='pdf') || (word.type=='Pdf')">
+                <i class="fa fa-file-pdf-o text-secondary" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-10 ">
+                <a [href]=trustedUrl target="_blank">
+                    <small class="text-warning">{{word.path | truncate : 20}}</small>
+
+                </a>
+            </div>
+            <div class="col col-2">
+                <a [href]=trustedUrl target="_blank">
+                    <i class="fa fa-play-circle text-muted" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<ng-template #Blocklivello1>
+    <img class="card-img-top bg-secondary-mod" [src]="'/img/' + word.wordId + '.png'" alt="" (load)="handleImageLoad($event)">
+
+</ng-template>
+
+
+
+
+
+
+<ng-template #Blocklivello2>
+
+    <small>{{word.titolo | truncate : 100}}</small>
+
+
+</ng-template>

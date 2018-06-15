@@ -20,8 +20,6 @@ var todoSchema = new Schema({
         minlength: 6,
         trim: true // sicuro?
     },
-
-
     tipologia: {
         type: String,
         required: false,
@@ -69,6 +67,10 @@ var todoSchema = new Schema({
         trim: true,
         min: 1,
         max: 5
+    },
+    completed: {
+        type: Boolean,
+        required: false
     },
     // word: {
     //     type: String,

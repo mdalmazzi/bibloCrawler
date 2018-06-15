@@ -12,7 +12,10 @@ var userRoutes = require('./routes/user');
 var ideeRoutes = require('./routes/idee');
 var scalettaRoutes = require('./routes/scaletta');
 var postloginRoutes = require('./routes/postlogin');
+var postloginRoutesF = require('./routes/postloginf');
+
 var progettoRoutes = require('./routes/progetto');
+var crawlerRoutes = require('./routes/crawler');
 
 var Page = require('./models/page');
 var Word = require('./models/word');
@@ -21,8 +24,8 @@ var app = express();
 //mongoose.connect('dea-lab-user:pwd-dea-lab@ds161793.mlab.com:61793/dea-lab');
 //mongoose.connect('localhost:27017/bibblo');
 //mongoose.connect('localhost:27017/testYOUTube');
-//mongoose.connect('localhost:27017/SpaggiariPage');
-mongoose.connect('localhost:27017/Spaggiari');
+mongoose.connect('localhost:27017/SpaggiariPage');
+// mongoose.connect('localhost:27017/Spaggiari');
 
 //mongoose.connect('mongodb://admin:abc123@localhost:27017/SpaggiariPage');
 
@@ -52,6 +55,11 @@ app.use('/idee', ideeRoutes);
 app.use('/scaletta', scalettaRoutes);
 app.use('/dettaglio', postloginRoutes);
 app.use('/infoprogetto', progettoRoutes);
+app.use('/crawler', crawlerRoutes);
+app.use('/home-info', postloginRoutesF);
+
+
+// Creazione words DB da full search pagine indicizzate //
 
 app.get('/word/:id', (req, res) => {
     console.log('Salvataggio word')
@@ -114,8 +122,5 @@ app.use('/', appRoutes);
 app.use(function(req, res, next) {
     return res.render('index');
 });
-
-
-
 
 module.exports = app;

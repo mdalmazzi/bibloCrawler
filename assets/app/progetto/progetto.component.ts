@@ -1,20 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 import {ProgettoService} from "./progetto.service";
 import {Progetto} from "./progetto.model";
+import {Crawler} from "./crawler.model";
+import {Sito} from './sito.model'
+import { empty } from 'rxjs/Observer';
 
 @Component({
     selector: 'app-progetto',
     templateUrl: './progetto.component.html',
     styleUrls: ['./progetto.component.css']
 })
-export class ProgettoComponent {
+export class ProgettoComponent implements OnInit{
     constructor(private progettoService: ProgettoService) {}
 
-    public progetti: Progetto[] = [];
-    public progetto: Progetto;
+    // public progetti: Progetto[] = [];
+    // public progetto: Progetto;
 
-    placeholderVar = "Scrivi il nome del progetto qui..."
+    @Input() progetto: Progetto;
+    @Input() progetti: Progetto[];
+
+    // progetto: Progetto;
+    // progetti: Progetto[];
+
+    // public crawlers: Crawler[];
+    @Input() crawlers: Crawler[];
+
+    placeholderVar = "Scrivi il nome del sotto-progetto qui..."
     nomeProgetto: string = '';
 
 
@@ -23,7 +35,7 @@ export class ProgettoComponent {
     }
 
     selectProgetto(event:MouseEvent) {
-        console.log('myDropdownProgetti');
+       
         document.getElementById("myDropdownProgetti").classList.toggle("show");  
     }
 
@@ -38,9 +50,11 @@ export class ProgettoComponent {
         }
     }
 
-    setProgetto( i: number) {
-        console.log('setta progetto');
+    setProgetto(i: number) {
+        
         this.progetto = this.progetti[i];
+        this.progettoService.progetto = this.progetti[i];
+        console.log(this.progetto, this.progettoService.progetto)
     }
 
     closeProgetto(event) {
@@ -59,36 +73,63 @@ export class ProgettoComponent {
     
 
     ngOnInit(){
+
+        // Non leggiamo qua ma già in crawler
         
-        this.progettoService.getProgetto()
+        // this.progettoService.getProgetto()
         
-        .subscribe(
-            (progetto: Progetto[]) => {
-                this.progetti = progetto;
-                this.progetto = this.progetti[0]
-                console.log('Elenco progetti: ', progetto);
-            }
-        );
+        // .subscribe(
+        //     (progetto: Progetto[]) => {
+        //         this.progetti = progetto;
+        //         this.progetto = this.progetti[0]
+        //         console.log('Elenco progetti: ', progetto);
+        //     }
+        // );
+
+        // this.progettoService.getCrawlers()
+        
+        // .subscribe(
+        //     (crawlers: Crawler[]) => {
+        //         this.crawlers = crawlers;
+        //         this.progetto = this.crawlers[1].progetti[0];
+        //         this.progetti = this.crawlers[1].progetti;
+        //         console.log('Elenco Crawlers: ', this.crawlers, this.progetti, this.progetto);
+        //     }
+        // );
       
      }
 
      addProgetto() {
+        
+        const newSito = new Sito('','');
+        // console.log('crawlers: ', this.crawlers)
+        const newProgetto = new Progetto(this.nomeProgetto.replace(/<(?:.|\n)*?>/gm, ''), [newSito], []);
+        
 
-        const newProgetto = new Progetto(this.nomeProgetto.replace(/<(?:.|\n)*?>/gm, ''));
 
         this.progetti.push(newProgetto);
         
-        this.progettoService.addProgetto(newProgetto)
+        this.progettoService.addProgetto(newProgetto, this.crawlers[1])
         .subscribe(
-            data => console.log(data),
+            data => {
+           
+                data;
+                this.progettoService.updateCrawler(data.obj._id)
+                    .subscribe(
+                        data => {
+                            console.log('UpdateCrawler',data);
+                            // this.progetti.push( data);
+                        },
+                        error => console.error(error)
+                        
+                    )
+            },
             error => console.error(error)
         );
 
         this.nomeProgetto = '';
 
      }
-
-    
 
    
 }

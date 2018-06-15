@@ -1,10 +1,11 @@
 
 import {Component, OnInit} from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { ActivatedRoute, Router} from "@angular/router";
 
 import {PostLoginService} from "../post-login/post-login.service";
 import {Word} from "../post-login/word.model";
-import { ActivatedRoute, Router} from "@angular/router";
+import {ProgettoService} from "../progetto/progetto.service";
 
 
 @Component({
@@ -13,8 +14,7 @@ import { ActivatedRoute, Router} from "@angular/router";
     styleUrls: ['./header.component.css']
 
 })
-export class HeaderComponent implements OnInit{
-    
+export class HeaderComponent implements OnInit{   
 
     word: Word;
     words: Word[];
@@ -24,9 +24,16 @@ export class HeaderComponent implements OnInit{
     public number_titolo;
    
     header_home = false;
+
+    start_word = 'fisica';
+    start_scuola = 'all';
+    start_risorsa = 'all';
+    start_licenza = 'all'; 
+    start_fonte = 'all';
+    start_materia = 'all';
     //url_status: any;
     
-        constructor(private boxService: PostLoginService, public route: ActivatedRoute, public router: Router, private  postLoginService: PostLoginService) {
+        constructor(private boxService: PostLoginService, public route: ActivatedRoute, public router: Router, private  postLoginService: PostLoginService, private progettoService: ProgettoService) {
 
             //router.events.subscribe((url:any) => console.log(url));
             
@@ -38,28 +45,43 @@ export class HeaderComponent implements OnInit{
 
     OneditorModelChangeSEARCH(event: any) {
         
-        //this.doSearch(event);
         this.search_word = event;
-        console.log(event)
+        
     
     }
 
-    submitSearch() {
-        this.doSearch(this.search_word)
-    }
 
     goProgetto() {
-        this.router.navigate(['progetto/']);
+        document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+
+        this.router.navigate(['crawlers']);
+        document.getElementById("validazione").classList.remove("active");
+        document.getElementById("progetto").classList.toggle("active"); 
+        document.getElementById("frontend").classList.remove("active");
     }
 
     goValidate() {
+        document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+
         this.router.navigate(['home/fisica']);
+        document.getElementById("validazione").classList.toggle("active");
+        document.getElementById("progetto").classList.remove("active"); 
+        document.getElementById("frontend").classList.remove("active");
     }
 
-    
 
     goFrontEnd() {
-        this.router.navigate(['esterno']);
+        // this.router.navigate(['esterno']);
+ 
+        // this.router.navigate(['homef/fisica']);
+        document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css');
+
+        
+        this.router.navigate(['/home/'+ this.start_word + '/' + this.start_scuola + '/' + this.start_risorsa + '/' + this.start_fonte + '/' + this.start_materia + '/' + this.start_licenza]);
+
+        document.getElementById("validazione").classList.remove("active");
+        document.getElementById("progetto").classList.remove("active"); 
+        document.getElementById("frontend").classList.toggle("active");
     }
 
 
@@ -67,31 +89,12 @@ export class HeaderComponent implements OnInit{
     doSearch(search: string) {
         search = (search.replace(/<(?:.|\n)*?>/gm, '')).toLowerCase();
 
-        //this.boxService.search_word = search;
-        
-        // if (search != "") {
-        //     this.router.navigate(['home/' + search]); 
-        // }
-        
-        /* this.boxService.getBoxes(search.replace(/<(?:.|\n)*?>/gm, ''))
-        
-                .subscribe(
-                    (words: Word[]) => {
-                        this.words = words;
-          
-                    }
-                ); */      
+      
             } 
 
     ngOnInit() {
        
     }
 
-
-
-
-   
-
-   
 
 }

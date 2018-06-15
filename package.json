@@ -49,6 +49,7 @@
     "rxjs": "^5.2.0",
     "serve-favicon": "~2.3.0",
     "simplecrawler": "^0.5.4",
+    "url2img": "^1.0.3",
     "zone.js": "^0.8.5"
   },
   "devDependencies": {

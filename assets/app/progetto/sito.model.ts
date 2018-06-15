@@ -8,8 +8,7 @@ export class Sito {
     scuola?: string[];
     lingua?: string[];
     materia?: string[];
-    _id?:string;
-    
+    _id?:string;  
     completed?: boolean;
     quality?: number;
     

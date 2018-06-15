@@ -56,9 +56,8 @@ export class PostLoginComponent implements  OnInit {
                 
                this.boxService.index_word = this.index_word  + this.itemsPerPage *(this.page - 1);
         
-               console.log(this.boxService.index_word);
-        
-        
+            //    console.log(this.boxService.index_word);
+
                this.router.navigate(['input']);
                 //this.loadWord.emit(this.word); */
                 // document.getElementById('myModal').style.display = "block";

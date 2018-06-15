@@ -9,6 +9,9 @@ import {InputWordComponent} from "./post-login/input.component";
 import {DettaglioWordComponent} from "./post-login/dettaglio-word.component";
 import {ProgettoComponent} from "./progetto/progetto.component";
 import {ExternalPageComponent} from "./post-login/frontend.component";
+import {CrawlerComponent} from "./progetto/crawler.component";
+
+import {HomeComponentF} from "./post-loginf/home.component";
 
 const APP_ROUTES: Routes = [
    {path: '', redirectTo: '/auth', pathMatch: 'full'},
@@ -17,12 +20,14 @@ const APP_ROUTES: Routes = [
  
     {path: 'auth', component: AuthenticationComponent, children: USER_ROUTES},
 
-
     {path: 'home/:id', component: HomeComponent},
+    {path: 'home/:word/:scuola/:risorsa/:fonte/:materia/:licenza', component: HomeComponentF},
+    // {path: 'home', redirectTo: 'home/ ', pathMatch: 'full'},
     {path: 'dettaglio', component: DettaglioWordComponent},
 
     {path: 'input', component: InputWordComponent},
     {path: 'progetto', component: ProgettoComponent},
+    {path: 'crawlers', component: CrawlerComponent},
     {path: 'esterno', component: ExternalPageComponent}
     
 ];

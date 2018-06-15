@@ -27,10 +27,13 @@ export class WordsComponent implements  OnInit{
 
     OneditorModelChangeWord(event) { 
       
+        console.log('event medium: ', event);
         this.wordMedium = event;
      }
 
      addWord() {
+
+        console.log('progetto - wordMedium: ',this.wordMedium, this.progetto);
 
         this.words.push(this.wordMedium.replace(/<(?:.|\n)*?>/gm, ''));
         this.wordMedium = '';
@@ -46,6 +49,8 @@ export class WordsComponent implements  OnInit{
         // const sito = new Sito(this.fonteUrl.replace(/<(?:.|\n)*?>/gm, ''), this.typeFonte[0], this.typeLicenza[0], this.typeSchool, this.typeLanguage, this.typeMateria);
 
         this.progetto.words = this.words;
+
+        console.log('this.progetto: ', this.progetto);
 
         console.log('Submit: sito >>', this.words);
            this.progettoService.onUpdateWords(this.progetto)

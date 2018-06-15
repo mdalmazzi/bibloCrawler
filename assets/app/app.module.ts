@@ -35,9 +35,7 @@ import {ModifyFonteComponent}  from "./progetto/modifica-fonte.component";
 import {WordsComponent}  from "./progetto/words.component";
 import {WordComponent}  from "./progetto/word.component";
 import {ExternalPageComponent}  from "./post-login/frontend.component";
-
-
-
+import {CrawlerComponent}  from "./progetto/crawler.component";
 
 import {ProgettoViewerComponent} from "./progetto/progetto-viewer.component";
 import { QuillEditorModule } from 'ngx-quill-editor';
@@ -48,6 +46,16 @@ import {CommonModule} from "@angular/common";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ProgettoService } from './progetto/progetto.service';
 
+//Front End Component
+import { DettaglioWordComponentF } from './post-loginf/dettaglio-word.component';
+import { HomeComponentF } from './post-loginf/home.component';
+import { ListMappeComponentF } from './post-loginf/list-mappe.component';
+import { PostLoginComponentF } from './post-loginf/post-login.component';
+
+import {TruncatePipe} from './post-loginf/truncate';
+
+
+//End Front End Component
 
 
 
@@ -81,7 +89,15 @@ import { ProgettoService } from './progetto/progetto.service';
         ModifyFonteComponent,
         WordsComponent,
         WordComponent,
-        ExternalPageComponent
+        ExternalPageComponent,
+        CrawlerComponent,
+        //
+        DettaglioWordComponentF,
+        HomeComponentF,
+        ListMappeComponentF,
+        PostLoginComponentF,
+        TruncatePipe
+        //
 
     ],
     imports: [BrowserModule,

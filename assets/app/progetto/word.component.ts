@@ -1,8 +1,11 @@
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
+import { ActivatedRoute, Router} from "@angular/router";
+
 import {Sito} from "./sito.model";
 
 import {ProgettoService} from "./progetto.service";
 import {Progetto} from "./progetto.model";
+import { Word } from '../post-login/word.model';
 
 
 @Component({
@@ -10,10 +13,10 @@ import {Progetto} from "./progetto.model";
     templateUrl: './word.component.html'
 })
 export class WordComponent implements  OnInit{
-    constructor() {}
+    constructor(public route: ActivatedRoute, public router: Router,) {}
 
     @Input() indiceWord: number;
-    @Input() word: string;
+    @Input() word;
     @Output() deleteWords = new EventEmitter();
     
 
@@ -24,5 +27,12 @@ export class WordComponent implements  OnInit{
      deleteWord() {
         
          this.deleteWords.emit(this.indiceWord);
+     }
+
+     goWord(word: Word) {
+        this.router.navigate(['home/' + word]);
+        document.getElementById("validazione").classList.toggle("active");
+        document.getElementById("progetto").classList.remove("active"); 
+        document.getElementById("frontend").classList.remove("active");
      }
 }

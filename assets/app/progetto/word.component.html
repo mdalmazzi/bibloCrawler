@@ -1,1 +1,11 @@
-<span class="label label-primary" (click)="deleteWord()" aria-hidden="true">{{word}} <span class="glyphicon glyphicon-remove" (click) ="deleteWord()"> </span></span>
+<!-- <a [routerLink]="['/home/'+ word]"> -->
+<a (click)="goWord(word)">
+    <span class="label label-primary" aria-hidden="true">{{word}} </span>
+</a>
+
+<span class="label label-danger" aria-hidden="true">
+        <span class="glyphicon glyphicon-remove" (click)="deleteWord()"></span>
+</span>
+<span class="label" aria-hidden="true">
+        
+</span>

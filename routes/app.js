@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/crawler', function(req, res) {
+router.get('/crawler-go', function(req, res) {
 
     crawler.crawl(function(content, url, contentType, todo) {
         //console.log(content);
