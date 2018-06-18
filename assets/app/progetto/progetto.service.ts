@@ -20,7 +20,7 @@ export class ProgettoService {
     //public progetto: Progetto = {name: 'progetto_massimo'};
     public progetto: Progetto;
 
-    // private path_to_server: string = 'http://localhost:3000';
+    //  private path_to_server: string = 'http://localhost:3000';
     private path_to_server: string = 'http://localhost:8880';
 
   
@@ -49,7 +49,7 @@ export class ProgettoService {
             .map((response: Response) => {
                 const crawlers = response.json().obj;
 
-                // console.log('response crawlers: ', crawlers);
+                console.log('response crawlers: ', crawlers);
 
                  let transformedCrawlers: Crawler[] = [];
 
@@ -57,12 +57,12 @@ export class ProgettoService {
                     transformedCrawlers.push(new Crawler(crawler.name, crawler.progetti))
                 }
 
-                for (let progetto of transformedCrawlers[0].progetti) {
-                    this.progetti.push(progetto);
-                }
+                // for (let progetto of transformedCrawlers[0].progetti) {
+                //     this.progetti.push(progetto);
+                // }
 
                 this.crawlers = transformedCrawlers;
-                this.crawler = transformedCrawlers[0];
+                // this.crawler = transformedCrawlers[0];
                 // console.log('transformedCrawlers: ', transformedCrawlers);
                 // console.log('this.progetti: ', this.progetti);
                 
@@ -151,11 +151,11 @@ export class ProgettoService {
     }
 
 
-    addCrawler() {
+    addCrawler(crawler: Crawler) {
 
         let crawlerNew = new Crawler('Biblò');
         
-        const body = JSON.stringify(crawlerNew);
+        const body = JSON.stringify(crawler);
         
         // console.log(body);
         // console.log('Add progetto: ', progetto)

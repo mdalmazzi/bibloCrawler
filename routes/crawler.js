@@ -173,7 +173,7 @@ router.post('/', /* authenticate, */ (req, res, next) => {
             })
         }
         res.status(201).json({
-            message: 'Crawler salvata',
+            message: 'Crawler salvato',
             obj: progetto
         })
     })

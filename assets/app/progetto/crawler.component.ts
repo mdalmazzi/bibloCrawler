@@ -18,9 +18,15 @@ export class CrawlerComponent {
     public crawlers: Crawler[];
     public crawler: Crawler;
 
-    placeholderVar = "Scrivi il nome del progetto qui..."
+    placeholderVar = "Scrivi il nome del crawler qui..."
+    nomeCrawler: string = '';
     nomeProgetto: string = '';
 
+
+
+    OneditorModelAddCrawler(event) {
+        this.nomeCrawler = event;
+    }
 
     OneditorModelAddProgetto(event) {
         this.nomeProgetto = event;
@@ -72,25 +78,28 @@ export class CrawlerComponent {
     } 
     
 
-    ngOnInit(){
-        
-    
+    ngOnInit(){      
 
         this.progettoService.getCrawlers()
         
         .subscribe(
             (crawlers: Crawler[]) => {
                 this.crawlers = crawlers;
-                this.progetto = this.crawlers[1].progetti[0];
-                this.progetti = this.crawlers[1].progetti;
-                this.progettoService.progetti = this.progetti;
-                this.progettoService.progetto = this.progetti[1];
+                    
+                console.log('Crawlers: ', crawlers);
+
+                if (this.crawlers) {
+                    this.progetto = this.crawlers[0].progetti[0];
+                    this.progetti = this.crawlers[0].progetti;
+                    this.progettoService.progetti = this.progetti;
+                    this.progettoService.progetto = this.progetti[0];
+                }
+                
+                
             
             }
         );
-
-        
-      
+ 
      }
 
      addProgetto() {
@@ -110,7 +119,12 @@ export class CrawlerComponent {
      }
 
      addCrawler() {
-        this.progettoService.addCrawler()
+
+        const newCrawler = new Crawler(this.nomeProgetto.replace(/<(?:.|\n)*?>/gm, ''));
+
+        this.crawlers.push(newCrawler);
+
+        this.progettoService.addCrawler(newCrawler)
         .subscribe(
             data => console.log(data),
             error => console.error(error)

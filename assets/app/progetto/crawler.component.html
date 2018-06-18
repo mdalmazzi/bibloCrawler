@@ -17,13 +17,33 @@
 
                             <a *ngFor="let crawler of crawlers; let i=index;" (click)="setCrawler(i)">{{crawler.name}} </a>
 
-                            <!-- <a *ngFor="let crawler of crawlers; let i=index" [ngStyle]="{ 'background-color': setColorProgetto(crawler.progetto.name, i)}" (click)="setProgetto(i)">{{crawler.name}} </a> -->
 
                         </div>
 
                     </div>
-                    <button (click)="addCrawler()" class="dropbtn">Aggiungi Crawler<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                    <!-- <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true" (click)="addCrawler()"></span></button>
+                    <hr> -->
                     <hr>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4><span class="label label-primary">Aggiungi crawler</span>
+                            </h4>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>
+                                <medium-editor [(editorModel)]="nomeCrawler" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelAddCrawler($event)">
+                                </medium-editor>
+                            </h4>
+                        </div>
+                        <div class="col-md-2">
+                            <h4>
+                                <button type="button" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" (click)="addCrawler()"></span>
+                                </button>
+                            </h4>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -31,6 +51,6 @@
     </div>
 
     <!-- Al momento gestiamo solo il crawler 1 - da gestire -->
-    <app-progetto [crawlers]="crawlers" [progetti]="crawlers[1].progetti" [progetto]="crawlers[1].progetti[1]"></app-progetto>
+    <app-progetto [crawlers]="crawlers" [progetti]="crawler.progetti" [progetto]="crawler.progetti[0]"></app-progetto>
 
     <!-- <app-progetto [progetti]="crawler.progetti" [progetto]="crawler.progetto"></app-progetto> -->
