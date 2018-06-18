@@ -20,7 +20,9 @@
                             <!-- <a *ngFor="let crawler of crawlers; let i=index" [ngStyle]="{ 'background-color': setColorProgetto(crawler.progetto.name, i)}" (click)="setProgetto(i)">{{crawler.name}} </a> -->
 
                         </div>
+
                     </div>
+                    <button (click)="addCrawler()" class="dropbtn">Aggiungi Crawler<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
                     <hr>
 
                 </div>

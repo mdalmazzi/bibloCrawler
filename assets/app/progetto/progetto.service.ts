@@ -149,6 +149,35 @@ export class ProgettoService {
 
             // this.updateCrawler(risultato); 
     }
+
+
+    addCrawler() {
+
+        let crawlerNew = new Crawler('Biblò');
+        
+        const body = JSON.stringify(crawlerNew);
+        
+        // console.log(body);
+        // console.log('Add progetto: ', progetto)
+        const headers = new Headers({'Content-Type': 'application/json'});
+        
+        return this.http.post(this.path_to_server + '/crawler', body, {headers: headers})
+            .map((response: Response) => {
+                
+                const result = response.json();
+                // const progetto = new Progetto(result.obj.name);
+                console.log('Result: ', result.obj._id);
+
+                // this.updateCrawler(result.obj);
+                // console.log(progetto);
+                // return progetto;
+                return result;
+                
+           })
+            .catch((error: Response) => Observable.throw(error.json()));  
+
+            // this.updateCrawler(risultato); 
+    }
     
     onUpdate(sito: Sito, index_sito: string) {
 

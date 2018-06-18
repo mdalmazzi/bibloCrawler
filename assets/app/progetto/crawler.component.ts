@@ -109,6 +109,14 @@ export class CrawlerComponent {
 
      }
 
+     addCrawler() {
+        this.progettoService.addCrawler()
+        .subscribe(
+            data => console.log(data),
+            error => console.error(error)
+        );
+     }
+
     
 
    
