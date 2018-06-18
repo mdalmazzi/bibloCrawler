@@ -3,7 +3,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProgettoService} from "./progetto.service";
 import {Sito} from "./sito.model";
 
-
 @Component({
     selector: 'app-modify-fonte',
     templateUrl: './modifica-fonte.component.html',
@@ -55,9 +54,6 @@ export class ModifyFonteComponent implements  OnInit{
             this.typeSchool = this.sito.scuola;
             this.typeSchool2String = this.typeSchool.join(', ');
         }
-        
-       
-       
       
         if (this.sito.licenza) {
             this.typeLicenza[0] = this.sito.licenza;
@@ -68,8 +64,6 @@ export class ModifyFonteComponent implements  OnInit{
             this.typeFonte[0] = this.sito.tipologia;
             this.typeFonte2String = this.typeFonte.join(', ');
         }
-
-        
 
         if (this.sito.lingua) {
             this.typeLanguage = this.sito.lingua;
@@ -248,8 +242,7 @@ export class ModifyFonteComponent implements  OnInit{
 
         } else {
             this.typeMateria.splice(this.typeMateria.indexOf(typeMateria), 1);
-            this.typeMateria2String = this.typeMateria.join(', ');
-                   
+            this.typeMateria2String = this.typeMateria.join(', ');              
         }
     }
 
@@ -302,7 +295,6 @@ export class ModifyFonteComponent implements  OnInit{
     onUpdate() {
             
              const sito = new Sito(this.fonteUrl.replace(/<(?:.|\n)*?>/gm, ''), this.typeFonte[0], this.typeLicenza[0], this.typeSchool, this.typeLanguage, this.typeMateria);
-
 
              this.progettoService.onUpdate(sito, this.sito._id)
                  .subscribe(
