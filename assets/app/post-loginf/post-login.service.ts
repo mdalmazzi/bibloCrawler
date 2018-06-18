@@ -11,17 +11,11 @@ export class PostLoginServiceF {
     public index_word;
     public search_word: string;
     public search_scuola: string;
-    public page
-    
-   
-    //private path_to_server: string = 'http://dealab-env.cpr43rbhcm.us-west-2.elasticbeanstalk.com';
+    public page;
 
-    // private path_to_server: string = 'http://localhost:3600';
-    private path_to_server: string = 'http://localhost:3000';
 
-    //private path_to_server: string = 'http://192.168.1.149:3600';
-
-    //private path_to_server: string = 'http://localhost:3600';
+    // private path_to_server: string = 'http://localhost:3000';
+    private path_to_server: string = 'http://localhost:8880';
   
     constructor(private http: Http) {}
 

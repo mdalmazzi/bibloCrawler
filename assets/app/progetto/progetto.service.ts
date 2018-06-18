@@ -19,13 +19,9 @@ export class ProgettoService {
     // settato il progetto in uso da rivedere nome per progetto default
     //public progetto: Progetto = {name: 'progetto_massimo'};
     public progetto: Progetto;
-    
-    //private path_to_server: string = 'http://localhost:4200';
 
-    //private path_to_server: string = 'http://192.168.1.139:3000';
-    private path_to_server: string = 'http://localhost:3000';
-
-    // private path_to_server: string = 'http://localhost:8880';
+    // private path_to_server: string = 'http://localhost:3000';
+    private path_to_server: string = 'http://localhost:8880';
 
   
     constructor(private http: Http) {}
