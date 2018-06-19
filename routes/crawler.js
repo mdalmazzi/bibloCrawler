@@ -243,8 +243,8 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 
 router.patch('/:id', function(req, res, next) {
 
-    // Crawler.findById(req.params.id, function(err, message) {
-    Crawler.find({ 'name': req.body.name }, function(err, message) {
+    Crawler.findById(req.params.id, function(err, message) {
+        // Crawler.find({ 'name': req.body.name }, function(err, message) {
 
         if (err) {
             return res.status(500).json({
