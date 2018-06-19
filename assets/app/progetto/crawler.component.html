@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="dropdown" (click)="closeProgetto($event)">
-                        <button (click)="selectProgetto($event)" class="dropbtn">Seleziona un progetto: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                        <button (click)="selectCrawler($event)" class="dropbtn">Seleziona un progetto: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
                         <div id="myDropdownCrawler" class="dropdown-content">
 
                             <a *ngFor="let crawler of crawlers; let i=index;" (click)="setCrawler(i)">{{crawler.name}} </a>
@@ -51,6 +51,6 @@
     </div>
 
     <!-- Al momento gestiamo solo il crawler 1 - da gestire -->
-    <app-progetto [crawlers]="crawlers" [progetti]="crawler.progetti" [progetto]="crawler.progetti[0]"></app-progetto>
+    <app-progetto [crawler]="crawler" [progetti]="progetti" [progetto]="progetto"></app-progetto>
 
     <!-- <app-progetto [progetti]="crawler.progetti" [progetto]="crawler.progetto"></app-progetto> -->

@@ -194,9 +194,9 @@ export class ProgettoService {
     
     }
 
-    updateCrawler(updateCrawler) {
+    updateCrawler(progettoId, updateCrawler) {
 
-        let crawler = this.crawlers[1];
+        let crawler = updateCrawler;
 
      
         const body = JSON.stringify(crawler);
@@ -204,7 +204,7 @@ export class ProgettoService {
         const headers = new Headers({'Content-Type': 'application/json'});
        
 
-        return this.http.patch(this.path_to_server + '/crawler/' + updateCrawler, body, {headers: headers}) 
+        return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
             .map((response: Response) => {
 
                 const result = response.json();

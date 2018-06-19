@@ -9,11 +9,15 @@ import {Crawler} from "./crawler.model";
     templateUrl: './crawler.component.html',
     styleUrls: ['./crawler.component.css']
 })
+
 export class CrawlerComponent {
-    constructor(private progettoService: ProgettoService) {}
+    constructor(private progettoService: ProgettoService) {
+
+       
+    }
 
     public progetti: Progetto[] = [];
-    public progetto: Progetto;
+    public progetto: Progetto = null;
 
     public crawlers: Crawler[];
     public crawler: Crawler;
@@ -32,8 +36,9 @@ export class CrawlerComponent {
         this.nomeProgetto = event;
     }
 
-    selectProgetto(event:MouseEvent) {
-       
+    selectCrawler(event:MouseEvent) {
+           
+        console.log('Select Crawler');
         document.getElementById("myDropdownCrawler").classList.toggle("show");  
     }
 
@@ -48,19 +53,54 @@ export class CrawlerComponent {
         }
     }
 
-    setCrawler( i: number) {
+    setCrawler(i: number) {
         
+        console.log('Set Crawler');
+
         this.crawler = this.crawlers[i];
         this.progettoService.crawler = this.crawler;
+
+        console.log('Crawler: ', this.crawler);
         // this.progettoService.progetto = this.progetti[i];
 
-        this.progettoService.progetti = this.crawler.progetti;
-        this.progettoService.progetto = this.crawler.progetti[0];
+        if (this.crawler) {
+            if (this.crawler.progetti.length > 0) 
+            {
+                this.progetto = this.crawler.progetti[0];
+                this.progetti = this.crawler.progetti;
+                this.progettoService.progetti = this.progetti;
+                this.progettoService.progetto = this.progetti[0];
 
-        this.progetti = this.crawler.progetti;
-        this.progetto = this.crawler.progetti[0];
 
-        // console.log('this.progettoService.crawler: ', this.progettoService.crawler);
+                // this.progettoService.progetti = this.crawler.progetti;
+                // this.progettoService.progetto = this.crawler.progetti[0];
+
+                // this.progetti = this.crawler.progetti;
+                // this.progetto = this.crawler.progetti[0];
+            }   
+            else {
+                //
+                console.log('Non ho progetti');
+                this.progetto = {name: ''};
+                this.progetti = [];
+                this.progettoService.progetti = [];
+                this.progettoService.progetto = {name: ''};
+                this.progetto.words = [];
+            }    
+            
+            if (this.crawler.progetti[0].words.length == 0) {
+                this.progetto.words = []
+                
+            }
+
+            if (this.progetto.name == '') {
+                this.progetto.words = [];
+            }
+        }
+
+        
+
+         console.log('this.progettoService.crawler: ', this.progettoService.crawler);
     }
 
     closeProgetto(event) {
@@ -85,21 +125,33 @@ export class CrawlerComponent {
         .subscribe(
             (crawlers: Crawler[]) => {
                 this.crawlers = crawlers;
+                this.crawler = crawlers[0];
                     
                 console.log('Crawlers: ', crawlers);
 
                 if (this.crawlers) {
-                    this.progetto = this.crawlers[0].progetti[0];
-                    this.progetti = this.crawlers[0].progetti;
-                    this.progettoService.progetti = this.progetti;
-                    this.progettoService.progetto = this.progetti[0];
-                }
-                
-                
-            
+                    if (this.crawlers[0].progetti.length > 0) 
+                    {
+                        this.progetto = this.crawlers[0].progetti[0];
+                        this.progetti = this.crawlers[0].progetti;
+                        this.progettoService.progetti = this.progetti;
+                        this.progettoService.progetto = this.progetti[0];
+                    }   
+                    else {
+                        this.progetto = new Progetto('');
+                        this.progetti = [];
+                        this.progettoService.progetti = [];
+                        this.progettoService.progetto = new Progetto('');
+                        this.progetto.words = [];
+                    }    
+                    
+                    if (this.crawlers[0].progetti[0].words.length == 0) {
+                        this.progetto.words = []
+
+                    }
+                }       
             }
         );
- 
      }
 
      addProgetto() {

@@ -25,6 +25,7 @@ export class ProgettoComponent implements OnInit{
 
     // public crawlers: Crawler[];
     @Input() crawlers: Crawler[];
+    @Input() crawler: Crawler;
 
     placeholderVar = "Scrivi il nome del sotto-progetto qui..."
     nomeProgetto: string = '';
@@ -109,12 +110,14 @@ export class ProgettoComponent implements OnInit{
 
         this.progetti.push(newProgetto);
         
-        this.progettoService.addProgetto(newProgetto, this.crawlers[1])
+        // this.progettoService.addProgetto(newProgetto, this.crawlers[1])
+        console.log('add progetto a crawler', this.crawler);
+        this.progettoService.addProgetto(newProgetto, this.crawler)
         .subscribe(
             data => {
            
-                data;
-                this.progettoService.updateCrawler(data.obj._id)
+                
+                this.progettoService.updateCrawler(data.obj._id, this.crawler)
                     .subscribe(
                         data => {
                             console.log('UpdateCrawler',data);
