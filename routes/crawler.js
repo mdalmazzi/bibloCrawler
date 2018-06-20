@@ -190,7 +190,7 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
                 console.log('Update Crawler: ', message);
 
                 if (message) {
-                    console.log('Risposta crawler: ', message, message[0].name, req.params.id);
+                    console.log('Risposta crawler: ', message, message[0].name, req.params.id, progetto._id);
 
                     message[0].progetti.push(progetto._id);
 
