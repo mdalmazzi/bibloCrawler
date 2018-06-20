@@ -268,14 +268,12 @@ router.patch('/:id', function(req, res, next) {
         } else {
             message[0].progetti[0] = req.params.id;
             console.log('ADD');
-
-
         }
 
 
         console.log('Crawler add progetto: ', message);
 
-        message[0].save(function(err, result) {
+        message.save(function(err, result) {
             // message.save(function(err, result) {
             if (err) {
                 return res.status(500).json({
