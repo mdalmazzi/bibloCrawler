@@ -260,7 +260,7 @@ router.patch('/:id', function(req, res, next) {
         }
         console.log('Risposta crawler: ', message, message[0].name, req.params.id);
 
-        console.log('lenght', message[0].progetti.lenght)
+        console.log('lenght', message[0].progetti.lenght, message[0].progetti);
 
         if (message[0].progetti.lenght != 0) {
             message[0].progetti.push(req.params.id);
