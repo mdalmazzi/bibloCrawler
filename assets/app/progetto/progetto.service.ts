@@ -197,12 +197,10 @@ export class ProgettoService {
     updateCrawler(progettoId, updateCrawler) {
 
         let crawler = updateCrawler;
-
      
         const body = JSON.stringify(crawler);
         // console.log('body: ', body);
-        const headers = new Headers({'Content-Type': 'application/json'});
-       
+        const headers = new Headers({'Content-Type': 'application/json'});      
 
         // return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
         return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
