@@ -241,7 +241,7 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 // });
 
 
-router.post('/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
 
     // Crawler.findById(req.params.id, function(err, message) {
     Crawler.find({ 'name': req.body.name }, function(err, message) {

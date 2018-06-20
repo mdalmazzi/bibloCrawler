@@ -10,12 +10,6 @@ var schema = new Schema({
 });
 
 
-// schema.post('remove', function(mappa) {
-//     User.findById(mappa.user, function(err, user) {
-//         user.mappa.pull(mappa);
-//         user.save();
 
-//     })
-// });
 
 module.exports = mongoose.model('Progetto', schema);
