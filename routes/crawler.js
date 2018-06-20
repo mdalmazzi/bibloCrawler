@@ -260,7 +260,14 @@ router.patch('/:id', function(req, res, next) {
         }
         console.log('Risposta crawler: ', message, message[0].name, req.params.id);
 
-        message[0].progetti.push(req.params.id);
+        if (message[0].progetti) {
+            message[0].progetti.push(req.params.id);
+            console.log('PUSH');
+        } else {
+            message[0].progetti[0] = req.params.id;
+            console.log('ADD');
+        }
+
 
         console.log('Crawler add progetto: ', message);
 
