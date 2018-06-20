@@ -157,11 +157,11 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/:id', /* authenticate, */ (req, res, next) => {
     //Aggiunta per aggiornare progetto
+
     var progetto = new Progetto({
-        name: req.body.name,
-
-
+        name: req.body.name
     });
+
     progetto.save(function(err, progetto) {
         if (err) {
             return res.status(500).json({
@@ -192,25 +192,30 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
                 if (message) {
                     console.log('Risposta crawler: ', message, message[0].name, req.params.id, progetto._id);
 
-                    message[0].progetti[0] = progetto._id;
+                    // message[0].progetti[0] = progetto._id;
 
-                    // message[0].progetti.push(false, progetto._id);
+                    message[0].progetti.push(progetto._id);
 
                     console.log('Crawler add progetto: ', message[0]);
 
-                    message[0].save(function(err, result) {
-                        // message.save(function(err, result) {
-                        if (err) {
-                            return res.status(500).json({
-                                title: 'Errore nell aggiornamento',
-                                error: err
-                            })
-                        }
-                        res.status(201).json({
-                            message: 'Crawler Update',
-                            obj: result
+                    message[0].save();
+                    res.status(201).json({
+                            message: 'Crawler salvato',
+                            obj: message
                         })
-                    });
+                        // message[0].save(function(err, result) {
+                        //     // message.save(function(err, result) {
+                        //     if (err) {
+                        //         return res.status(500).json({
+                        //             title: 'Errore nell aggiornamento',
+                        //             error: err
+                        //         })
+                        //     }
+                        //     res.status(201).json({
+                        //         message: 'Crawler Update',
+                        //         obj: result
+                        //     })
+                        // });
                 }
 
             });
