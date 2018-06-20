@@ -103,52 +103,52 @@ router.get('/:id', function(req, res, next) {
 
 /// Aggiunta Sito a Progetto
 
-router.post('/:id', /* authenticate, */ (req, res, next) => {
-    var todo = new Todo({
-        text: req.body.text,
-        tipologia: req.body.tipologia,
-        licenza: req.body.licenza,
-        scuola: req.body.scuola,
-        lingua: req.body.lingua,
-        materia: req.body.materia,
+// router.post('/:id', /* authenticate, */ (req, res, next) => {
+//     var todo = new Todo({
+//         text: req.body.text,
+//         tipologia: req.body.tipologia,
+//         licenza: req.body.licenza,
+//         scuola: req.body.scuola,
+//         lingua: req.body.lingua,
+//         materia: req.body.materia,
 
-    });
+//     });
 
-    todo.save(function(err, result) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred su POST',
-                error: err
-            })
-        }
+//     todo.save(function(err, result) {
+//         if (err) {
+//             return res.status(500).json({
+//                 title: 'An error occurred su POST',
+//                 error: err
+//             })
+//         }
 
-        //Aggiunta per aggiornare progetto
-        Progetto.find({ 'name': req.params.id },
-            function(err, progetto) {
-                if (err) {
-                    return res.status(500).json({
-                        title: 'An error occured',
-                        error: err
-                    })
-                }
+//         //Aggiunta per aggiornare progetto
+//         Progetto.find({ 'name': req.params.id },
+//             function(err, progetto) {
+//                 if (err) {
+//                     return res.status(500).json({
+//                         title: 'An error occured',
+//                         error: err
+//                     })
+//                 }
 
-                // console.log('Fonte: ', result._id);
-                // console.log('Progetto: ', progetto);
-                progetto[0].sito.push(result._id);
-                progetto[0].save();
+//                 // console.log('Fonte: ', result._id);
+//                 // console.log('Progetto: ', progetto);
+//                 progetto[0].sito.push(result._id);
+//                 progetto[0].save();
 
-                // });
-            })
+//                 // });
+//             })
 
-        //Aggiunta per aggiornare progetto
+//         //Aggiunta per aggiornare progetto
 
-        res.status(201).json({
-            message: 'Fonte salvata',
-            obj: result
-        })
+//         res.status(201).json({
+//             message: 'Fonte salvata',
+//             obj: result
+//         })
 
-    });
-});
+//     });
+// });
 
 /// Aggiunta Sito a Progetto
 
@@ -241,7 +241,7 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 // });
 
 
-router.patch('/:id', function(req, res, next) {
+router.post('/:id', function(req, res, next) {
 
     // Crawler.findById(req.params.id, function(err, message) {
     Crawler.find({ 'name': req.body.name }, function(err, message) {
@@ -260,17 +260,12 @@ router.patch('/:id', function(req, res, next) {
         }
         console.log('Risposta crawler: ', message, message[0].name, req.params.id);
 
-        if (message[0].progetti.length == 0) {
-            message[0].progetti[0] = req.params.id;
+        message[0].progetti.push(req.params.id);
 
-        } else {
-            message[0].progetti.push(req.params.id);
-        }
-
-
-        // message.progetti.push(null, req.params.id);
+        console.log('Crawler add progetto: ', message);
 
         message[0].save(function(err, result) {
+            // message.save(function(err, result) {
             if (err) {
                 return res.status(500).json({
                     title: 'Errore nell aggiornamento',

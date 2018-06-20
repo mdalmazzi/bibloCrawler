@@ -6,7 +6,7 @@ var Todo = require('./todos');
 var schema = new Schema({
     name: { type: String, required: true },
     sito: [{ type: Schema.Types.ObjectId, ref: 'Todo' }],
-    words: [{ type: String, required: true }]
+    words: [{ type: String, required: false }]
 });
 
 

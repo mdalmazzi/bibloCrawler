@@ -116,7 +116,7 @@ export class ProgettoComponent implements OnInit{
         .subscribe(
             data => {
            
-                
+                console.log('Aggiunto Progetto', data);
                 this.progettoService.updateCrawler(data.obj._id, this.crawler)
                     .subscribe(
                         data => {

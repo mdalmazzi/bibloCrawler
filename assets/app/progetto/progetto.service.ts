@@ -204,7 +204,8 @@ export class ProgettoService {
         const headers = new Headers({'Content-Type': 'application/json'});
        
 
-        return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
+        // return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
+        return this.http.post(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
             .map((response: Response) => {
 
                 const result = response.json();

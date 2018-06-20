@@ -88,8 +88,10 @@ export class CrawlerComponent {
                 this.progetto.words = [];
             }    
             
-            if (this.crawler.progetti[0].words.length == 0) {
-                this.progetto.words = []
+            // if (this.crawler.progetti[0].words.length == 0) {
+            //     this.progetto.words = []
+            if (this.progetto.words.length == 0) {
+                    this.progetto.words = []
                 
             }
 
