@@ -128,26 +128,20 @@ export class ProgettoService {
     addProgetto(progetto: Progetto, crawler: Crawler) {
         
         const body = JSON.stringify(progetto);
-        // console.log(body);
-        // console.log('Add progetto: ', progetto)
+        
         const headers = new Headers({'Content-Type': 'application/json'});
         
-        return this.http.post(this.path_to_server + '/infoprogetto', body, {headers: headers})
+        return this.http.post(this.path_to_server + '/crawler/' + this.crawler.name, body, {headers: headers})
             .map((response: Response) => {
                 
                 const result = response.json();
-                // const progetto = new Progetto(result.obj.name);
-                console.log('Result: ', result.obj._id);
-
-                // this.updateCrawler(result.obj);
-                // console.log(progetto);
-                // return progetto;
+               
+                
                 return result;
                 
            })
             .catch((error: Response) => Observable.throw(error.json()));  
 
-            // this.updateCrawler(risultato); 
     }
 
 
@@ -199,18 +193,17 @@ export class ProgettoService {
         let crawler = updateCrawler;
      
         const body = JSON.stringify(crawler);
-        // console.log('body: ', body);
+ 
         const headers = new Headers({'Content-Type': 'application/json'});      
 
-        // return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
+        
         return this.http.patch(this.path_to_server + '/crawler/' + progettoId, body, {headers: headers}) 
             .map((response: Response) => {
 
                 const result = response.json();
-                // const crawler = new Crawler(result.obj);
+              
                 console.log('Crawler Update: ', result);    
             
-                // return crawler;
                 return result;
             
            })

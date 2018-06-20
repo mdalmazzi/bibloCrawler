@@ -155,6 +155,75 @@ router.get('/:id', function(req, res, next) {
 
 /// Aggiunta Progetto
 
+router.post('/:id', /* authenticate, */ (req, res, next) => {
+    //Aggiunta per aggiornare progetto
+    var progetto = new Progetto({
+        name: req.body.name,
+
+
+    });
+    progetto.save(function(err, progetto) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occured',
+                error: err
+            })
+        }
+
+        if (progetto) {
+            Crawler.find({ 'name': req.params.id }, function(err, message) {
+                // Crawler.find({ 'name': req.body.name }, function(err, message) {
+
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occurred',
+                        error: err
+                    });
+                }
+
+                if (!message) {
+                    return res.status(500).json({
+                        title: 'No Crawler Found',
+                        error: { message: 'Fonte not FOUND' }
+                    });
+                }
+                console.log('Update Crawler: ', message);
+
+                if (message) {
+                    console.log('Risposta crawler: ', message[0], message.name, req.params.id);
+
+                    message[0].progetti.push(progetto._id);
+
+                    console.log('Crawler add progetto: ', message[0]);
+
+                    message[0].save(function(err, result) {
+                        // message.save(function(err, result) {
+                        if (err) {
+                            return res.status(500).json({
+                                title: 'Errore nell aggiornamento',
+                                error: err
+                            })
+                        }
+                        res.status(201).json({
+                            message: 'Crawler Update',
+                            obj: result
+                        })
+                    });
+                }
+
+            });
+
+        }
+
+
+        // res.status(201).json({
+        //     message: 'Progetto salvata',
+        //     obj: progetto
+        // })
+    })
+
+});
+
 
 router.post('/', /* authenticate, */ (req, res, next) => {
     //Aggiunta per aggiornare crawler
@@ -263,14 +332,7 @@ router.patch('/:id', function(req, res, next) {
 
         console.log('length', message.progetti.length, message.progetti);
 
-        if (message.progetti.length != 0) {
-            message.progetti.push(req.params.id);
-            console.log('PUSH');
-        } else {
-            message.progetti[0] = req.params.id;
-            console.log('ADD');
-        }
-
+        message.progetti.push(req.params.id);
 
         console.log('Crawler add progetto: ', message);
 
