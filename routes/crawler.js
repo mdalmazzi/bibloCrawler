@@ -243,7 +243,8 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 
 router.patch('/:id', function(req, res, next) {
 
-    Crawler.findById(req.body._id, function(err, message) {
+    // Crawler.findById(req.body._id, function(err, message) {
+    Crawler.findOneAndUpdate({ 'name': req.body.name }, function(err, message) {
         // Crawler.find({ 'name': req.body.name }, function(err, message) {
 
         if (err) {
@@ -258,15 +259,15 @@ router.patch('/:id', function(req, res, next) {
                 error: { message: 'Fonte not FOUND' }
             });
         }
-        console.log('Risposta crawler: ', message, message[0].name, req.params.id);
+        console.log('Risposta crawler: ', message, message.name, req.params.id);
 
-        console.log('length', message[0].progetti.length, message[0].progetti);
+        console.log('length', message.progetti.length, message.progetti);
 
-        if (message[0].progetti.length != 0) {
-            message[0].progetti.push(req.params.id);
+        if (message.progetti.length != 0) {
+            message.progetti.push(req.params.id);
             console.log('PUSH');
         } else {
-            message[0].progetti[0] = req.params.id;
+            message.progetti[0] = req.params.id;
             console.log('ADD');
         }
 
