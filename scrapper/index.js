@@ -33,12 +33,26 @@ module.exports.extractData = function(html, url, contentType, todo) {
             materia: todo.materia
         });
 
-        searchForImage($images, $, page);
+        // searchForImage($images, $, page);
 
-        page.save(function(err, result) {
-            if (err) throw err;
-            console.log('Page created!');
-        });
+        // Page.findOne({})
+        Page.findOne({ path: url }, function(err, obj) {
+            if (err) {
+
+            }
+            if (obj) {
+                console.log('Path già memorizzato: ', url)
+                return
+            } else {
+                page.save(function(err, result) {
+                    if (err) throw err;
+                    console.log('Page created!');
+                });
+            }
+
+        })
+
+
     } else {
         //
     };
