@@ -106,8 +106,7 @@ export class ProgettoComponent implements OnInit{
         // console.log('crawlers: ', this.crawlers)
         const newProgetto = new Progetto(this.nomeProgetto.replace(/<(?:.|\n)*?>/gm, ''), [newSito], []);
         
-
-         this.progetti.push(newProgetto);
+        this.progetti.push(newProgetto);
         
         // console.log('add progetto a crawler', this.crawler);
         this.progettoService.addProgetto(newProgetto, this.crawler)

@@ -12,8 +12,7 @@ import {Crawler} from "./crawler.model";
 
 export class CrawlerComponent {
     constructor(private progettoService: ProgettoService) {
-
-       
+     
     }
 
     public progetti: Progetto[] = [];
@@ -64,7 +63,7 @@ export class CrawlerComponent {
         // this.progettoService.progetto = this.progetti[i];
 
         if (this.crawler) {
-            if (this.crawler.progetti.length > 0) 
+            if (this.crawler.progetti) 
             {
                 this.progetto = this.crawler.progetti[0];
                 this.progetti = this.crawler.progetti;
@@ -162,7 +161,7 @@ export class CrawlerComponent {
 
         this.progetti.push(newProgetto);
         
-        this.progettoService.addProgetto(newProgetto, this.crawlers[1])
+        this.progettoService.addProgetto(newProgetto, this.crawler)
         .subscribe(
             data => console.log(data),
             error => console.error(error)
@@ -174,7 +173,9 @@ export class CrawlerComponent {
 
      addCrawler() {
 
-        const newCrawler = new Crawler(this.nomeProgetto.replace(/<(?:.|\n)*?>/gm, ''));
+        const newProgetto = new Progetto('');
+
+        const newCrawler = new Crawler(this.nomeCrawler.replace(/<(?:.|\n)*?>/gm, ''));
 
         this.crawlers.push(newCrawler);
 

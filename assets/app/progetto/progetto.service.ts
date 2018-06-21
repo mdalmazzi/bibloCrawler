@@ -146,12 +146,10 @@ export class ProgettoService {
 
 
     addCrawler(crawler: Crawler) {
-
-        let crawlerNew = new Crawler('Biblò');
         
         const body = JSON.stringify(crawler);
         
-        // console.log(body);
+        console.log(body);
         // console.log('Add progetto: ', progetto)
         const headers = new Headers({'Content-Type': 'application/json'});
         
