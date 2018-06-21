@@ -261,9 +261,13 @@ router.patch('/:id', function(req, res, next) {
         // message.sito.push(null, req.body.sito._id)
         //user.save();
 
+
+
         message.scuola = req.body.scuola;
+        // message.
         message.lingua = req.body.lingua;
         message.materia = req.body.materia;
+        message.completed = req.body.completed;
         // message.text = req.body.text;
         // message.text = req.body.text;
 

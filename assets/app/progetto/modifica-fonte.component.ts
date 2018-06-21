@@ -44,6 +44,10 @@ export class ModifyFonteComponent implements  OnInit{
     typeMateriaValue: string[] = ['Matematica', 'Fisica', 'Geografia']; 
     
 
+    changeCompleted(event) {
+        this.sito.completed = ! this.sito.completed;
+    }
+
     ngOnInit(){
 
         if (this.sito.text) {
@@ -291,10 +295,11 @@ export class ModifyFonteComponent implements  OnInit{
         this.fonteUrl = event;        
      }
 
+   
 
     onUpdate() {
             
-             const sito = new Sito(this.fonteUrl.replace(/<(?:.|\n)*?>/gm, ''), this.typeFonte[0], this.typeLicenza[0], this.typeSchool, this.typeLanguage, this.typeMateria);
+             const sito = new Sito(this.fonteUrl.replace(/<(?:.|\n)*?>/gm, ''), this.typeFonte[0], this.typeLicenza[0], this.typeSchool, this.typeLanguage, this.typeMateria, this.sito._id, this.sito.completed);
 
              this.progettoService.onUpdate(sito, this.sito._id)
                  .subscribe(

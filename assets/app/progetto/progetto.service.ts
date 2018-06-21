@@ -20,8 +20,8 @@ export class ProgettoService {
     //public progetto: Progetto = {name: 'progetto_massimo'};
     public progetto: Progetto;
 
-    //  private path_to_server: string = 'http://localhost:3000';
-    private path_to_server: string = 'http://localhost:8880';
+    private path_to_server: string = 'http://localhost:3000';
+    // private path_to_server: string = 'http://localhost:8880';
 
   
     constructor(private http: Http) {}
@@ -177,7 +177,8 @@ export class ProgettoService {
         const headers = new Headers({'Content-Type': 'application/json'});
 
 
-        return this.http.post(this.path_to_server + '/infoprogetto/' + index_sito, body, {headers: headers})
+        // return this.http.post(this.path_to_server + '/infoprogetto/' + index_sito, body, {headers: headers})
+        return this.http.patch(this.path_to_server + '/infoprogetto/' + index_sito, body, {headers: headers})
              .map((response: Response) => {
                  response.json();
                  console.log(`Progetto aggiornato su Crawler: ${JSON.stringify(response, undefined, 2)}`);
