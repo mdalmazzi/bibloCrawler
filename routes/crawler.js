@@ -237,7 +237,7 @@ router.post('/', /* authenticate, */ (req, res, next) => {
 
     var crawler = new Crawler({
         name: req.body.name,
-        progetti: req.body.progetti
+        // progetti: req.body.progetti
 
 
     });

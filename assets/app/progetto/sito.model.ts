@@ -3,7 +3,7 @@ import {Meta} from './meta.model'
 export class Sito {
     // word?: string;
     text: string;
-    tipologia: string;
+    tipologia?: string;
     licenza?: any;
     scuola?: string[];
     lingua?: string[];

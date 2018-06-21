@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProgettoService} from "./progetto.service";
 import {Progetto} from "./progetto.model";
 import {Crawler} from "./crawler.model";
+import {Sito} from "./sito.model";
 
 @Component({
     selector: 'app-crawler',
@@ -172,10 +173,11 @@ export class CrawlerComponent {
      }
 
      addCrawler() {
+        const newsito = new Sito('');
+        const newProgetto = new Progetto('', [newsito], []);
 
-        const newProgetto = new Progetto('');
 
-        const newCrawler = new Crawler(this.nomeCrawler.replace(/<(?:.|\n)*?>/gm, ''));
+        const newCrawler = new Crawler(this.nomeCrawler.replace(/<(?:.|\n)*?>/gm, ''), [newProgetto]);
 
         this.crawlers.push(newCrawler);
 
