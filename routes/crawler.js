@@ -194,7 +194,9 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
 
                     // message[0].progetti[0] = progetto._id;
 
-                    message[0].progetti.push(progetto._id);
+                    // message[0].progetti.push(progetto._id);
+                    message[0].progetti = message[0].progetti.concat([progetto._id]);
+                    // myArray = myArray.concat([myObject]);
 
                     console.log('Crawler add progetto: ', message[0]);
 
