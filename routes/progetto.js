@@ -132,7 +132,8 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
                     })
                 }
 
-                progetto[0].sito.push(result._id);
+                // progetto[0].sito.push(result._id);
+                progetto[0].sito = progetto[0].sito.concat([result._id]);
                 progetto[0].save();
 
                 res.status(201).json({

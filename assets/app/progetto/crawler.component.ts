@@ -99,10 +99,6 @@ export class CrawlerComponent {
                 this.progetto.words = [];
             }
         }
-
-        
-
-         console.log('this.progettoService.crawler: ', this.progettoService.crawler);
     }
 
     closeProgetto(event) {
