@@ -37,7 +37,8 @@ var pageSchema = new Schema({
         type: String,
         required: true,
         minlength: 6,
-        trim: true // sicuro?
+        trim: true, // sicuro?
+        unique: true
     },
     meta1: {
         type: {
