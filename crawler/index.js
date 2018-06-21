@@ -68,7 +68,8 @@ module.exports.crawl = function(callback) {
             Todo.findOneAndUpdate({ 'completed': false }, { $set: { 'completed': true } }, { new: true }, function(error, todo) {
                 if (error) return handleError(err);
 
-                console.log(`Stato URL: ${todo.text} database aggiornato a completed!`)
+                console.log(`Stato URL: ${todo.text} database aggiornato a completed!`);
+                myCrawler.stop();
             });
 
             console.log(process.argv);
