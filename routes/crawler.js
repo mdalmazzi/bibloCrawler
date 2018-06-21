@@ -198,24 +198,24 @@ router.post('/:id', /* authenticate, */ (req, res, next) => {
 
                     console.log('Crawler add progetto: ', message[0]);
 
-                    message[0].save();
-                    res.status(201).json({
-                            message: 'Crawler salvato',
-                            obj: message
+                    // message[0].save();
+                    // res.status(201).json({
+                    //         message: 'Crawler salvato',
+                    //         obj: message
+                    //     })
+                    message[0].save(function(err, result) {
+                        // message.save(function(err, result) {
+                        if (err) {
+                            return res.status(500).json({
+                                title: 'Errore nell aggiornamento',
+                                error: err
+                            })
+                        }
+                        res.status(201).json({
+                            message: 'Crawler Update',
+                            obj: result
                         })
-                        // message[0].save(function(err, result) {
-                        //     // message.save(function(err, result) {
-                        //     if (err) {
-                        //         return res.status(500).json({
-                        //             title: 'Errore nell aggiornamento',
-                        //             error: err
-                        //         })
-                        //     }
-                        //     res.status(201).json({
-                        //         message: 'Crawler Update',
-                        //         obj: result
-                        //     })
-                        // });
+                    });
                 }
 
             });
