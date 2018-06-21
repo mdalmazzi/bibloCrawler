@@ -93,19 +93,24 @@ app.get('/word/:id', (req, res) => {
                     //_creator: req.user._id
             });
 
-            // word.save().then((doc) => {
-            //     res.send(doc);
-            // }, (e) => {
-            //     res.status(400).send(e);
-            // });
-            word.save(function(err, result) {
-
-                if (err) throw err;
-                else {
-                    //res.send(result);
-                    console.log('Salvataggio word da ricerca full text', result);
+            Word.findOne({ path: word.path }, function(err, obj) {
+                if (err) {
+                    return
                 }
+                if (obj) {
+                    return
+                }
+                word.save(function(err, result) {
+
+                    if (err) throw err;
+                    else {
+                        //res.send(result);
+                        console.log('Salvataggio word da ricerca full text', result);
+                    }
+                })
             })
+
+
         })
 
         //var body = _.pick(req.body, ['email', 'password']);

@@ -28,7 +28,8 @@ var wordSchema = new Schema({
         type: String,
         required: true,
         minlength: 6,
-        trim: true // sicuro?
+        trim: true,
+        unique: true // sicuro?
     },
     meta1: {
         type: {
