@@ -38,7 +38,7 @@ module.exports.crawl = function(callback) {
 
             var myCrawler = Crawler.crawl(todo.text);
 
-            myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
+            //  myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
 
             // Aggiungere WhiteList
             var urls = [];
