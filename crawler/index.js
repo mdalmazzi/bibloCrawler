@@ -11,85 +11,88 @@ module.exports.crawl = function(callback) {
     //Todo.find({ 'completed': false })
 
     Progetto.findOne({})
-        .populate({ path: 'sito', match: { 'completed': false } })
-        //  .find({ 'completed': false })
-        // .populate('sito')
 
-    .exec(function(err, messages) {
-        if (err) {
-            return handleError(err);
-            // return res.status(500).json({
-            //     title: 'An error occured',
-            //     error: err
-            // });
-        }
-        // res.status(200).json({
-        //     message: 'Progetto letto con successo',
-        //     obj: messages
-        // })
+    .populate({ path: 'sito', match: { 'completed': false } })
+        .exec(function(err, messages) {
+            if (err) {
+                return handleError(err);
+                // return res.status(500).json({
+                //     title: 'An error occured',
+                //     error: err
+                // });
+            }
+            // res.status(200).json({
+            //     message: 'Progetto letto con successo',
+            //     obj: messages
+            // })
 
-        console.log('Todos: ', messages);
+            // console.log('Todos: ', messages);
 
-        var todo = messages.sito[0];
-        if (!todo) {
-            return //gestire meglio
-        } else {
-            var myCrawlerUrl = todo.text;
+            var todo = messages.sito[0];
+            if (!todo) {
+                return //gestire meglio
+            } else {
+                var myCrawlerUrl = todo.text;
 
-            var myCrawler = Crawler.crawl(todo.text);
+                var myCrawler = Crawler.crawl(todo.text);
 
-            //  myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
+                //  myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
 
-            // Aggiungere WhiteList
-            var urls = [];
+                // Aggiungere WhiteList
+                var urls = [];
+                myCrawler.interval = 10000; // Ten seconds
+                myCrawler.maxConcurrency = 3;
+                myCrawler.timeout = 300000;
+                myCrawler.maxResourceSize = 8388608;
+                // crawler.maxResourceSize = 16777216;
 
-            myCrawler.start();
-        }
+                myCrawler.start();
+            }
 
-        myCrawler.on("crawlstart", function() {
-            console.log("Crawler started! Partitooooo");
+            myCrawler.on("crawlstart", function() {
+                console.log("Crawler started! Partitooooo");
 
-        });
-
-        myCrawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
-            //console.log("Fetched completed!", todo);
-            console.log("Fetched completed! At: ", queueItem);
-
-            callback(responseBuffer, queueItem.url, queueItem.stateData.contentType, todo);
-        });
-
-        myCrawler.on("complete", function() {
-            console.log(`Crawler ${myCrawlerUrl} completed!`);
-
-            console.log('myCrawler', myCrawler);
-            // myCrawler = null;
-            // console.log('myCrawler', myCrawler);
-
-            Todo.findOneAndUpdate({ 'completed': false }, { $set: { 'completed': true } }, { new: true }, function(error, todo) {
-                if (error) return handleError(err);
-
-                console.log(`Stato URL: ${todo.text} database aggiornato a completed!`);
-                myCrawler.stop();
             });
 
-            console.log(process.argv);
+            myCrawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 
-            //process.exit(1);
-        });
+                console.log("Fetched completed! At: ", queueItem);
 
-        myCrawler.on("queueadd", function(queueItem, referrerQueueItem) {
-            //  console.log(`Aggiunto Item a queue!`, queueItem);
+                callback(responseBuffer, queueItem.url, queueItem.stateData.contentType, todo);
+            });
 
-        });
+            myCrawler.on("complete", function() {
+                console.log(`Crawler ${myCrawlerUrl} completed!`);
 
-        myCrawler.on("queueerror", function(error, URLData) {
-            console.log(`Errore in queue`, error);
+                console.log('myCrawler', myCrawler);
+                // myCrawler = null;
+                // console.log('myCrawler', myCrawler);
 
-        });
+                Todo.findOneAndUpdate({ 'completed': false }, { $set: { 'completed': true } }, { new: true }, function(error, todo) {
+                    if (error) return handleError(err);
 
-        myCrawler.on("fetchstart", function(queueItem, requestOptions) {
-            // console.log('Fetch start at:', queueItem);
-        });
+                    console.log(`Stato URL: ${todo.text} database aggiornato a completed!`);
+                    myCrawler.stop();
+                });
 
-    })
+                console.log(process.argv);
+
+                //process.exit(1);
+            });
+
+            myCrawler.on("queueadd", function(queueItem, referrerQueueItem) {
+                //  console.log(`Aggiunto Item a queue!`, queueItem);
+
+            });
+
+            myCrawler.on("queueerror", function(error, URLData) {
+                console.log(`Errore in queue`, error);
+
+            });
+
+            myCrawler.on("fetchstart", function(queueItem, requestOptions) {
+                // console.log('Fetch start at:', queueItem);
+            });
+
+        })
 }
