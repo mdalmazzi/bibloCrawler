@@ -4,7 +4,6 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 
-// 
 var Word = require('../models/word');
 var { Todo } = require('../models/todos');
 var Page = require('../models/page');
@@ -205,7 +204,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
 
             words = messages;
 
-            for (var i = 0; i < 20; i++) {
+            for (var i = 0; i < 100; i++) {
                 //console.log('i: ', i, words[i].titolo, words[i].images.length);
                 //if (words[i].images.length == 0) {
 
@@ -221,126 +220,10 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
 
             }
 
-            // }
+
         });
     } else {
 
-        /* Esempio di text search with AND  */
-
-        // Word.find({
-        //             $and: [
-        //                 { $text: { $search: req.params.word, $caseSensitive: false } },
-        //                 { "meta3.content": (req.params.materia == 'all') ? { $exists: true } : { "$regex": req.params.materia.split("&")[1] } }
-        //             ]
-        //         },
-
-        /* Esempio di text search with AND  */
-
-        Word.find({
-                    "meta2.content": (req.params.word == 'all') ? { $exists: true } : { "$regex": req.params.word, "$options": "i" },
-
-                    "meta3.content": (req.params.materia == 'all') ? { $exists: true } : { "$regex": req.params.materia.split("&")[1] },
-
-                    // "scuola": (req.params.scuola == 'all') ? { $exists: true } : {
-                    //     $in: req.params.scuola.split("&")
-                    // },
-
-                    // "type": (req.params.risorsa == 'all') ? { $exists: true } : {
-                    //     $in: req.params.risorsa.split("&")
-
-                    // },
-
-                    "licenza": (req.params.licenza == 'all') ? { $exists: true } :
-                        (req.params.licenza.split("&").length == 2) ? {
-                            "$regex": req.params.licenza.split("&")[1],
-                            "$options": "i"
-
-                        } : { $regex: /copyright|Creative Commons/ },
-
-                    "path": (req.params.fonte == 'all') ? { $exists: true } :
-
-                        (req.params.fonte.split("&").length == 3) ?
-
-                        {
-                            $regex: /treccani|oilproject/
-                        } : (req.params.fonte.split("&")[1] == 'treccani') ?
-
-                        {
-                            $regex: /treccani/
-                        } : {
-                            $regex: /oilproject/
-                        },
-
-                },
-
-                function(err, messages) {
-                    if (err) {
-                        return res.status(500).json({
-                            title: 'An error occured',
-                            error: err
-                        })
-                    }
-                })
-            // .sort({ quality: -1 })
-
-
-
-        .exec(function(err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occured',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: ' Success',
-                obj: messages
-            });
-
-            /* words = messages;
-            console.log(words);
-            if (words.type == "video") {
-
-                console.log('thumbnail file downloaded:');
-
-                youtubedl.getThumbs(words.path, options_bis, function(err, files) {
-                    if (err) throw err;
-                    console.log('thumbnail file downloaded:', files);
-                });
-            } */
-            /* words = messages;
-            for (var i = 310; i < (320); i++) {
-                console.log(words)
-                if (!words[i].images) {
-                    urlToImage(words[i].path, words[i].wordId, options)
-                        .then(function() {
-                            // do stuff with google.png
-                        })
-                        .catch(function(err) {
-                            console.error(err);
-                        });
-                }
-            } */
-            /* words = messages;
-
-            for (var i = 0; i < (50); i++) {
-                console.log('i: ', i, words[i].titolo, words[i].images.length);
-                if (words[i].images.length == 0) {
-                    console.log('Print i: ', i)
-                    urlToImage(words[i].path, words[i]._id + '.png', options)
-
-                    .then(function() {
-                            // do stuff with IMAGE
-
-                        })
-                        .catch(function(err) {
-                            console.error(err);
-                        });
-
-                }
-
-            } */
-        });
     }
 
 });
