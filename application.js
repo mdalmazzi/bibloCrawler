@@ -13,6 +13,7 @@ var ideeRoutes = require('./routes/idee');
 var scalettaRoutes = require('./routes/scaletta');
 var postloginRoutes = require('./routes/postlogin');
 var postloginRoutesF = require('./routes/postloginf');
+var imagesRoutes = require('./routes/images');
 
 var progettoRoutes = require('./routes/progetto');
 var crawlerRoutes = require('./routes/crawler');
@@ -57,6 +58,7 @@ app.use('/dettaglio', postloginRoutes);
 app.use('/infoprogetto', progettoRoutes);
 app.use('/crawler', crawlerRoutes);
 app.use('/home-info', postloginRoutesF);
+app.use('/images', imagesRoutes);
 
 
 // Creazione words DB da full search pagine indicizzate //

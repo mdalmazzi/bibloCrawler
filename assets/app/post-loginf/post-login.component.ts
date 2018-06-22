@@ -181,7 +181,7 @@ export class PostLoginComponentF implements  OnInit {
         
         // let url_image = 'http://localhost:3000/img/' + this.word.wordId + '.png';
 
-        let url_image = 'http://localhost:8800/img/' + this.word.wordId + '.png';
+        let url_image = 'http://localhost:8880/img/' + this.word.wordId + '.png';
 
         //console.log('url_image', url_image);
         if (this.ImageExist(url_image)) 
@@ -192,7 +192,7 @@ export class PostLoginComponentF implements  OnInit {
         }
 
         if (this.word.images) {
-            let url_image = 'http://localhost:8800/img/' + this.word.wordId + '.png';
+            let url_image = 'http://localhost:8880/img/' + this.word.wordId + '.png';
 
             // let url_image = 'http://localhost:3000/img/' + this.word.wordId + '.png';
             //console.log(this.ImageExist(url_image), url_image)
