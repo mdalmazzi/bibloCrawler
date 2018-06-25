@@ -40,10 +40,13 @@ module.exports.crawl = function(callback) {
 
                 // Aggiungere WhiteList
                 var urls = [];
-                myCrawler.interval = 10000; // Ten seconds
+                // myCrawler.interval = 10000; // Ten seconds
+                myCrawler.interval = 1000; // One second
                 myCrawler.maxConcurrency = 3;
                 myCrawler.timeout = 300000;
                 myCrawler.maxResourceSize = 8388608;
+                myCrawler.domainWhitelist = messages.sito;
+                console.log('myCrawler.domainWhitelist: ', myCrawler.domainWhitelist);
                 // crawler.maxResourceSize = 16777216;
 
                 myCrawler.start();
