@@ -10,7 +10,7 @@ module.exports.crawl = function(callback) {
     ///was ok
     //Todo.find({ 'completed': false })
 
-    Progetto.findOne({})
+    Progetto.find({})
 
     .populate({ path: 'sito', match: { 'completed': false } })
         .exec(function(err, messages) {
