@@ -29,6 +29,7 @@ module.exports.crawl = function(callback) {
             // console.log('Todos: ', messages);
 
             var todo = messages.sito[0];
+
             if (!todo) {
                 return //gestire meglio
             } else {
@@ -45,11 +46,18 @@ module.exports.crawl = function(callback) {
                 myCrawler.maxConcurrency = 3;
                 myCrawler.timeout = 300000;
                 myCrawler.maxResourceSize = 8388608;
-                myCrawler.domainWhitelist = messages.sito;
+
+                // var siti;
+                messages.sito.forEach((element) => {
+                        myCrawler.domainWhitelist.push(element.text)
+                    })
+                    // console.log('messages.sito -> siti: ', siti);
+                    // myCrawler.domainWhitelist = siti;
+
                 console.log('myCrawler.domainWhitelist: ', myCrawler.domainWhitelist);
                 // crawler.maxResourceSize = 16777216;
 
-                myCrawler.start();
+                // myCrawler.start();
             }
 
             myCrawler.on("crawlstart", function() {
