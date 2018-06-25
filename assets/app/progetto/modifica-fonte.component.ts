@@ -41,8 +41,8 @@ export class ModifyFonteComponent implements  OnInit{
     //MATERIATYPE
     typeMateria: string[] = [];
     typeMateria2String: string = '';
-    typeMateriaValue: string[] = ['Matematica', 'Fisica', 'Geografia']; 
-    
+    typeMateriaValue: string[] = ['Matematica', 'Fisica', 'Geografia', 'Storia', 'Italiano', 'Scienze', 'Inglese', 'Francese', 'Tedesco', 'Spagnolo', 'Tecnologia', 'Arte e Immagine', 'Scienze motorie e sportive', 'Latino', 'Informatica', 'Filosofia', 'Musica', 'Religione', 'Scienze delle Terra', 'Biologia', 'Chimica', 'Diritto ed economia', 'Psicologia', 'Antropologia', 'Pedagogia', 'Sociologia', 'Disegno', 'Greco', 'Geostoria']; 
+
 
     changeCompleted(event) {
         this.sito.completed = ! this.sito.completed;

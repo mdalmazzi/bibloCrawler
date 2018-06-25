@@ -157,77 +157,68 @@ youtube.crop('0:05', '0:25', './file.mp4')
 
 router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res, next) {
 
-    if ((req.params.materia == 'all') && (req.params.scuola == 'all') && (req.params.risorsa == 'all') && (req.params.fonte == 'all') && (req.params.licenza == 'all')) {
-        // Word.find({
-        //         "word": req.params.word
+    // if ((req.params.materia == 'all') && (req.params.scuola == 'all') && (req.params.risorsa == 'all') && (req.params.fonte == 'all') && (req.params.licenza == 'all')) {
+    // Word.find({
+    //         "word": req.params.word
 
-        //     })
-        // Page.find({ $text: { $search: req.params.word, $caseSensitive: false } },
-        Page.find({},
-                function(err, messages) {
-                    if (err) {
-                        return res.status(500).json({
-                            title: 'An error occured',
-                            error: err
-                        })
-                    }
-                })
-            .limit(500)
-
-        //.sort({ quality: -1 })
-
-        .exec(function(err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occured',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: ' Success',
-                obj: messages
-            })
-
-            /*  words = messages;
-             console.log(words);
-             if (words.type == "video") {
-
-                 console.log('thumbnail file downloaded:');
-
-                 youtubedl.getThumbs(words.path, options_bis, function(err, files) {
-                     if (err) throw err;
-                     console.log('thumbnail file downloaded:', files);
-                 });
-             } */
-
-            // for (var i = 0; i < 100; i++) {
-
-            words = messages;
-
-            for (var i = 0; i < 100; i++) {
-                //console.log('i: ', i, words[i].titolo, words[i].images.length);
-                //if (words[i].images.length == 0) {
-
-                urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
-
-                .then(function() {
-                        // do stuff with IMAGE
-                        console.log('Done:', i);
+    //     })
+    // Page.find({ $text: { $search: req.params.word, $caseSensitive: false } },
+    Page.find({},
+            function(err, messages) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occured',
+                        error: err
                     })
-                    .catch(function(err) {
-                        console.error(err);
-                    });
+                }
+            })
+        .limit(500)
 
-            }
+    //.sort({ quality: -1 })
 
+    .exec(function(err, messages) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occured',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message: ' Success',
+            obj: messages
+        })
 
-        });
-    } else {
+        /*  words = messages;
+         
+         if (words.type == "video") {
 
-    }
+             console.log('thumbnail file downloaded:');
 
+             youtubedl.getThumbs(words.path, options_bis, function(err, files) {
+                 if (err) throw err;
+                 console.log('thumbnail file downloaded:', files);
+             });
+         } */
+
+        // for (var i = 0; i < 100; i++) {
+
+        words = messages;
+
+        for (var i = 0; i < 100; i++) {
+            //console.log('i: ', i, words[i].titolo, words[i].images.length);
+            //if (words[i].images.length == 0) {
+
+            urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
+
+            .then(function() {
+                    // do stuff with IMAGE
+                    console.log('Done:', i);
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+        }
+    });
 });
-
-
 
 module.exports = router;

@@ -8,7 +8,9 @@ const typeLicense = ["copyright", "creative commons", "pubblico dominio"];
 const typeSchool = ["Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado"];
 const typeContent = ["Page", "Image", "Video", "text/html; charset=UTF-8", "image/jpeg", "image/png", "video/mp4", "image/gif"];
 const typeLanguage = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco"];
-const typeMateria = ["Matematica", "Fisica"];
+
+const typeMateria = ['Matematica', 'Fisica', 'Geografia', 'Storia', 'Italiano', 'Scienze', 'Inglese', 'Francese', 'Tedesco', 'Spagnolo', 'Tecnologia', 'Arte e Immagine', 'Scienze motorie e sportive', 'Latino', 'Informatica', 'Filosofia', 'Musica', 'Religione', 'Scienze delle Terra', 'Biologia', 'Chimica', 'Diritto ed economia', 'Psicologia', 'Antropologia', 'Pedagogia', 'Sociologia', 'Disegno', 'Greco', 'Geostoria'];
+
 const typeFonte = ["Editore", "Blog", "MOOC"];
 
 var todoSchema = new Schema({
