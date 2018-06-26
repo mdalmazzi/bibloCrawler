@@ -17,7 +17,7 @@ module.exports.extractData = function(html, url, contentType, todo) {
 
     var body = $('html > body').text();
 
-    if (contentType === "text/html; charset=UTF-8" || contentType === "image/jpeg" || contentType === "image/png" || contentType === "image/gif" || contentType === "text/html") {
+    if (contentType === "text/html; charset=UTF-8" || contentType === "image/jpeg" || contentType === "image/png" || contentType === "image/gif" || contentType === "text/html" || contentType === "text/html; charset=utf-8") {
         var page = new Page({
 
             titolo: title,

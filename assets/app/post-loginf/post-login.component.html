@@ -53,10 +53,7 @@ Era la vecchia gestione per la dimensione , non mi piace
     </div>
 
 
-
     <img *ngIf="imageUri; else Blocklivello1" class="card-img-top bg-secondary-mod" [src]="imageUri" alt="" (load)="handleImageLoad($event)">
-
-
 
 
     <div class="card-block bg-secondary-mod">
@@ -92,7 +89,10 @@ Era la vecchia gestione per la dimensione , non mi piace
             <div class="col col-2" *ngIf="(word.type=='Immagine') || (word.type=='immagine')">
                 <i class="fa fa-picture-o text-secondary" aria-hidden="true"></i>
             </div>
-            <div class="col col-2" *ngIf="(word.type=='Pagina Web') || (word.type=='pagina web') || (word.type=='Web Page') || (word.type=='web page') || (word.type=='Web page') || (word.type=='Pagina web') || (word.type=='webpage') || (word.type=='Web page, Video') || (word.type=='Pagina Web, Video')">
+            <!-- <div class="col col-2" *ngIf="(word.type=='Pagina Web') || (word.type=='pagina web') || (word.type=='Web Page') || (word.type=='web page') || (word.type=='Web page') || (word.type=='Pagina web') || (word.type=='webpage') || (word.type=='Web page, Video') || (word.type=='Pagina Web, Video')"> -->
+
+
+            <div class="col col-2" *ngIf="(word.type=='text/html; charset=UTF-8') || (word.type=='text/html') || (word.type=='text/html')">
                 <i class="fa fa fa-link text-secondary" aria-hidden="true"></i>
             </div>
             <div class="col col-2" *ngIf="(word.type=='PDF') || (word.type=='pdf') || (word.type=='Pdf')">

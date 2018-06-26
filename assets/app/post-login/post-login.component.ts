@@ -14,11 +14,10 @@ import {Word} from "./word.model";
     templateUrl: './post-login.component.html',
     styleUrls: ['./post-login.component.css']
 })
-export class PostLoginComponent implements  OnInit {
-    constructor(public router: Router, private sanitizer: DomSanitizer, public boxService: PostLoginService) {
 
-       
-    }
+
+export class PostLoginComponent implements  OnInit {
+    constructor(public router: Router, private sanitizer: DomSanitizer, public boxService: PostLoginService) {}
   
     @Input() word: Word;
     @Input() index_word: number;

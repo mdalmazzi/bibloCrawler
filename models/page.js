@@ -15,7 +15,7 @@ var Schema = mongoose.Schema;
 
 const typeLicense = ["copyright", "creative commons", "pubblico dominio"];
 const typeSchool = ["Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado"];
-const typeContent = ["Page", "Image", "Video", "text/html; charset=UTF-8", "image/jpeg", "image/png", "video/mp4", "image/gif", "text/html"];
+const typeContent = ["Page", "Image", "Video", "text/html; charset=UTF-8", "image/jpeg", "image/png", "video/mp4", "image/gif", "text/html", "text/html; charset=utf-8"];
 const typeLanguage = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco"];
 const typeMateria = ["Matematica", "Fisica"];
 
