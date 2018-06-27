@@ -20,12 +20,12 @@ export class PostLoginService {
     addBox(word: Word) {
         
                 const body = JSON.stringify(word);
-               // console.log(body);
+              
                 const headers = new Headers({'Content-Type': 'application/json'});
                 const token = localStorage.getItem('token')
                     ? '?token=' + localStorage.getItem('token')
                     : '';
-                //console.log(token,'token');
+                
                 return this.http.post(this.path_to_server + '/input' + token, body, {headers: headers})
                     .map((response: Response) => {
                         const result = response.json();
@@ -54,7 +54,7 @@ export class PostLoginService {
 
 
                 this.words = transformedWords;
-                // console.log(this.words);
+      
                 return transformedWords;
             })
              .catch((error: Response) => Observable.throw(error.json()));
@@ -64,14 +64,12 @@ export class PostLoginService {
     
      updateBox(word: Word) {
         const body = JSON.stringify(word);
-
-        console.log('body: ', body);
         
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-       // return this.http.patch(this.path_to_server + '/home/' + word.wordId + token, body, {headers: headers})
+    
        return this.http.patch(this.path_to_server + '/dettaglio/' + word.wordId + token, body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
@@ -93,14 +91,7 @@ export class PostLoginService {
     } 
    /*  
 
-    arrayCountMappa(num_mappa: number) {
-        for (var i=0; i<(this.boxes.length); i++) {
-            if (this.boxes[i].numero_mappa == num_mappa) {
-                this.indexBoxes.push(i);
-            }
-            console.log(this.indexBoxes);
-        }
-    }
+   
 
     deleteMappa(box: Box) {
 

@@ -70,8 +70,7 @@ export class PostLoginComponent implements  OnInit {
         } */
         
         this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.word.path);
-
-        
+ 
         
       }
 
@@ -81,7 +80,6 @@ export class PostLoginComponent implements  OnInit {
     }
 
     
-
     ondeleteMappa(box) {
        
         /* this.boxService.deleteMappa(box)

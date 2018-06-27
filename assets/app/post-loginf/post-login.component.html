@@ -65,11 +65,11 @@ Era la vecchia gestione per la dimensione , non mi piace
                 <div class="col col-10">
 
                 </div>
-                <div class="col col-2" *ngIf="word.licenza=='Creative Commons'">
-                    <i class="fa fa-creative-commons text-light bg-secondary-mod" aria-hidden="true"></i>
+                <div class="col col-2" *ngIf="word.licenza=='creative commons'">
+                    <i class="fa fa-creative-commons text-secondary" aria-hidden="true"></i>
                 </div>
-                <div class="col col-2" *ngIf="(word.licenza=='copyright') || (word.licenza=='Copyright')">
-                    <i class="fa fa-copyright text-light bg-secondary-mod" aria-hidden="true"></i>
+                <div class="col col-2" *ngIf="(word.licenza=='copyright') ">
+                    <i class="fa fa-copyright text-secondary" aria-hidden="true"></i>
                 </div>
 
 
@@ -83,10 +83,10 @@ Era la vecchia gestione per la dimensione , non mi piace
                 <small>  {{word.titolo | truncate : 20}} </small>
             </div>
 
-            <div class="col col-2" *ngIf="(word.type=='video') || (word.type=='Video')">
+            <div class="col col-2" *ngIf="(word.type=='video/mp4') || (word.type=='Video')">
                 <i class="fa fa-video-camera text-secondary" aria-hidden="true"></i>
             </div>
-            <div class="col col-2" *ngIf="(word.type=='Immagine') || (word.type=='immagine')">
+            <div class="col col-2" *ngIf="(word.type=='image/gif') || (word.type=='image/jpeg' || (word.type=='image/png'))">
                 <i class="fa fa-picture-o text-secondary" aria-hidden="true"></i>
             </div>
             <!-- <div class="col col-2" *ngIf="(word.type=='Pagina Web') || (word.type=='pagina web') || (word.type=='Web Page') || (word.type=='web page') || (word.type=='Web page') || (word.type=='Pagina web') || (word.type=='webpage') || (word.type=='Web page, Video') || (word.type=='Pagina Web, Video')"> -->
