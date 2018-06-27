@@ -40,7 +40,7 @@ export class PostLoginServiceF {
                     // transformedWords.push(new Word(word.word, word.titolo,  word.path, word.meta1, word.meta2, word.meta3, word.images, word.type,  word.licenza, word.scuola[0]))}
 
                 this.words = transformedWords;
-                console.log(this.words);
+                // console.log(this.words);
                 
                 return transformedWords;
             })

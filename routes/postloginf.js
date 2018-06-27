@@ -172,7 +172,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                         })
                     }
                 })
-            .limit(500)
+            .limit(100)
 
         //.sort({ quality: -1 })
 
