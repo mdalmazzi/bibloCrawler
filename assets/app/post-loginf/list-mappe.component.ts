@@ -30,7 +30,7 @@ export class ListMappeComponentF {
                 
 
               
-                this.doSearch(this.search_word, this.search_scuola, this.search_risorsa, this.search_fonte, this.search_materia,this.search_licenza, )
+                // this.doSearch(this.search_word, this.search_scuola, this.search_risorsa, this.search_fonte, this.search_materia,this.search_licenza, )
               
             }
         );
