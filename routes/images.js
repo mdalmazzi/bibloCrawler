@@ -58,7 +58,7 @@ var options = {
     //height: 400,
 
     //cropWidth: 400,
-    //cropHeight: 400,
+    cropHeight: 400,
 
     // The file type of the rendered image. By default, PhantomJS 
     // sets the output format automatically based on the file extension.
@@ -204,7 +204,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
 
         words = messages;
 
-        for (var i = 100; i < 200; i++) {
+        for (var i = 200; i < 300; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
             //if (words[i].images.length == 0) {
 
