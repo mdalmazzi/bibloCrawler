@@ -44,10 +44,13 @@ module.exports.extractData = function(html, url, contentType, todo) {
                 console.log('Path già memorizzato: ', url)
                 return
             } else {
-                page.save(function(err, result) {
-                    if (err) throw err;
-                    console.log('Page created!');
-                });
+                if (!page.images.length) {
+                    page.save(function(err, result) {
+                        if (err) throw err;
+                        console.log('Page created!');
+                    });
+                }
+
             }
 
         })
