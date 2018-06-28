@@ -48,7 +48,7 @@ module.exports.extractData = function(html, url, contentType, todo) {
 
                     page.save(function(err, result) {
                         if (err) throw err;
-                        console.log('Page created!');
+                        console.log('Page created!', url);
                     });
 
                 }
@@ -67,6 +67,7 @@ function searchForImage($images, $, page) {
 
     if ($images) {
         $(($images)).each(function(image) {
+            console.log('image', image, $images)
             if ($images[image].attribs.src.match(/http/g) !== null) {
                 // Salva solo se ha path globale -- forse migliorabile
                 page.images.push($images[image].attribs.src);
