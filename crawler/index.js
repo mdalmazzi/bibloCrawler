@@ -44,9 +44,9 @@ module.exports.crawl = function(callback) {
         } else {
             var myCrawlerUrl = todo.text;
 
-            // var myCrawler = Crawler.crawl(todo.text);
+            var myCrawler = Crawler.crawl(todo.text);
 
-            var myCrawler = new Crawler(todo.text);
+            // var myCrawler = new Crawler(todo.text);
             // var myCrawler2 = new Crawler("http://www.repubblica.it");
 
             //  myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
