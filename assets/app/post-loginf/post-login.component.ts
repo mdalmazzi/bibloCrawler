@@ -23,6 +23,7 @@ export class PostLoginComponentF implements  OnInit {
   
     // Settaggi da spostare fuori in un init globale
     private image_path = "http://localhost:8880/img/";
+    // private image_path = "http://localhost:3000/img/";
     // Settaggi da spostare fuori in un init globale
 
 
