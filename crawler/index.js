@@ -47,7 +47,7 @@ module.exports.crawl = function(callback) {
             // var myCrawler = Crawler.crawl(todo.text);
 
             var myCrawler = new Crawler(todo.text);
-            var myCrawler2 = new Crawler("http://www.repubblica.it");
+            // var myCrawler2 = new Crawler("http://www.repubblica.it");
 
             //  myCrawler.maxDepth = 3; // First page and discovered links from it are fetched
 
@@ -55,22 +55,22 @@ module.exports.crawl = function(callback) {
             var urls = [];
             // myCrawler.interval = 10000; // Ten seconds
             myCrawler.interval = 1000; // One second
-            myCrawler.depth = 2;
+            // myCrawler.depth = 2;
             myCrawler.maxConcurrency = 3;
             myCrawler.timeout = 300000;
             myCrawler.maxResourceSize = 8388608;
 
             // var siti;
-            messages.sito.forEach((element) => {
-                    myCrawler.domainWhitelist.push(element.text);
-                    // myCrawler.queueURL = element.text;
-                    // myCrawler.queueURL(element.text, myCrawler.queue.length + 1, false);
-                    console.log('myCrawler.queue: ', myCrawler.queue);
-                })
-                // console.log('messages.sito -> siti: ', siti);
-                // myCrawler.domainWhitelist = siti;
-                // myCrawler.domainWhitelist.push('http://www.bitness.it');
-            console.log('myCrawler.domainWhitelist: ', myCrawler.domainWhitelist);
+            // messages.sito.forEach((element) => {
+            //         myCrawler.domainWhitelist.push(element.text);
+            //         // myCrawler.queueURL = element.text;
+            //         // myCrawler.queueURL(element.text, myCrawler.queue.length + 1, false);
+            //         console.log('myCrawler.queue: ', myCrawler.queue);
+            //     })
+            // console.log('messages.sito -> siti: ', siti);
+            // myCrawler.domainWhitelist = siti;
+            // myCrawler.domainWhitelist.push('http://www.bitness.it');
+            // console.log('myCrawler.domainWhitelist: ', myCrawler.domainWhitelist);
             // crawler.maxResourceSize = 16777216;
 
             myCrawler.start();
@@ -90,12 +90,7 @@ module.exports.crawl = function(callback) {
 
         });
 
-        myCrawler2.on("crawlstart", function() {
-            console.log("Crawler2 started! Partitooooo2");
 
-
-
-        });
 
         myCrawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 
@@ -105,20 +100,15 @@ module.exports.crawl = function(callback) {
         });
 
 
-        myCrawler2.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 
-            console.log("Fetched2 completed! At: ", queueItem);
-
-            callback(responseBuffer, queueItem.url, queueItem.stateData.contentType, todo);
-        });
 
         myCrawler.on("complete", function() {
             console.log(`Crawler ${myCrawlerUrl} completed!`);
 
-            console.log('myCrawler', myCrawler);
+            // console.log('myCrawler', myCrawler);
 
             // myCrawler2 = Crawler.crawl("http://www.repubblica.it");
-            myCrawler2.start();
+            // myCrawler2.start();
 
             //myCrawler.host = myCrawler.domainWhitelist[1];
             // myCrawler = null;
@@ -128,7 +118,7 @@ module.exports.crawl = function(callback) {
             //     if (error) return handleError(err);
 
             //     console.log(`Stato URL: ${todo.text} database aggiornato a completed!`);]
-            console.log('Prima stop', myCrawler.domainWhitelist[1]);
+            // console.log('Prima stop', myCrawler.domainWhitelist[1]);
             // var Url = myCrawler.domainWhitelist[1];
             // var Url = "http://www.mondadorieducation.it/";
             // myCrawler.stop();
@@ -140,11 +130,11 @@ module.exports.crawl = function(callback) {
             // console.log('Dopo stop', myCrawler.domainWhitelist, myCrawler.queue);
             // });
 
-            myCrawler2.on("fetchstart", function(queueItem, requestOptions) {
-                console.log('Fetch2 start at:', queueItem, myCrawler.queue);
+            // myCrawler2.on("fetchstart", function(queueItem, requestOptions) {
+            //     console.log('Fetch2 start at:', queueItem, myCrawler.queue);
 
 
-            });
+            // });
 
             console.log(process.argv);
             // myCrawler.start();
@@ -168,11 +158,11 @@ module.exports.crawl = function(callback) {
 
         });
 
-        myCrawler2.on("fetchstart", function(queueItem, requestOptions) {
-            console.log('Fetch2 start at:', queueItem, myCrawler.queue);
+        // myCrawler2.on("fetchstart", function(queueItem, requestOptions) {
+        //     console.log('Fetch2 start at:', queueItem, myCrawler.queue);
 
 
-        });
+        // });
 
     })
 }
