@@ -182,7 +182,7 @@ export class PostLoginComponentF implements  OnInit {
 
         let url_image = this.image_path + this.word.wordId + '.png';
 
-        console.log('this.word: Images ?', this.word);
+        console.log('this.word: Images ?', this.word.images);
 
         if (this.word.images) {
             this.imageUri = this.word.images[0];
