@@ -70,6 +70,16 @@ export class PostLoginComponent implements  OnInit {
         } */
         
         this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.word.path);
+
+        if (!this.word.images) {
+            let url_image = 'http://localhost:8880/img/' + this.word.wordId + '.png';
+
+            // Inutile ID word diverso da ID pages
+            if (this.ImageExist(url_image)) {
+                this.word.images.push(url_image)
+            }
+
+        }
  
         
       }
@@ -78,6 +88,14 @@ export class PostLoginComponent implements  OnInit {
      /*    return localStorage.getItem('userId') ==  this.box.userId;
  */
     }
+
+    ImageExist(url) 
+        {
+           var img = new Image();
+           img.src = url;
+           return img.height != 0;
+           
+        }
 
     
     ondeleteMappa(box) {

@@ -21,6 +21,11 @@ export class PostLoginComponentF implements  OnInit {
     constructor(public router: Router, private sanitizer: DomSanitizer, private boxService: PostLoginServiceF) {    
     }
   
+    // Settaggi da spostare fuori in un init globale
+    private image_path = "http://localhost:8880/img/";
+    // Settaggi da spostare fuori in un init globale
+
+
     @Input() word: Word;
     @Input() index_word: number;
     @Input() length_word: number;
@@ -30,6 +35,7 @@ export class PostLoginComponentF implements  OnInit {
     height: any;
     imageUri: any;
     onthefly: boolean;
+    
    
     @Output() loadWord = new EventEmitter<any>();
    
@@ -157,8 +163,7 @@ export class PostLoginComponentF implements  OnInit {
             this.count_image = this.count_image +1
             
             this.imageUri = this.word.images[this.count_image];
-            //console.log('this.word.images[this.count_image]', this.word.images[this.count_image]);
-            //this.checkImageSize();
+          
            }
 
            return this.image_size = image.naturalWidth;
@@ -173,29 +178,28 @@ export class PostLoginComponentF implements  OnInit {
         }
 
     ngOnInit() {
-       /*  if (localStorage.getItem('userId') ==  this.box.userId) {
-            this.boxService.editTitolo(this.box)
-        } */
 
-        //console.log('Looking for image in HTTP', this.searchStringInArray("http", this.word.images), this.word.path);
-        
-        // let url_image = 'http://localhost:3000/img/' + this.word.wordId + '.png';
+        let url_image = this.image_path + this.word.wordId + '.png';
 
-        let url_image = 'http://localhost:8880/img/' + this.word.wordId + '.png';
+        console.log('this.word: Images ?', this.word);
 
-        //console.log('url_image', url_image);
+        if (this.word.images) {
+            this.imageUri = this.word.images[0];
+        }
+       
         if (this.ImageExist(url_image)) 
         {
             this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(url_image);
-                        
-            this.imageUri = url_image;
+            
+            if (this.imageUri != this.word.images[0]) {
+                this.imageUri = url_image;
+            }
+            
         }
 
         if (this.word.images) {
-            let url_image = 'http://localhost:8880/img/' + this.word.wordId + '.png';
+            let url_image = this.image_path + this.word.wordId + '.png';
 
-            // let url_image = 'http://localhost:3000/img/' + this.word.wordId + '.png';
-            //console.log(this.ImageExist(url_image), url_image)
             
             if (this.ImageExist(url_image)) {
                 let j = this.searchStringInArray("http", this.word.images);
@@ -210,47 +214,15 @@ export class PostLoginComponentF implements  OnInit {
                     }
                     else 
                     {   
-                        /* this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(this.word.images[j]);
-                        
-                        this.imageUri = this.word.images[j]; */
+                       
                     
                      }
                 }
 
-      //  let j = this.searchStringInArray("http", this.word.images);
+    
         
         this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.word.path);
-        // Spostato sotto
-        //this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(this.word.images[0]);
-
-      //  let k = this.searchStringInArray_bis("http", this.word.images);
        
-
-       /*  if (j ==-1) 
-            
-            { */
-               /*  if (k ==-1) 
-                {
-                    this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(this.word.images[0]);
-                    this.imageUri = this.word.images[0];
-                }
-                else 
-                {    
-                    
-                    var l = this.getLocation(this.word.path);
-                     this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(l.hostname + '/' + this.word.images[k]);
-                    this.imageUri = l.hostname + this.word.images[k];
-                   
-                } */
-      /*       }
-            
-            else 
-            {   
-                this.trustedVideo = this.sanitizer.bypassSecurityTrustUrl(this.word.images[j]);
-                //let lung = j.length
-                this.imageUri = this.word.images[j];
-            
-             } */
        
        
         var image = new Image();
@@ -260,11 +232,6 @@ export class PostLoginComponentF implements  OnInit {
        image.src = this.imageUri;
        
        this.image_size = image.naturalWidth; 
-
-       //let image_width = this.checkImageSize();
-
-
-      // console.log('image.width',this.image_size )
         
     }
        
@@ -274,7 +241,7 @@ export class PostLoginComponentF implements  OnInit {
             this.onthefly = true;
        } else {
             this.onthefly = false;
-            //console.log(this.word.body)
+           
        }
 
        if (this.word.meta1.content) {}
@@ -285,7 +252,7 @@ export class PostLoginComponentF implements  OnInit {
 
        if (this.word.type == "video") 
             {
-               /*  this.imageUri ='https://img.youtube.com/vi/9KE_I6d5m9E/default.jpg'; */
+           
 
                 let YouTubeId = this.extractVideoID(this.word.path)
 

@@ -11,15 +11,14 @@ router.get('/', function(req, res, next) {
 router.get('/crawler-go', function(req, res) {
 
     crawler.crawl(function(content, url, contentType, todo) {
-        //console.log(content);
+
         scrapper.extractData(content, url, contentType, todo);
 
     });
 
-    // Aggiunto per gestione PAGE
+    // Aggiunto per gestione PAGE - uhm uhm
     res.render('index', { title: 'Crawler attivato' });
-    // Aggiunto per gestione PAGE
+    // Aggiunto per gestione PAGE - uhm uhm
 });
-
 
 module.exports = router;
