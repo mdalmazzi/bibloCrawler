@@ -11,6 +11,11 @@ var Page = require('../models/page');
 var words = require('../models/word');
 var fs = require('fs');
 
+var cheerio = require('cheerio');
+
+
+
+
 //import getThumb from 'video-thumbnail-url';
 /* var getThumb = require('video-thumbnail-url');
 
@@ -23,6 +28,22 @@ getThumb('https://www.youtube.com/watch?v=dQw4w9WgXcQ').then(thumb_url => { // t
 
 //var urlToImage = require('url-to-image');
 var urlToImage = require('url2img');
+
+function searchForImage($images, $, page) {
+
+    if ($images) {
+        $(($images)).each(function(image) {
+            // console.log('$images[image] ', $images[image])
+            if ($images[image].attribs.src) {
+                if ($images[image].attribs.src.match(/http/g) !== null) {
+                    // Salva solo se ha path globale -- forse migliorabile
+                    page.images.push($images[image].attribs.src);
+                };
+            }
+
+        });
+    }
+}
 
 
 var options = {
@@ -204,19 +225,35 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
 
         words = messages;
 
-        for (var i = 200; i < 300; i++) {
+
+        for (var i = 300; i < 350; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
             //if (words[i].images.length == 0) {
 
-            urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
+            var $ = cheerio.load(messages[i].body);
+            var $images = $('img');
 
-            .then(function() {
-                    // do stuff with IMAGE
-                    console.log('Done:', i);
-                })
-                .catch(function(err) {
-                    console.error(err);
-                });
+            searchForImage($images, $, messages[i]);
+
+            if (messages[i].images.length) {
+
+                urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
+
+                .then(function() {
+                        // do stuff with IMAGE
+                        console.log('Done:', i);
+                    })
+                    .catch(function(err) {
+                        console.error(err);
+                    });
+
+            } else {
+
+                messages[i].save().then(() => { return });
+
+            }
+
+
         }
     });
 });

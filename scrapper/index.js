@@ -51,6 +51,8 @@ module.exports.extractData = function(html, url, contentType, todo) {
                         console.log('Page created!', url);
                     });
 
+                } else {
+                    console.log('page.images', page.images, page.path)
                 }
 
             }
@@ -67,11 +69,14 @@ function searchForImage($images, $, page) {
 
     if ($images) {
         $(($images)).each(function(image) {
-            console.log('image', image, $images)
-            if ($images[image].attribs.src.match(/http/g) !== null) {
-                // Salva solo se ha path globale -- forse migliorabile
-                page.images.push($images[image].attribs.src);
-            };
+            // console.log('$images[image] ', $images[image])
+            if ($images[image].attribs.src) {
+                if ($images[image].attribs.src.match(/http/g) !== null) {
+                    // Salva solo se ha path globale -- forse migliorabile
+                    page.images.push($images[image].attribs.src);
+                };
+            }
+
         });
     }
 }
