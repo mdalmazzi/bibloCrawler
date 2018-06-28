@@ -33,7 +33,7 @@ module.exports.extractData = function(html, url, contentType, todo) {
             materia: todo.materia
         });
 
-        // searchForImage($images, $, page);
+        searchForImage($images, $, page);
 
         // Page.findOne({})
         Page.findOne({ path: url }, function(err, obj) {
