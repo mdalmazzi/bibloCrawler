@@ -34,12 +34,12 @@ module.exports.crawl = function(callback) {
         //     obj: messages
         // })
 
-        console.log('Todos: ', messages);
+        // console.log('Todos: ', messages);
 
         var todo = messages.sito[0];
 
         if (!todo) {
-            console.log('todo: ', todo);
+            // console.log('todo: ', todo);
             return //gestire meglio
         } else {
             var myCrawlerUrl = todo.text;
@@ -94,7 +94,7 @@ module.exports.crawl = function(callback) {
 
         myCrawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 
-            console.log("Fetched completed! At: ", queueItem);
+            // console.log("Fetched completed! At: ", queueItem);
 
             callback(responseBuffer, queueItem.url, queueItem.stateData.contentType, todo);
         });
@@ -103,7 +103,7 @@ module.exports.crawl = function(callback) {
 
 
         myCrawler.on("complete", function() {
-            console.log(`Crawler ${myCrawlerUrl} completed!`);
+            // console.log(`Crawler ${myCrawlerUrl} completed!`);
 
             // console.log('myCrawler', myCrawler);
 
@@ -136,24 +136,24 @@ module.exports.crawl = function(callback) {
 
             // });
 
-            console.log(process.argv);
+            // console.log(process.argv);
             // myCrawler.start();
 
             //process.exit(1)
         });
 
         myCrawler.on("queueadd", function(queueItem, referrerQueueItem) {
-            console.log(`Aggiunto Item a queue!`, queueItem);
+            // console.log(`Aggiunto Item a queue!`, queueItem);
 
         });
 
         myCrawler.on("queueerror", function(error, URLData) {
-            console.log(`Errore in queue`, error);
+            // console.log(`Errore in queue`, error);
 
         });
 
         myCrawler.on("fetchstart", function(queueItem, requestOptions) {
-            console.log('Fetch start at:', queueItem, myCrawler.queue);
+            // console.log('Fetch start at:', queueItem, myCrawler.queue);
 
 
         });
