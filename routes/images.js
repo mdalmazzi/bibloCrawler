@@ -14,8 +14,6 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 
 
-
-
 //import getThumb from 'video-thumbnail-url';
 /* var getThumb = require('video-thumbnail-url');
 
@@ -231,7 +229,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         words = messages;
 
 
-        for (var i = 450; i < 850; i++) {
+        for (var i = 850; i < 1000; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
             // if (words[i].images.length == 0) {
 
