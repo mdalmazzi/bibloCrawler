@@ -196,7 +196,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                     })
                 }
             })
-        .limit(1000)
+        .limit(2000)
 
     //.sort({ quality: -1 })
 
@@ -229,7 +229,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         words = messages;
 
 
-        for (var i = 850; i < 1000; i++) {
+        for (var i = 1000; i < 2000; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
             // if (words[i].images.length == 0) {
 
