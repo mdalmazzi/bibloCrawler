@@ -196,7 +196,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                     })
                 }
             })
-        .limit(3000)
+        .limit(4000)
 
     //.sort({ quality: -1 })
 
