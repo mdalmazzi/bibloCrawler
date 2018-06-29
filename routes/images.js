@@ -31,20 +31,23 @@ var urlToImage = require('url2img');
 
 function searchForImage($images, $, page) {
 
-    if ($images) {
-        $(($images)).each(function(image) {
-            console.log('$images[image] ', $images[image])
-            if ($images[image].attribs.src) {
-                if ($images[image].attribs.src.match(/http/g) !== null) {
-                    // Salva solo se ha path globale -- forse migliorabile
-                    page.images.push($images[image].attribs.src);
-                    console.log('Salvo immagine');
-                    page.images.save();
-                };
-            }
+    if ($) {
+        if ($images) {
+            $(($images)).each(function(image) {
+                console.log('$images[image] ', $images[image])
+                if ($images[image].attribs.src) {
+                    if ($images[image].attribs.src.match(/http/g) !== null) {
+                        // Salva solo se ha path globale -- forse migliorabile
+                        page.images.push($images[image].attribs.src);
+                        console.log('Salvo immagine');
+                        page.images.save();
+                    };
+                }
 
-        });
+            });
+        }
     }
+
 }
 
 
