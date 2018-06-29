@@ -38,6 +38,8 @@ function searchForImage($images, $, page) {
                 if ($images[image].attribs.src.match(/http/g) !== null) {
                     // Salva solo se ha path globale -- forse migliorabile
                     page.images.push($images[image].attribs.src);
+                    console.log('Salvo immagine');
+                    page.images.save();
                 };
             }
 
@@ -193,7 +195,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                     })
                 }
             })
-        .limit(500)
+        .limit(600)
 
     //.sort({ quality: -1 })
 
@@ -226,34 +228,34 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         words = messages;
 
 
-        for (var i = 300; i < 350; i++) {
+        for (var i = 500; i < 510; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
-            //if (words[i].images.length == 0) {
+            if (words[i].images.length == 0) {
 
-            var $ = cheerio.load(messages[i].body);
-            var $images = $('img');
+                var $ = cheerio.load(messages[i].body);
+                var $images = $('img');
 
-            searchForImage($images, $, messages[i]);
+                searchForImage($images, $, messages[i]);
 
-            if (messages[i].images.length) {
+                if (!messages[i].images.length) {
 
-                urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
+                    urlToImage(words[i].path, 'public/img/' + words[i]._id + '.png', options)
 
-                .then(function() {
-                        // do stuff with IMAGE
-                        console.log('Done:', i);
-                    })
-                    .catch(function(err) {
-                        console.error(err);
-                    });
+                    .then(function() {
+                            // do stuff with IMAGE
+                            console.log('Done:', i);
+                        })
+                        .catch(function(err) {
+                            console.error(err);
+                        });
 
-            } else {
+                } else {
 
-                messages[i].save().then(() => { return });
+                    // messages[i].save().then(() => { return });
+
+                }
 
             }
-
-
         }
     });
 });
