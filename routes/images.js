@@ -31,7 +31,7 @@ var urlToImage = require('url2img');
 
 function searchForImage($images, $, page) {
 
-    if ($) {
+    if ($ != undefined) {
         if ($images) {
             $(($images)).each(function(image) {
                 console.log('$images[image] ', $images[image])
