@@ -5,15 +5,59 @@
 
             </pagination-controls> -->
 
-            <br>
-            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
+            <!-- <app-youtube></app-youtube> -->
+
+            <!-- <div class="container"> -->
+            <form [formGroup]="searchForm">
+                <mat-form-field>
+                    <input formControlName="search" id="search" matInput placeholder="Search YouTube and Biblò Crawler">
+                </mat-form-field>
+            </form>
+            <form [formGroup]="searchFormBis">
+                <mat-form-field *ngIf="FALSE">
+
+                    <input formControlName="search" id="search" matInput placeholder="Search YouTube">
+
+                </mat-form-field>
+            </form>
+
+            <div class="cards">
+                <!-- <mat-spinner *ngIf="isDataLoaded"></mat-spinner> -->
+                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of resultsBis | async">
+                    <mat-card-title class="text-warning">
+                        <small>
+                        <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
+                            <h6>{{result.snippet.title | truncate : 20}}</h6>
+                        </a>
+                    </small>
+                    </mat-card-title>
+                    <mat-card-footer style="padding: 20px" class="bg-light-mod">
+
+                        <p>{{result.snippet.description | truncate : 100}}</p>
+                        <img [src]="result.snippet.thumbnails.default.url" style="width: 100%; max-width: 250px;" />
+
+                    </mat-card-footer>
+
+
+                </mat-card>
+            </div>
+
+
+
+
+            <!-- </div> -->
+            <br>
+            <br>
+
+            <!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="row">
                     <div class="col col-3">
                         <div class="row text-muted ">
                             <div class="col col-12">
                                 <small> <strong>Ricerca su</strong></small>
                             </div>
+
                         </div>
 
                         <div class="row">
@@ -35,12 +79,12 @@
                                     <button type="submit" class="btn btn-warning bg-warning-mod "><i class="fa fa-search text-white" aria-hidden="true"></i></button>
                             </span>
                         </div>
+
                     </div>
 
 
                     <div class="col col-2">
 
-                        <!-- <button type="submit" class="btn bg-warning-mod text-white fa fa-search"></button> -->
 
                     </div>
 
@@ -63,7 +107,6 @@
 
                 <div class="row">
                     <div class="col col-10">
-                        <!-- <button type="submit" class="btn btn-warning  dropdown-toggle text-white" (click)="set_ricerca()" [class.bg-warning-mod]="ricerca_v" [class.btn-warning]="ricerca_v" [class.bg-secondary]="!ricerca_v" [class.btn-secondary]="!ricerca_v">Perfeziona ricerca</button> -->
 
                         <button [ngStyle]="{display: !ricerca_v ? 'none' : 'block'}" type="submit" class="btn   text-white bg-warning-mod btn-warning" (click)="set_ricerca()">Perfeziona ricerca <i class="fa fa-caret-down" aria-hidden="true"></i></button>
 
@@ -98,6 +141,8 @@
                         </div>
                         <div *ngIf="search_scuola_v">
                             <hr>
+
+
 
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -216,9 +261,9 @@
 
 
                                             <label class="form-check-label">
-                                                                     <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Prima</small> 
-                                                                    </label>
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                        <small>Prima</small> 
+                                                        </label>
 
                                         </div>
                                     </div>
@@ -229,9 +274,9 @@
                                         </div>
                                         <div class="col col-10">
                                             <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Seconda</small> 
-                                                                </label>
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                        <small>Seconda</small> 
+                                                        </label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -240,8 +285,8 @@
                                         </div>
                                         <div class="col col-10">
                                             <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Terza</small> 
+                                                 <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Terza</small> 
                                                                 </label>
                                         </div>
                                     </div>
@@ -254,7 +299,7 @@
 
                                     <div class="col col-10">
                                         <label class="form-check-label">
-                                                              <input class="form-check-input" 
+                                                    <input class="form-check-input" 
                                                               id="Secondaria Secondo Grado" type="checkbox" value="Secondaria Secondo Grado" ngModel name="Secondaria Secondo Grado">
                                                         <small>Scuola Secondaria di II° grado</small>
                                                     </label>
@@ -278,9 +323,9 @@
 
 
                                             <label class="form-check-label">
-                                                                     <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                        <small>Biennio professionali </small>
-                                                                    </label>
+                                                        <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                         <small>Biennio professionali </small>
+                                                            </label>
 
                                         </div>
                                     </div>
@@ -291,8 +336,8 @@
                                         </div>
                                         <div class="col col-10">
                                             <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Triennio professionali</small>
+                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Triennio professionali</small>
                                                                 </label>
                                         </div>
                                     </div>
@@ -302,8 +347,30 @@
                                         </div>
                                         <div class="col col-10">
                                             <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Biennio Istituti tecnici</small> 
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Biennio Istituti tecnici</small> 
+                                                    </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                     <small>Triennio Istituti tecnici </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Biennio Licei</small> 
                                                                 </label>
                                         </div>
                                     </div>
@@ -313,30 +380,8 @@
                                         </div>
                                         <div class="col col-10">
                                             <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Triennio Istituti tecnici </small>
-                                                                </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col col-1">
-
-                                        </div>
-                                        <div class="col col-10">
-                                            <label class="form-check-label">
-                                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                    <small>Biennio Licei</small> 
-                                                                </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col col-1">
-
-                                        </div>
-                                        <div class="col col-10">
-                                            <label class="form-check-label">
-                                                                        <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
-                                                                        <small>Triennio Licei </small>
+                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                <small>Triennio Licei </small>
                                                                     </label>
                                         </div>
                                     </div>
@@ -345,8 +390,8 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                                                  <input class="form-check-input" id="Universita" type="checkbox" value="Università" ngModel name="Università">
-                                                        <small>Università</small>
+                                        <input class="form-check-input" id="Universita" type="checkbox" value="Università" ngModel name="Università">
+                                            <small>Università</small>
                                            </label>
                             </div>
 
@@ -374,17 +419,17 @@
                             <hr>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                                                          <input class="form-check-input" type="checkbox" value="" ngModel 
-                                                                          name="Italiano">
-                                                                          <small>Italiano</small>
-                                                                </label>
+                                <input class="form-check-input" type="checkbox" value="" ngModel 
+                                name="Italiano">
+                                    <small>Italiano</small>
+                                    </label>
                             </div>
 
                             <div class="form-check">
                                 <label class="form-check-label">
-                                                                              <input class="form-check-input" type="checkbox" value="" ngModel
-                                                                              name="Inglese">
-                                                                              <small>Inglese</small>
+                                    <input class="form-check-input" type="checkbox" value="" ngModel
+                                    name="Inglese">
+                                                                    <small>Inglese</small>
                                                                 </label>
                             </div>
 
@@ -431,15 +476,15 @@
 
                             <div class="form-check">
                                 <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="" ngModel
-                                        name="immagine">
+                                        <input class="form-check-input" type="checkbox" value="image" ngModel
+                                        name="image">
                                         <small>Immagini</small>
                                     </label>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="" ngModel
-                                        name="web page">
+                                        <input class="form-check-input" type="checkbox" value="charset=UTF-8" ngModel
+                                        name="charset=UTF-8">
                                         <small>Pagine Web</small>
                                     </label>
                             </div>
@@ -525,7 +570,7 @@
                                             <div class="col col-10">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                                            <input class="form-check-input" id="copyright" type="checkbox" value="Treccani" ngModel name="treccani">
+                                                     <input class="form-check-input" id="copyright" type="checkbox" value="Treccani" ngModel name="treccani">
                                                                                  <small>Treccani</small>
                                                                          </label>
                                                 </div>
@@ -593,7 +638,7 @@
                                             <div class="col col-10">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                                            <input class="form-check-input" id="Creative Commons" type="checkbox" value="oilproject" ngModel name="oilproject"><small>Oil Project</small>
+                                                        <input class="form-check-input" id="Oilproject" type="checkbox" value="oilproject" ngModel name="oilproject"><small>Oil Project</small>
                                                                         </label>
                                                 </div>
                                             </div>
@@ -679,7 +724,7 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                              <input class="form-check-input" id="Scienze" type="checkbox" value="fisica" ngModel name="matematica">
+                                              <input class="form-check-input" id="Matematica" type="checkbox" value="Matematica" ngModel name="matematica">
                                               <small>Matematica</small>
                                             </label>
                             </div>
@@ -698,12 +743,15 @@
                 </pagination-controls>
 
                 <div class="row">
+
                     <div class="card-columns col col-12">
 
-                        <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="60" [page]="p" *ngFor="let word of words | paginate: { itemsPerPage: 60, currentPage: p }; let i=index ">
-
-
+                        <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
                         </app-postlogin-f>
+
+
+
+
                     </div>
                 </div>
                 <pagination-controls (pageChange)="p = $event">
@@ -711,7 +759,29 @@
                 </pagination-controls>
 
 
-            </form>
+            </form> -->
+            <div class="row">
+                <pagination-controls (pageChange)="p = $event">
+
+                </pagination-controls>
+            </div>
+
+
+            <div class="row">
+
+                <div class="card-columns col col-12">
+
+                    <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
+                    </app-postlogin-f>
+
+                </div>
+            </div>
+            <div class="row">
+                <pagination-controls (pageChange)="p = $event">
+
+                </pagination-controls>
+            </div>
+
         </div>
     </div>
 </div>

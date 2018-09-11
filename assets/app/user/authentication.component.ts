@@ -13,11 +13,11 @@ import {UserService} from "./user.service";
             </ul>
         </nav>
     </header>
-        <div class="row spacing">
-            <router-outlet>
-                
-            </router-outlet>
-        </div>
+    <div class="row spacing">
+    <router-outlet>
+        
+    </router-outlet>
+</div>
     `
 })
 export class AuthenticationComponent {

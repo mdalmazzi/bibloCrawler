@@ -149,7 +149,8 @@ export class DettaglioWordComponent implements  OnInit {
            this.boxService.deleteBox(this.word)
                 .subscribe(
                 result => console.log(result)
-        );     
+        ); 
+            
         this.router.navigate(['home/' + this.word.word]);
 
        }

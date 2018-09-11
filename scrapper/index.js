@@ -38,7 +38,7 @@ module.exports.extractData = function(html, url, contentType, todo) {
         // Page.findOne({})
         Page.findOne({ path: url }, function(err, obj) {
             if (err) {
-
+                console.log('contentType', contentType)
             }
             if (obj) {
                 console.log('Path già memorizzato: ', url)
@@ -49,9 +49,11 @@ module.exports.extractData = function(html, url, contentType, todo) {
                     page.save(function(err, result) {
                         if (err) throw err;
                         console.log('Page created!', url);
+                        console.log('contentType', contentType)
                     });
 
                 } else {
+                    console.log('contentType', contentType)
                     console.log('page.images', page.images, page.path)
                 }
 

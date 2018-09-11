@@ -35,12 +35,10 @@ export class HeaderComponent implements OnInit{
     
         constructor(private boxService: PostLoginService, public route: ActivatedRoute, public router: Router, private  postLoginService: PostLoginService, private progettoService: ProgettoService) {
 
-            //router.events.subscribe((url:any) => console.log(url));
-            
+            //router.events.subscribe((url:any) => console.log(url));        
             //console.log(router.url);  // to print only path eg:"/login"
             //this.url_status = router.url; 
-           
-           
+                
     }
 
     OneditorModelChangeSEARCH(event: any) {
@@ -60,6 +58,7 @@ export class HeaderComponent implements OnInit{
         document.getElementById("frontend").classList.remove("active");
     }
 
+    
     goValidate() {
         document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 
@@ -74,7 +73,7 @@ export class HeaderComponent implements OnInit{
         // this.router.navigate(['esterno']);
  
         // this.router.navigate(['homef/fisica']);
-        document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css');
+        // document.getElementById('theme').setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css');
 
         
         this.router.navigate(['/home/'+ this.start_word + '/' + this.start_scuola + '/' + this.start_risorsa + '/' + this.start_fonte + '/' + this.start_materia + '/' + this.start_licenza]);

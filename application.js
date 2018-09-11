@@ -28,7 +28,6 @@ var app = express();
 mongoose.connect('localhost:27017/SpaggiariPage');
 // mongoose.connect('localhost:27017/Spaggiari');
 
-//mongoose.connect('mongodb://admin:abc123@localhost:27017/SpaggiariPage');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,6 +58,8 @@ app.use('/infoprogetto', progettoRoutes);
 app.use('/crawler', crawlerRoutes);
 app.use('/home-info', postloginRoutesF);
 app.use('/images', imagesRoutes);
+app.use('/youtube', imagesRoutes);
+
 
 
 // Creazione words DB da full search pagine indicizzate //
@@ -72,16 +73,19 @@ app.get('/word/:id', (req, res) => {
             // $caseSensitive: <boolean>,
             // $diacriticSensitive: <boolean>
         }
-    }, {
-        body: 0
+
+        // }, {
+        //     body: 0
     }).then((words) => {
         var wordsave = words;
-
+        console.log('words: ', words);
         wordsave.forEach((word) => {
             var word = new Word({
                 // Inserire tutto
                 titolo: word.titolo,
                 path: word.path,
+                // body: word.body,
+                image_id: word._id,
                 meta1: word.meta1,
                 meta2: word.meta2,
                 meta3: word.meta3,

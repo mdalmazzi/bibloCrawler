@@ -141,7 +141,7 @@ youtubedl.getThumbs(url, options_bis, function(err, files) {
 
 ///
 
-/////// ve
+/////// 
 
 /* var Youtube = require('youtube.com');
 
@@ -163,7 +163,21 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         //         "word": req.params.word
 
         //     })
-        Page.find({ $text: { $search: req.params.word, $caseSensitive: false } },
+        Page.find({
+                    $text: { $search: req.params.word, $caseSensitive: false },
+
+                    // inserito Cairo
+                    //'titolo': req.params.word
+                    // inserito Cairo
+
+                    // "scuola": { $in: req.params.scuola.split("&") },
+
+                    // "type": (req.params.risorsa == 'all') ? { $exists: true } : {
+                    //     // $in: req.params.risorsa.split("&")
+                    //     "$regex": req.params.risorsa
+                    // }
+
+                }, { score: { $meta: "textScore" } },
                 function(err, messages) {
                     if (err) {
                         return res.status(500).json({
@@ -172,6 +186,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                         })
                     }
                 })
+            .sort({ score: { $meta: 'textScore' } })
             .limit(600)
 
         //.sort({ quality: -1 })
@@ -236,41 +251,50 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         //         },
 
         /* Esempio di text search with AND  */
+        console.log('req.params.scuola.split("&")[0]: ', req.params.scuola.split("&")[0], req.params.risorsa);
 
-        Word.find({
-                    "meta2.content": (req.params.word == 'all') ? { $exists: true } : { "$regex": req.params.word, "$options": "i" },
+        Page.find(
 
-                    "meta3.content": (req.params.materia == 'all') ? { $exists: true } : { "$regex": req.params.materia.split("&")[1] },
+                {
+
+                    // $text: (req.params.type != 'image') ? { $search: req.params.word, $caseSensitive: false } : { $exists: true },
+                    // $text: { $search: req.params.word, $caseSensitive: false },
+                    // "meta2.content": (req.params.word == 'all') ? { $exists: true } : { "$regex": req.params.word, "$options": "i" }
+
+
+                    // "meta3.content": (req.params.materia == 'all') ? { $exists: true } : { "$regex": req.params.materia.split("&")[1] },
 
                     // "scuola": (req.params.scuola == 'all') ? { $exists: true } : {
                     //     $in: req.params.scuola.split("&")
                     // },
 
-                    // "type": (req.params.risorsa == 'all') ? { $exists: true } : {
-                    //     $in: req.params.risorsa.split("&")
+                    "scuola": (req.params.scuola.split("&")[0] == 'all') ? { $exists: true } : { $in: req.params.scuola.split("&") },
 
-                    // },
+                    "type": (req.params.risorsa == 'all') ? { $exists: true } : {
+                        // $in: req.params.risorsa.split("&")
+                        "$regex": req.params.risorsa
+                    },
 
-                    "licenza": (req.params.licenza == 'all') ? { $exists: true } :
-                        (req.params.licenza.split("&").length == 2) ? {
-                            "$regex": req.params.licenza.split("&")[1],
-                            "$options": "i"
+                    // "licenza": (req.params.licenza == 'all') ? { $exists: true } :
+                    //     (req.params.licenza.split("&").length == 2) ? {
+                    //         "$regex": req.params.licenza.split("&")[1],
+                    //         "$options": "i"
 
-                        } : { $regex: /copyright|Creative Commons/ },
+                    //     } : { $regex: /copyright|Creative Commons/ },
 
-                    "path": (req.params.fonte == 'all') ? { $exists: true } :
+                    // "path": (req.params.fonte == 'all') ? { $exists: true } :
 
-                        (req.params.fonte.split("&").length == 3) ?
+                    //     (req.params.fonte.split("&").length == 3) ?
 
-                        {
-                            $regex: /treccani|oilproject/
-                        } : (req.params.fonte.split("&")[1] == 'treccani') ?
+                    //     {
+                    //         $regex: /treccani|oilproject/
+                    //     } : (req.params.fonte.split("&")[1] == 'treccani') ?
 
-                        {
-                            $regex: /treccani/
-                        } : {
-                            $regex: /oilproject/
-                        },
+                    //     {
+                    //         $regex: /treccani/
+                    //     } : {
+                    //         $regex: /oilproject/
+                    //     },
 
                 },
 

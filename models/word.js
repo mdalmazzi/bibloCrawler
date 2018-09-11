@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 
 
 const typeLicense = ["copyright", "creative commons", "pubblico dominio"];
-const typeSchool = ["Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado"];
-const typeContent = ["Page", "Image", "Video", "text/html; charset=UTF-8", "image/jpeg", "image/png", "video/mp4", "image/gif"];
+const typeSchool = ["Infanzia", "Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado"];
+const typeContent = ["Page", "Image", "Video", "text/html; charset=UTF-8", "text/html; charset=utf-8", "image/jpeg", "image/png", "video/mp4", "image/gif"];
 const typeLanguage = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco"];
 const typeMateria = ["Matematica", "Fisica"];
 
@@ -111,7 +111,23 @@ var wordSchema = new Schema({
         minlength: 1,
         trim: true
 
-    }
+    },
+    // body: word.body,
+    // image_id: word._id,
+    body: {
+        type: String,
+        required: false,
+        minlength: 1,
+        trim: true
+
+    },
+    image_id: {
+        type: String,
+        required: false,
+        minlength: 1,
+        trim: true
+
+    },
 });
 
 var Word = mongoose.model('Word', wordSchema);

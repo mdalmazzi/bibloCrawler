@@ -6,18 +6,122 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NgForm} from '@angular/forms';
 
 import {Word} from "./word.model";
+//Per YOUTube
 
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import {ViewEncapsulation} from '@angular/core';
+
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+const API_URL = 'https://www.googleapis.com/youtube/v3/search';
+const API_KEY = 'AIzaSyCRJqo_zdv1gDIsSkczJOFTnKcm2coSWEA';
+
+
+
+//Per YOUTube
 
 @Component({
     selector: 'app-listmappe-f',
     templateUrl: './list-mappe.component.html',
-    styleUrls: ['./list-mappe.component.css']
+    styleUrls: ['./list-mappe.component.css', './youtube.component.scss'],
+    //Per YOUTube
+    encapsulation: ViewEncapsulation.None,
+    //Per YOUTube
 })
 export class ListMappeComponentF {
+    //Per YOUTube
+    searchForm: FormGroup;
+    results: Observable<{}>;    
+
+    searchFormBis: FormGroup;
+    resultsBis: Observable<{}>;   
+
+    transformedWords: Word[] = [];
+    // public words: Word[] = [];
+
+    private path_to_server: string = 'http://localhost:3000';
+
+    //Per YOUTube
 
     @ViewChild('f') signupForm: NgForm;
 
-    constructor( public router: Router, private route: ActivatedRoute, private boxService: PostLoginServiceF) {
+    constructor( public router: Router, private route: ActivatedRoute, private boxService: PostLoginServiceF, private formBuilder: FormBuilder, private http: Http) {
+
+        this.transformedWords = [];
+
+       
+        
+        
+    
+        //Per YOUTube
+        this.searchForm = this.formBuilder.group({
+            search: ['', Validators.required],
+          });
+        
+          this.results = this.searchForm.controls.search.valueChanges
+        // this.words = this.searchForm.controls.search.valueChanges
+          
+          .filter(value => value.length > 2)
+          .debounceTime(500)
+          //use distictUntilChanged: Only emit when the current value is different than the last.
+          .distinctUntilChanged()
+          //use Switchmap: it works perfect for scenarios like typeaheads
+          //where you are no longer concerned with the response of the previous request when a new input arrives.
+          .switchMap(searchTerm =>
+
+            this.http.get(this.path_to_server + '/home-info/' + searchTerm + '/' + 'all' + '/' + 'all' + '/' + 'all' + '/' + 'all' + '/' + 'all')
+            // this.http.get(
+            //   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video`
+            // )
+          )
+        //   .map(res => res.json().items);
+        .map((response: Response) => {
+            const words = response.json().obj;
+            console.log('words', words);
+
+            this.transformedWords = [];
+            
+            for (let word of words) {
+
+                this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))}
+
+                this.words = this.transformedWords;
+                console.log('Trasformed: ', this.words);
+            
+                return this.transformedWords;
+        })
+
+       
+
+        this.searchFormBis = this.formBuilder.group({
+            search: ['', Validators.required],
+          });
+        
+          this.resultsBis = this.searchForm.controls.search.valueChanges
+           
+          .filter(value => value.length > 2)
+          .debounceTime(500)
+          //use distictUntilChanged: Only emit when the current value is different than the last.
+          .distinctUntilChanged()
+          //use Switchmap: it works perfect for scenarios like typeaheads
+          //where you are no longer concerned with the response of the previous request when a new input arrives.
+          .switchMap(searchTerm => this.http.get(
+              `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video`
+            )
+          )
+          .map(res => res.json().items);
+          
+
+         
+          
+          
+
+       //Per YOUTube
        
         this.route.params.subscribe (
             params => {
@@ -42,12 +146,19 @@ export class ListMappeComponentF {
     }
 
     public words: Word[] = [];
-    private array_scuola = ['Infanzia', 'Primaria','Secondaria Primo Grado', 'Secondaria Secondo Grado', 'Università', , 'Universita'];
-    private array_risorsa = ['Immagini', 'Video','Esercizi', 'esercizi', 'Pagina Web', 'Web page', 'web page', 'Immagine', 'video', 'immagine', 'PDF', 'pdf', 'Pdf'];
 
-    private array_fonte = ['treccani', 'oilproject'];
-    private array_materia = ['scienze', 'fisica', 'storia' , 'matematica', 'italiano', 'inglese'];
-    private array_licenza = ['copyright', 'Creative Commons', 'Copyright'];
+    private array_scuola = ["Infanzia", "Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado", 'Universita'];
+
+    private array_risorsa = ["Page", "Image", "Video", "charset=UTF-8", "text\/html; charset=utf-8", "image/jpeg", "image/png", "video/mp4", "image/gif", "PDF", "pdf", "Pdf", "image"];
+
+    private array_fonte = ["Editore", "Blog", "MOOC"];
+
+    private array_materia = ['Matematica', 'Fisica', 'Geografia', 'Storia', 'Italiano', 'Scienze', 'Inglese', 'Francese', 'Tedesco', 'Spagnolo', 'Tecnologia', 'Arte e Immagine', 'Scienze motorie e sportive', 'Latino', 'Informatica', 'Filosofia', 'Musica', 'Religione', 'Scienze delle Terra', 'Biologia', 'Chimica', 'Diritto ed economia', 'Psicologia', 'Antropologia', 'Pedagogia', 'Sociologia', 'Disegno', 'Greco', 'Geostoria'];
+
+    private array_licenza = ['copyright', 'creative commons', "pubblico dominio"];
+
+
+    
 
     //private search_word: string; // inutilizzata
     public search_word: string = "";
@@ -72,8 +183,6 @@ export class ListMappeComponentF {
     public placeholderVar = "Cerca";
 
     public search_scuola_FE: string = "";
-
-    
 
     public change_mouse: string;
 
@@ -148,6 +257,8 @@ export class ListMappeComponentF {
         this.search_materia = ""; 
         this.search_licenza = ""; 
 
+        // console.log('this.signupForm.value: ',this.signupForm.value)
+
        /*  if (this.search_scuola === 'all') {
             this.search_scuola = ''
         }
@@ -158,20 +269,28 @@ export class ListMappeComponentF {
 
    
       //  var i= 1
-        if (this.signupForm) {} else {
-           // console.log('caspita')
-        }
+        
         for(var key in this.signupForm.value) {
-       
-         //   var value = ;
+                 
+
             if (this.signupForm.value[key]) {
+                
+                console.log('Quelli settati sono: ', key);
+
                 if ((this.array_scuola.indexOf(key)) != -1) { 
-                    this.search_scuola = this.search_scuola + '&'+ key + '&';       
-                }
+                    this.search_scuola = this.search_scuola + '&'+ key;    
+                     console.log('Key', key, this.search_scuola)    
+                } else {}
+
                 if ((this.array_risorsa.indexOf(key)) != -1) { 
-                    this.search_risorsa = this.search_risorsa + '&'+ key + '&';        
-                }
+                    
+                    this.search_risorsa = this.search_risorsa + '&'+ key;       
+                    
+                    console.log('key: ', key, this.search_risorsa);
+                } else {}
+
                 if ((this.array_fonte.indexOf(key)) != -1) { 
+                    
                     this.search_fonte = this.search_fonte + '&'+ key ;        
                 }
                 if ((this.array_materia.indexOf(key)) != -1) { 
@@ -181,10 +300,6 @@ export class ListMappeComponentF {
                     this.search_licenza = this.search_licenza + '&'+ key ;        
                 }
             }
-            
-            //console.log(this.search_fonte);
-
-            //console.log(this.search_licenza);
 
             if (this.boxService.search_word == '') {
                 this.boxService.search_word = 'all'
@@ -211,15 +326,6 @@ export class ListMappeComponentF {
                 this.search_licenza = 'all'
             }
 
-            
-           /*  if (value) {
-               if (i==1) { (this.search_scuola = 'Infanzia')} ;  
-               if (i==2) { (this.search_scuola = this.search_scuola + '&' + 'Primaria')} ;    
-               if (i==3) { (this.search_scuola = this.search_scuola + '&' +'Secondaria Primo Grado')} ; 
-               if (i==4) { (this.search_scuola = this.search_scuola + '&' +'Secondaria Secondo Grado')} ; 
-               if (i==5) { (this.search_scuola = this.search_scuola + '&' +'Università')} ; 
-            } */
-      //      i++
         }
        
        /*  this.router.navigate(['home/' + this.search_word + '/' + this.search_scuola + '/' + this.search_risorsa]); */
@@ -228,7 +334,6 @@ export class ListMappeComponentF {
 
 
         this.doSearch(this.boxService.search_word, this.search_scuola, this.search_risorsa, this.search_fonte, this.search_materia, this.search_licenza);
-      //  console.log(this.search_fonte.split("&"), this.search_fonte.split("&").length)
         
     }
     
@@ -259,22 +364,55 @@ export class ListMappeComponentF {
         
     }
 
+    replaceAt(index, replacement, stringa) {
+        // let string_replace = stringa.substr(0, index)  + stringa.substr(index );
+
+        let string_clean = stringa.slice(0, index);
+
+        // console.log('Inside replace string_replace: ', string_clean);
+        return string_clean;
+    }
+
+    private res;
+    private res_risorsa;
+
     doSearch(search_word: string, search_scuola: string, search_risorsa: string, search_fonte: string, search_materia: string, search_licenza: string) {
 
+        console.log('Parametro iniziale search_scuola: ', search_scuola, search_risorsa);
         
-        //this.search_scuola_FE = this.search_scuola.split("&");
-       // this.remove(this.search_scuola.split("&"), "");
         this.search_scuola_FE = this.remove(this.search_scuola.split("&"), "");
-       
+
         this.search_scuola_FE.toString().replace('all,', '');  
-        //this.search_scuola_FE.toString().replace('All,', '');   
+        
+        this.res = this.search_scuola.replace("all&", "");
+
+        this.res_risorsa = this.search_risorsa.replace("all&", "");
+        // let res_risorsa = this.search_risorsa;
 
         this.search_clean = (search_word.replace(/<(?:.|\n)*?>/gm, '')).toLowerCase();
+
        
+        if (this.res_risorsa.charAt(this.res_risorsa.length - 1) == "&") {
+                var search_risorsa_clean = this.replaceAt(this.res_risorsa.length-1, '', this.res_risorsa);
+                console.log('Search_risorsa_clean: ', search_risorsa_clean);
+                
+        } else {
+                console.log('Search_risorsa_clean: ', search_risorsa_clean);
+                search_risorsa_clean = this.res_risorsa;
+        }
+
+        if (this.res.charAt(this.res.length - 1) == "&") {
+                var search_scuola_clean = this.replaceAt(this.res.length-1, '', this.res);
+                console.log('Search_scuola_clean: ', search_scuola_clean);
+                
+        } else {
+            console.log('search_scuola_clean: ', search_scuola_clean);
+            search_scuola_clean = this.res;
+        } 
       
         if (this.search_clean != "") {
 
-            this.boxService.getBoxes(this.search_clean, search_scuola, search_risorsa, search_fonte, search_materia, search_licenza)
+            this.boxService.getBoxes(this.search_clean, search_scuola_clean, search_risorsa_clean, search_fonte, search_materia, search_licenza)
         
                 .subscribe(
                     (words: Word[]) => {

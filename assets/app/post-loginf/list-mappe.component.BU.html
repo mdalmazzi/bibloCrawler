@@ -1,0 +1,729 @@
+<div class="container bg-white">
+    <div class="row">
+        <div class="col col-12">
+            <!-- <pagination-controls (pageChange)="p = $event">
+
+            </pagination-controls> -->
+
+            <br>
+
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="row">
+                    <div class="col col-3">
+                        <div class="row text-muted ">
+                            <div class="col col-12">
+                                <small> <strong>Ricerca su</strong></small>
+                            </div>
+                            <br>
+
+                            <br>
+                        </div>
+
+                        <app-youtube></app-youtube>
+
+                        <div class="row">
+                            <div class="col col-12">
+                                <span class="text-primary text-capitalize"> {{search_scuola_FE}}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col col-4">
+                        <div class="input-group">
+                            <medium-editor [style.color]="'black'" class="form-control" [(editorModel)]="search_word" [editorOptions]="{'toolbar': false}" (editorModelChange)="OneditorModelChangeSEARCH($event)" [editorPlaceholder]="placeholderVar">
+
+                            </medium-editor>
+                            <span class="input-group-btn ">
+                                    <button type="submit" class="btn btn-warning bg-warning-mod "><i class="fa fa-search text-white" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="col col-2">
+
+                        <!-- <button type="submit" class="btn bg-warning-mod text-white fa fa-search"></button> -->
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col col-3">
+                        <h6><strong><span class="text-muted">Hai fatto la ricerca</span></strong></h6>
+                    </div>
+                    <div class="col col-9">
+                        <h6> <strong><span class="text-primary text-capitalize"> {{search_clean}}</span></strong></h6>
+
+                    </div>
+                </div>
+
+
+                <br>
+
+                <div class="row">
+                    <div class="col col-10">
+                        <!-- <button type="submit" class="btn btn-warning  dropdown-toggle text-white" (click)="set_ricerca()" [class.bg-warning-mod]="ricerca_v" [class.btn-warning]="ricerca_v" [class.bg-secondary]="!ricerca_v" [class.btn-secondary]="!ricerca_v">Perfeziona ricerca</button> -->
+
+                        <button [ngStyle]="{display: !ricerca_v ? 'none' : 'block'}" type="submit" class="btn   text-white bg-warning-mod btn-warning" (click)="set_ricerca()">Perfeziona ricerca <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+
+                        <button [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" type="submit" class="btn btn-secondary  bg-secondary text-white" (click)="set_ricerca()">Perfeziona ricerca <i class="fa fa-caret-up" aria-hidden="true"></i></button>
+
+
+                    </div>
+                    <div class="col col-2">
+
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+                        <div class="row ">
+                            <div class="col-10">
+                                <small><strong>Scuola</strong></small>
+                            </div>
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_scuola_v" (click)="set_scuola_v()"></span>
+
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_scuola_v" (click)="set_scuola_v()"></span>
+
+
+                            </div>
+
+                        </div>
+                        <div *ngIf="search_scuola_v">
+                            <hr>
+
+
+                            <!-- "Primaria", "Secondaria Primo Grado", "Secondaria Secondo Grado" -->
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                                  <input class="form-check-input" id="Infanzia" type="checkbox" value="Infanzia" ngModel name="Infanzia">
+                                                 <small> Scuola dell'Infanzia</small>
+                                            </label>
+                            </div>
+
+                            <div class="form-check">
+
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                            <input class="form-check-input" id="Primaria" type="checkbox" value="Primaria" ngModel name="Primaria"><small>Scuola Primaria</small>
+                                                        </label>
+                                    </div>
+                                    <div class="col col-2">
+                                        <span style="cursor:pointer" class="fa fa-caret-up  " aria-hidden="true" *ngIf="search_elementare_v" (click)="set_elementare_v()"></span>
+
+
+                                        <span style="cursor:pointer" class="fa fa-caret-down  " aria-hidden="true" *ngIf="!search_elementare_v" (click)="set_elementare_v()"></span>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="search_elementare_v" class="form-check">
+                                    <div class="row">
+
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+
+
+                                            <label class="form-check-label">
+                                                                 <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                                 <small>Prima</small> 
+                                                                </label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                                <small>Seconda </small>
+                                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                                <small> Terza </small>
+                                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                                <small>Quarta</small> 
+                                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                                <small>Quinta </small>
+                                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-check">
+                                <div class="row">
+
+                                    <div class="col col-10">
+
+                                        <label class="form-check-label">
+                                                          <input class="form-check-input" id="Secondaria Primo Grado" type="checkbox" value="Secondaria Primo Grado" ngModel name="Secondaria Primo Grado">
+                                                          <small>Scuola Secondaria di I° grado</small>
+                                                        </label>
+                                    </div>
+                                    <div class="col col-2">
+                                        <span style="cursor:pointer" class="fa fa-caret-up  " aria-hidden="true" *ngIf="search_primo_v" (click)="set_primo_v()"></span>
+
+
+                                        <span style="cursor:pointer" class="fa fa-caret-down  " aria-hidden="true" *ngIf="!search_primo_v" (click)="set_primo_v()"></span>
+                                    </div>
+
+
+                                </div>
+                                <div *ngIf="search_primo_v" class="form-check">
+                                    <div class="row">
+
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+
+
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                        <small>Prima</small> 
+                                                        </label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                        <small>Seconda</small> 
+                                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                 <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Terza</small> 
+                                                                </label>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                    <input class="form-check-input" 
+                                                              id="Secondaria Secondo Grado" type="checkbox" value="Secondaria Secondo Grado" ngModel name="Secondaria Secondo Grado">
+                                                        <small>Scuola Secondaria di II° grado</small>
+                                                    </label>
+                                    </div>
+                                    <div class="col col-2">
+                                        <span style="cursor:pointer" class="fa fa-caret-up  " aria-hidden="true" *ngIf="search_secondo_v" (click)="set_secondo_v()"></span>
+
+
+                                        <span style="cursor:pointer" class="fa fa-caret-down  " aria-hidden="true" *ngIf="!search_secondo_v" (click)="set_secondo_v()"></span>
+                                    </div>
+
+
+                                </div>
+                                <div *ngIf="search_secondo_v" class="form-check">
+                                    <div class="row">
+
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+
+
+                                            <label class="form-check-label">
+                                                        <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                         <small>Biennio professionali </small>
+                                                            </label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Triennio professionali</small>
+                                                                </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Biennio Istituti tecnici</small> 
+                                                    </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                     <small>Triennio Istituti tecnici </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                    <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                    <small>Biennio Licei</small> 
+                                                                </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-1">
+
+                                        </div>
+                                        <div class="col col-10">
+                                            <label class="form-check-label">
+                                                <input class=" form-check-input " id="Primaria" type="radio" value="Primaria_prima"  name="Primaria_prima">
+                                                <small>Triennio Licei </small>
+                                                                    </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                        <input class="form-check-input" id="Universita" type="checkbox" value="Università" ngModel name="Università">
+                                            <small>Università</small>
+                                           </label>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+
+                        <div class="row">
+                            <div class="col-10">
+                                <small><strong>Lingua</strong></small>
+                            </div>
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_lingua_v" (click)="set_lingua_v()"></span>
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_lingua_v" (click)="set_lingua_v()"></span>
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="search_lingua_v">
+                            <hr>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="" ngModel 
+                                name="Italiano">
+                                    <small>Italiano</small>
+                                    </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value="" ngModel
+                                    name="Inglese">
+                                                                    <small>Inglese</small>
+                                                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label"><input class="form-check-input" type="checkbox" value="" ngModel
+                                                                name="Francese"><small>Francese</small>
+                                                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label"><input class="form-check-input" type="checkbox" value="" ngModel name="Spagnolo"><small>Spagnolo</small>
+                                                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label"><input class="form-check-input" type="checkbox" value="" ngModelname="Tedesco"><small>Tedesco</small>
+                                                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+                        <div class="row">
+                            <div class="col-10">
+                                <small><strong>Risorse</strong></small>
+                            </div>
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_risorsa_v" (click)="set_risorsa_v()"></span>
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_risorsa_v" (click)="set_risorsa_v()"></span>
+
+                            </div>
+                        </div>
+                        <div *ngIf="search_risorsa_v">
+                            <hr>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="" ngModel
+                                        name="video">
+                                        <small>Video</small>
+                                    </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="image" ngModel
+                                        name="image">
+                                        <small>Immagini</small>
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="charset=UTF-8" ngModel
+                                        name="charset=UTF-8">
+                                        <small>Pagine Web</small>
+                                    </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="" ngModel
+                                        name="PDF">
+                                        <small>PDF</small>
+                                    </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+                        <div class="row">
+                            <div class="col-10">
+                                <small><strong>Licenza</strong></small>
+                            </div>
+
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_licenza_v" (click)="set_licenza_v()"></span>
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_licenza_v" (click)="set_licenza_v()"></span>
+
+                            </div>
+                        </div>
+                        <div *ngIf="search_licenza_v">
+                            <hr>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                                      <input class="form-check-input" id="Creative Commons" type="checkbox" value="Creative Commons" ngModel name="Creative Commons">
+                                                      <small>Creative Commons</small> 
+                                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                                    
+                                                    <input class="form-check-input" id="copyright" type="checkbox" value="copyright" ngModel name="copyright">
+                                                    <small>© Copyright</small>
+                                                </label>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+                        <div class="row">
+                            <div class="col-10">
+                                <small><strong>Fonti</strong></small>
+                            </div>
+
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_fonti_v" (click)="set_fonti_v()"></span>
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_fonti_v" (click)="set_fonti_v()"></span>
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="search_fonti_v">
+                            <hr>
+                            <div class="form-check">
+                                <div class="row">
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                            <input class=" form-check-input " id="Editori" type="checkbox" value="Editori"  name="Editori">
+                                                             <small>Editori </small>
+                                                        </label>
+                                        <div *ngIf="search_editori_v" class="row">
+                                            <div class="col col-1">
+                                            </div>
+                                            <div class="col col-10">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                                            <input class="form-check-input" id="copyright" type="checkbox" value="Treccani" ngModel name="treccani">
+                                                                                 <small>Treccani</small>
+                                                                         </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                                            <input class="form-check-input" id="Zanichelli" type="checkbox" value="Zanichelli" ngModel name="Zanichelli"><small>Zanichelli</small>
+                                                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                                        <input class="form-check-input" id="copyright" type="checkbox" value="Pearson" ngModel name="Pearson">
+                                                                         <small>Pearson</small>
+                                                                     </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col col-2">
+                                        <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_editori_v" (click)="set_editori_v()"></span>
+
+                                        <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_editori_v" (click)="set_editori_v()"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Istituti" type="checkbox" value="Istituti"  name="Istituti">
+                                                                <small>Scuole</small>
+                                                            </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Insegnanti" type="checkbox" value="Insegnanti"  name="Insegnanti">
+                                                                <small>Insegnanti </small>
+                                                            </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                                <input class=" form-check-input " id="MOOC" type="checkbox" value="MOOC"  name="MOOC">
+                                                                <small>MOOC </small>
+                                                            </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col col-10">
+                                        <label class="form-check-label">
+                                                                <input class=" form-check-input " id="Altro" type="checkbox" value="Altro"  name="Altro">
+                                                                <small>Altro </small>
+                                                            </label>
+                                        <div class="row">
+                                            <div class="col col-1">
+
+                                            </div>
+                                            <div class="col col-10">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" id="Oilproject" type="checkbox" value="oilproject" ngModel name="oilproject"><small>Oil Project</small>
+                                                                        </label>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div [ngStyle]="{display: ricerca_v ? 'none' : 'block'}" class="col col-2">
+
+
+                        <div class="row">
+                            <div class="col-10">
+                                <small><strong>Materia</strong></small>
+                            </div>
+
+                            <div class="col-2">
+
+                                <span style="cursor:pointer" class="fa fa-caret-up" aria-hidden="true" *ngIf="search_materia_v" (click)="set_materia_v()"></span>
+
+                                <span style="cursor:pointer" class="fa fa-caret-down" aria-hidden="true" *ngIf="!search_materia_v" (click)="set_materia_v()"></span>
+
+                            </div>
+                        </div>
+                        <div *ngIf="search_materia_v">
+                            <hr>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="italiano" type="checkbox" value="italiano" ngModel name="italiano">
+                                              <small>Italiano</small>
+                                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="inglese" type="checkbox" value="italiano" ngModel name="inglese">
+                                              <small>Inglese</small>
+                                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="Arte e immagine" type="checkbox" value="Arte e immagine" ngModel name="Arte e immagine">
+                                              <small>Arte e immagine</small>
+                                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="fisica" type="checkbox" value="fisica" ngModel name="fisica">
+                                              <small>Fisica</small>
+                                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                                  <input class="form-check-input" id="storia" type="checkbox" value="storia" ngModel name="storia">
+                                                  <small>Storia</small>
+                                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="Scienze" type="checkbox" value="fisica" ngModel name="scienze">
+                                              <small>Scienze</small>
+                                            </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                              <input class="form-check-input" id="Matematica" type="checkbox" value="Matematica" ngModel name="matematica">
+                                              <small>Matematica</small>
+                                            </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <br>
+
+                <pagination-controls (pageChange)="p = $event">
+
+                </pagination-controls>
+
+                <div class="row">
+                    <div class="card-columns col col-12">
+
+                        <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="60" [page]="p" *ngFor="let word of words | paginate: { itemsPerPage: 60, currentPage: p }; let i=index ">
+
+
+                        </app-postlogin-f>
+                    </div>
+                </div>
+                <pagination-controls (pageChange)="p = $event">
+
+                </pagination-controls>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div> -->

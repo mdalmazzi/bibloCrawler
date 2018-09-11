@@ -22,8 +22,8 @@ export class PostLoginComponentF implements  OnInit {
     }
   
     // Settaggi da spostare fuori in un init globale
-    private image_path = "http://localhost:8880/img/";
-    // private image_path = "http://localhost:3000/img/";
+    // private image_path = "http://localhost:8880/img/";
+    private image_path = "http://localhost:3000/img/";
     // Settaggi da spostare fuori in un init globale
 
 
@@ -45,8 +45,7 @@ export class PostLoginComponentF implements  OnInit {
     private trustedVideo;
     private image_size;
     public count_image = 0;
-    //public hostname: any;
-
+   
 
    getLocation(href) {
         var l = document.createElement("a");
@@ -58,7 +57,7 @@ export class PostLoginComponentF implements  OnInit {
         this.width = event.target.width;
         this.height = event.target.height;
 
-        /* console.log(this.width, this.height, 'altezza e larghezza immagine'); */
+       
         
       }
       
@@ -94,12 +93,10 @@ export class PostLoginComponentF implements  OnInit {
         
        this.boxService.index_word = this.index_word  + this.itemsPerPage *(this.page - 1);
 
-      /*  console.log(this.boxService.index_word);
- */
+ 
 
        this.router.navigate(['dettaglio']);
-        //this.loadWord.emit(this.word); */
-        // document.getElementById('myModal').style.display = "block";
+       
      }
 
      searchStringInArray (str, strArray) {
@@ -182,8 +179,6 @@ export class PostLoginComponentF implements  OnInit {
 
         let url_image = this.image_path + this.word.wordId + '.png';
 
-        console.log('this.word: Images ?', this.word.images);
-
         if (this.word.images) {
             this.imageUri = this.word.images[0];
         }
@@ -220,7 +215,10 @@ export class PostLoginComponentF implements  OnInit {
                      }
                 }
 
-    
+        if ((this.word.type=='image/gif') || (this.word.type=='image/jpeg') || (this.word.type=='image/png')) 
+        {
+            this.imageUri = this.word.path;
+        }
         
         this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.word.path);
        

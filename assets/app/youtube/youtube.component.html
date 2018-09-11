@@ -1,0 +1,17 @@
+<div class="container">
+    <form [formGroup]="searchForm">
+        <mat-form-field>
+            <input formControlName="search" id="search" matInput placeholder="Search YouTube">
+        </mat-form-field>
+    </form>
+    <div class="cards">
+        <!-- <mat-spinner *ngIf="isDataLoaded"></mat-spinner> -->
+        <mat-card *ngFor="let result of results | async">
+            <a [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
+                <h3>{{result.snippet.title}}</h3>
+            </a>
+            <p>{{result.snippet.description}}</p>
+            <img [src]="result.snippet.thumbnails.default.url" style="width: 100%; max-width: 250px;" />
+        </mat-card>
+    </div>
+</div>

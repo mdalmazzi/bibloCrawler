@@ -50,7 +50,7 @@ function searchForImage($images, $, page) {
 
 
 var options = {
-    //fileQuality: 50,
+    fileQuality: 20,
     //width: 1200,
     //height: 800,
     //cropWidth: 400,
@@ -196,7 +196,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                     })
                 }
             })
-        .limit(5000)
+        .limit(25)
 
     //.sort({ quality: -1 })
 
@@ -229,7 +229,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
         words = messages;
 
 
-        for (var i = 4000; i < 5000; i++) {
+        for (var i = 0; i < 20; i++) {
             //console.log('i: ', i, words[i].titolo, words[i].images.length);
             // if (words[i].images.length == 0) {
 

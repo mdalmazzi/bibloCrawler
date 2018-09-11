@@ -12,6 +12,9 @@
                 <medium-editor [(editorModel)]="word.titolo" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="placeholderVar" (editorModelChange)="OneditorModelChangeTitolo($event)">
                 </medium-editor>
                 <hr>
+
+                <!-- {{word.body}} -->
+
                 <a>
                     <img class="media-object" [src]="word?.images[0]" alt="immagine" style="max-height:50px;">
                 </a>

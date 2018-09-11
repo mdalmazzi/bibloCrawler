@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 
@@ -20,7 +21,7 @@ import {UserService} from "./user/user.service";
 import {AngularDragDirective} from "./shared/dragme.directive";
 import {Resizable} from "./shared/resize.directive";
 import {ResizeHandle} from "./shared/resizeHandle.directive";
-import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
+import { MediumEditorDirective } from 'angular2-medium-editor';
 
 import {PostLoginComponent} from "./post-login/post-login.component";
 import {ListMappeComponent} from "./post-login/list-mappe.component";
@@ -51,8 +52,17 @@ import { DettaglioWordComponentF } from './post-loginf/dettaglio-word.component'
 import { HomeComponentF } from './post-loginf/home.component';
 import { ListMappeComponentF } from './post-loginf/list-mappe.component';
 import { PostLoginComponentF } from './post-loginf/post-login.component';
+import { YouTubeComponent } from './youtube/youtube.component';
 
 import {TruncatePipe} from './post-loginf/truncate';
+import {
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+  } from '@angular/material';
+
 
 
 //End Front End Component
@@ -96,11 +106,13 @@ import {TruncatePipe} from './post-loginf/truncate';
         HomeComponentF,
         ListMappeComponentF,
         PostLoginComponentF,
-        TruncatePipe
+        TruncatePipe,
+        YouTubeComponent
         //
 
     ],
     imports: [BrowserModule,
+        // BrowserAnimationsModule,
         FormsModule,
         routing,
         ReactiveFormsModule,
@@ -109,7 +121,12 @@ import {TruncatePipe} from './post-loginf/truncate';
         CommonModule,
      
         QuillEditorModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
 
   
     ],

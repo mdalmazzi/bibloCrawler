@@ -1,0 +1,28 @@
+@import '~@angular/material/_theming';
+@include mat-core();
+$primary: mat-palette($mat-cyan);
+$accent: mat-palette($mat-amber);
+$theme: mat-light-theme($primary, $accent);
+@include angular-material-theme($theme);
+.container {
+    width: 90%;
+    margin: 0 auto;
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 23%);
+        grid-template-rows: auto;
+        grid-column-gap: 1%;
+        grid-row-gap: 25px;
+        justify-content: space-between;
+        .mat-card {
+            h3 {
+                margin-top: 0;
+            }
+        }
+    }
+    mat-form-field {
+        display: block;
+        width: 40%;
+        margin: 0 auto;
+    }
+}

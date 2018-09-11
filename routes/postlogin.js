@@ -94,7 +94,7 @@ router.post('/', function(req, res, next) {
             user.word.push(result);
             user.save();
             res.status(201).json({
-                message: 'Box salvato',
+                message: 'Word salvata',
                 obj: result
             })
         });
@@ -105,6 +105,10 @@ router.post('/', function(req, res, next) {
 router.patch('/:id', function(req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Word.findById(req.params.id, function(err, message) {
+
+        // Word.find({ '_id': req.body._id }, function(err, message) {
+
+
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -135,6 +139,8 @@ router.patch('/:id', function(req, res, next) {
         message.type = req.body.type;
         message.quality = req.body.quality;
         message.images = req.body.images;
+
+        // console.log('Message update word:', message);
 
         message.save(function(err, result) {
             if (err) {

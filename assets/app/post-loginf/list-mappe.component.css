@@ -2,6 +2,10 @@
     background-color: #D32F2F;
 }
 
+.bg-secondary-mod {
+    background-color: rgb(220, 220, 220);
+}
+
 .equal {
     display: -webkit-flex;
     display: flex;

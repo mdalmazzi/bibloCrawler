@@ -14,8 +14,8 @@ export class PostLoginServiceF {
     public page;
 
 
-    // private path_to_server: string = 'http://localhost:3000';
-    private path_to_server: string = 'http://localhost:8880';
+    private path_to_server: string = 'http://localhost:3000';
+    // private path_to_server: string = 'http://localhost:8880';
   
     constructor(private http: Http) {}
 
@@ -36,10 +36,7 @@ export class PostLoginServiceF {
                     transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))}
 
 
-                    
-                    // transformedWords.push(new Word(word.word, word.titolo,  word.path, word.meta1, word.meta2, word.meta3, word.images, word.type,  word.licenza, word.scuola[0]))}
-
-                this.words = transformedWords;
+                    this.words = transformedWords;
                 // console.log(this.words);
                 
                 return transformedWords;

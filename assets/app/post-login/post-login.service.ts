@@ -12,8 +12,8 @@ export class PostLoginService {
     public search_word: string;
     public page;
    
-    // private path_to_server: string = 'http://localhost:3000';
-    private path_to_server: string = 'http://localhost:8880';
+    private path_to_server: string = 'http://localhost:3000';
+    // private path_to_server: string = 'http://localhost:8880';
   
     constructor(private http: Http) {}
 
@@ -63,7 +63,13 @@ export class PostLoginService {
 
     
      updateBox(word: Word) {
+        // per limitare dimensione tanto non viene cambiato.
+        word.body= '';
+        // per limitare dimensione tanto non viene cambiato.
+
         const body = JSON.stringify(word);
+
+        console.log('word update patch: ', word);
         
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
@@ -71,6 +77,8 @@ export class PostLoginService {
             : '';
     
        return this.http.patch(this.path_to_server + '/dettaglio/' + word.wordId + token, body, {headers: headers})
+
+    // return this.http.patch(this.path_to_server + '/dettaglio/' , body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
 
