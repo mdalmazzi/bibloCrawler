@@ -38,7 +38,7 @@ export class YouTubeComponent {
       //where you are no longer concerned with the response of the previous request when a new input arrives.
       .switchMap(searchTerm =>
         this.http.get(
-          `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video`
+          `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video&channelId=UCbFv_gbFN9UvNHJJjGavF6g`
         )
       )
       .map(res => res.json().items);

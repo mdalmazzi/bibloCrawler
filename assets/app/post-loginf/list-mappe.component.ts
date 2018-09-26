@@ -13,6 +13,11 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {ViewEncapsulation} from '@angular/core';
 
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import 'rxjs/add/observable/forkJoin';
+import { of } from 'rxjs/observable/of';
+import { concat } from 'rxjs/observable/concat';
+
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
@@ -39,8 +44,20 @@ export class ListMappeComponentF {
     results: Observable<{}>;    
 
     searchFormBis: FormGroup;
-    resultsBis: Observable<{}>;   
+    
+    resultsBis: Observable<{}>;    
+    resultsBis_Sub;  
+    resultsBis_1: Observable<{}>;  
+    resultsBis_2: Observable<{}>; 
+    resultsBis_3: Observable<{}>; 
+    // resultsBis_1;  
+    // resultsBis_2; 
+    
+    // resultsBis;     
+    // resultsBis_1;   
+    // resultsBis_2;  
 
+    trasformedYouTubeItems = [];
     transformedWords: Word[] = [];
     // public words: Word[] = [];
 
@@ -52,11 +69,15 @@ export class ListMappeComponentF {
 
     constructor( public router: Router, private route: ActivatedRoute, private boxService: PostLoginServiceF, private formBuilder: FormBuilder, private http: Http) {
 
-        this.transformedWords = [];
-
-       
+        this.transformedWords = [];    
         
-        
+        // this.resultsBis =  Observable.forkJoin([this.resultsBis_1, this.resultsBis_2])
+        // .map(responses => {
+        //     console.log('response forkJoin: ', responses)
+        //    // responses[0] => cars
+        //    // responses[1] => bikes
+        // });
+      
     
         //Per YOUTube
         this.searchForm = this.formBuilder.group({
@@ -92,17 +113,17 @@ export class ListMappeComponentF {
 
                 this.words = this.transformedWords;
                 console.log('Trasformed: ', this.words);
-            
+                
                 return this.transformedWords;
         })
 
        
 
-        this.searchFormBis = this.formBuilder.group({
-            search: ['', Validators.required],
-          });
+        // this.searchFormBis = this.formBuilder.group({
+        //     search: ['', Validators.required],
+        //   });
         
-          this.resultsBis = this.searchForm.controls.search.valueChanges
+          this.resultsBis_1 = this.searchForm.controls.search.valueChanges
            
           .filter(value => value.length > 2)
           .debounceTime(500)
@@ -110,15 +131,113 @@ export class ListMappeComponentF {
           .distinctUntilChanged()
           //use Switchmap: it works perfect for scenarios like typeaheads
           //where you are no longer concerned with the response of the previous request when a new input arrives.
-          .switchMap(searchTerm => this.http.get(
-              `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video`
-            )
-          )
-          .map(res => res.json().items);
+
+          .switchMap(searchTerm => {
+            //    let search1 = this.http.get(
+            //   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video&channelId=UCbFv_gbFN9UvNHJJjGavF6g`);
+
+            let search1 = this.http.get(
+                `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video&relevanceLanguage=it&safeSearch=strict`);
+             
+               return search1
+            })
+
+          .map(res => {
+            //   let solo_zani = [];
+             
+            //   for (let item of res.json().items) {
+            //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww' ]
+              
+
+            //     if (array_edi.includes(item.snippet.channelId)) {
+            //         solo_zani.push(item);
+            //     }
+
+            //   }
+            return res.json().items
+            // console.log('solo_zani: ', solo_zani);
+            // return solo_zani
+          }
+            );
+
+        //     this.resultsBis_2 = this.searchForm.controls.search.valueChanges
+           
+        //   .filter(value => value.length > 2)
+        //   .debounceTime(500)
+        //   //use distictUntilChanged: Only emit when the current value is different than the last.
+        //   .distinctUntilChanged()
+        //   //use Switchmap: it works perfect for scenarios like typeaheads
+        //   //where you are no longer concerned with the response of the previous request when a new input arrives.
+
+        //   .switchMap(searchTerm => {
+             
+        //       let search2 = this.http.get(
+        //         `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&channelId=UCofo3ZNdYI5CqNgmMyF_7Cw`)
+                     
+        //        return search2
+        //     })
+
+        //   .map(res => {
+            
+        //     let solo_monda = [];
+             
+        //     for (let item of res.json().items) {
+        //         if(item.snippet.channelId == 'UCofo3ZNdYI5CqNgmMyF_7Cw') {
+        //             solo_monda.push(item);
+        //         }
+        //     }
+        //   //   return res.json().items
+        //   console.log('solo_zani: ', solo_monda);
+        //   return solo_monda
+        //         // return res.json().items
+        //       }
+        //     );
+
+            
           
+            //this.resultsBis = this.resultsBis_2;
+            // this.resultsBis = this.resultsBis.concat(this.resultsBis_1);
 
          
+
+            // this.resultsBis = this.resultsBis_1
+            // this.resultsBis_1
+            //     .concat(this.resultsBis_2)
+            //     .subscribe(results => {
+            //         console.log('Subscribe: ', results);
+            //         this.resultsBis = results;
+            //     })
+
+            // this.resultsBis = Observable
+            // .concat(this.resultsBis_1, this.resultsBis_2)
+            // .subscribe(results => {
+            //     return results
+            // })
+
+
+           
+            
+
+            // this.resultsBis = Observable.forkJoin(this.resultsBis_1, this.resultsBis_2)            
+            
+            // .subscribe(results => {
+
+            //     // this.resultsBis = this.resultsBis_1;
+            //     console.log('forkJoin: ', results);
+                
+
+            //     // for (let word of this.resultsBis_2) {
+            //     return this.resultsBis = this.resultsBis_1.concat(this.resultsBis_2);   
+            //     //     this.resultsBis.push(word)
+            //     // }
+            
+            //   })
+              
           
+
+              
+              
+
           
 
        //Per YOUTube
