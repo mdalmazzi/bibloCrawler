@@ -12,8 +12,8 @@ export class PostLoginService {
     public search_word: string;
     public page;
    
-    private path_to_server: string = 'http://localhost:3000';
-    //private path_to_server: string = 'http://localhost:8880';
+    // private path_to_server: string = 'http://localhost:3000';
+    private path_to_server: string = 'http://localhost:8880';
   
     constructor(private http: Http) {}
 
