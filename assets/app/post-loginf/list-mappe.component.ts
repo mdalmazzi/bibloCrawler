@@ -61,7 +61,8 @@ export class ListMappeComponentF {
     transformedWords: Word[] = [];
     // public words: Word[] = [];
 
-    private path_to_server: string = 'http://localhost:3000';
+    // private path_to_server: string = 'http://localhost:3000';
+    private path_to_server: string = 'http://localhost:8880';
 
     //Per YOUTube
 
