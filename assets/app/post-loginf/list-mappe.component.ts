@@ -124,7 +124,7 @@ export class ListMappeComponentF {
         
           this.resultsBis_1 = this.searchForm.controls.search.valueChanges
            
-          .filter(value => value.length > 2)
+          .filter(value => value.length > 4)
           .debounceTime(500)
           //use distictUntilChanged: Only emit when the current value is different than the last.
           .distinctUntilChanged()
