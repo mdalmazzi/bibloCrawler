@@ -110,7 +110,7 @@ export class ListMappeComponentF {
                 for (var i=0; i<(words.length); i++) 
                 {
                 var word = words[i];
-                if (i>0 && words[i+1].titolo == words[i+1].titolo) {}
+                if (i>0 && words[i+1].titolo == words[i+1].titolo && i<(words.length-1)) {}
                 else {
                 this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))}
 
