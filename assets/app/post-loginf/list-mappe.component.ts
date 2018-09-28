@@ -116,10 +116,12 @@ export class ListMappeComponentF {
 
                 // this.words = this.transformedWords;
                 
-                console.log('Trasformed: ', this.transformedWords);
-                
-                return this.transformedWords;
+               
+                // return this.transformedWords;
             }
+            console.log('Trasformed: ', this.transformedWords);
+               
+            return this.transformedWords;
         })
 
        
