@@ -110,9 +110,13 @@ export class ListMappeComponentF {
                 for (var i=0; i<(words.length); i++) 
                 {
                 var word = words[i];
-                if (i>0 || words[i+1].titolo == words[i].titolo || i>(words.length-1)) {}
+                if (i>0 || words[i-1].titolo == words[i].titolo || i>(words.length-1)) {}
                 else {
-                this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))}
+                // this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))
+
+                this.transformedWords.push(new Word(words[i].word, words[i].titolo, words[i].body, words[i].path, words[i].meta1, words[i].meta2, words[i].meta3, words[i].images, words[i].type, words[i]._id, words[i].licenza, words[i].scuola, words[i].controllato, words[i].quality))
+            
+            }
 
                 // this.words = this.transformedWords;
                 
