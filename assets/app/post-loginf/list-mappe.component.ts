@@ -108,11 +108,12 @@ export class ListMappeComponentF {
             let i=0;
             for (let word of words) {
                 
-                if (i>0 && words[i+1].titolo == words[i+1].titolo) {}
+                if (i>0 && words[i+1].titolo == words[i+1].titolo) {i++}
                 else {
                 this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))}
 
                 this.words = this.transformedWords;
+                i++;
                 console.log('Trasformed: ', this.words);
                 
                 return this.transformedWords;
