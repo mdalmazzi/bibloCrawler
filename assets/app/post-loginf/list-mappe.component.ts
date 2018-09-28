@@ -26,8 +26,6 @@ import 'rxjs/add/operator/map';
 const API_URL = 'https://www.googleapis.com/youtube/v3/search';
 const API_KEY = 'AIzaSyCRJqo_zdv1gDIsSkczJOFTnKcm2coSWEA';
 
-
-
 //Per YOUTube
 
 @Component({
