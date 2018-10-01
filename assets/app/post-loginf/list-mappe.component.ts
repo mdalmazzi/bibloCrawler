@@ -165,6 +165,7 @@ export class ListMappeComponentF {
             //     }
 
             //   }
+            console.log('YouTube', res.json().items);
             return res.json().items
             // console.log('solo_zani: ', solo_zani);
             // return solo_zani

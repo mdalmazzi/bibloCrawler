@@ -802,13 +802,42 @@
 
 
             <div class="row">
+                <!-- 
+                Qui reinserire
+            -->
+                <!-- <div class="card-columns col col-12"> -->
 
-                <div class="card-columns col col-12">
+                <div class="cards">
 
                     <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
                     </app-postlogin-f>
 
                 </div>
+                <!-- 
+                    Qui reinserire
+                -->
+
+                <!-- <div class="cards">
+                    <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of results | async">
+                        <mat-card-title class="text-warning">
+                            <small>
+                            
+                        </small>
+                        </mat-card-title>
+                        <mat-card-footer style="padding: 20px" class="bg-light-mod">
+
+                            <p>{{result.titolo | truncate : 100}}</p>
+
+
+                        </mat-card-footer>
+
+
+                    </mat-card>
+
+
+                </div> -->
+
+
             </div>
             <div class="row">
                 <pagination-controls (pageChange)="p = $event">
