@@ -24,7 +24,7 @@
 
             <div class="cards">
                 <!-- <mat-spinner *ngIf="isDataLoaded"></mat-spinner> -->
-                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of resultsBis_1 | async">
+                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of resultsSum ">
                     <mat-card-title class="text-warning">
                         <small>
                         <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
@@ -41,7 +41,7 @@
 
 
                 </mat-card>
-                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of  resultsBis_2 | async">
+                <!-- <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of  resultsBis_2 | async">
                     <mat-card-title class="text-warning">
                         <small>
                         <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
@@ -59,6 +59,40 @@
 
                 </mat-card>
                 <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of  resultsBis_3 | async">
+                    <mat-card-title class="text-warning">
+                        <small>
+                        <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
+                            <h6>{{result.snippet.title | truncate : 20}}</h6>
+                        </a>
+                    </small>
+                    </mat-card-title>
+                    <mat-card-footer style="padding: 20px" class="bg-light-mod">
+
+                        <p>{{result.snippet.description | truncate : 100}}</p>
+                        <img [src]="result.snippet.thumbnails.default.url" style="width: 100%; max-width: 250px;" />
+
+                    </mat-card-footer>
+
+
+                </mat-card> -->
+                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of  resultsBis_4 ">
+                    <mat-card-title class="text-warning">
+                        <small>
+                        <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">
+                            <h6>{{result.snippet.title | truncate : 20}}</h6>
+                        </a>
+                    </small>
+                    </mat-card-title>
+                    <mat-card-footer style="padding: 20px" class="bg-light-mod">
+
+                        <p>{{result.snippet.description | truncate : 100}}</p>
+                        <img [src]="result.snippet.thumbnails.default.url" style="width: 100%; max-width: 250px;" />
+
+                    </mat-card-footer>
+
+
+                </mat-card>
+                <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of  resultsBis_5 ">
                     <mat-card-title class="text-warning">
                         <small>
                         <a class="text-warning" [href]="'https://www.youtube.com/watch?v=' + result.id.videoId" target="_blank">

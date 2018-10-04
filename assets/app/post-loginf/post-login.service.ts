@@ -3,7 +3,8 @@ import {Http, Response, Headers} from "@angular/http";
 import {EventEmitter, Injectable} from "@angular/core";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
-
+const API_URL = 'https://www.googleapis.com/youtube/v3/search';
+const API_KEY = 'AIzaSyCRJqo_zdv1gDIsSkczJOFTnKcm2coSWEA';
 
 @Injectable()
 export class PostLoginServiceF {
@@ -12,6 +13,7 @@ export class PostLoginServiceF {
     public search_word: string;
     public search_scuola: string;
     public page;
+    public nextPage: string;
 
 
     // private path_to_server: string = 'http://localhost:3000';
@@ -41,6 +43,33 @@ export class PostLoginServiceF {
                 
                 return transformedWords;
             })
+             .catch((error: Response) => Observable.throw(error.json()));
+             
+
+    }
+
+    getYouTube(searchTerm: string, pageToken: String) {
+
+        let solo_Publisher = [];
+
+        return this.http.get(`${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&pageToken=${pageToken}`)
+            .map((response: Response) => {
+                const items = response.json().items;
+
+                for (let item of items) {
+
+                  let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww'  ]       
+
+                    if (array_edi.includes(item.snippet.channelId)) {
+                    solo_Publisher.push(item);
+                    }
+                }
+                          
+                 console.log('Service YouTube', solo_Publisher);
+                
+                return solo_Publisher;
+            })
+
              .catch((error: Response) => Observable.throw(error.json()));
              
 
