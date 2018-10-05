@@ -188,7 +188,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                 })
             .sort({ score: { $meta: 'textScore' } })
             .limit(25)
-            .maxTimeMS(90000)
+
 
         //.sort({ quality: -1 })
 
