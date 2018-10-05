@@ -115,7 +115,7 @@ export class ListMappeComponentF {
         .map((response: Response) => {
             const words = response.json().obj;
             console.log('words', words);
-            console.log('typed: ', this.searchForm.controls.search.valueChanges, this.searchForm.controls.search);
+            // console.log('typed: ', this.searchForm.controls.search.valueChanges, this.searchForm.controls.search);
             this.transformedWords = [];
            
             // for (let word of words) {
@@ -134,7 +134,7 @@ export class ListMappeComponentF {
                 // return this.transformedWords;
 
             }
-            console.log('Trasformed: ', this.transformedWords);
+            // console.log('Trasformed: ', this.transformedWords);
                
             return this.transformedWords;
         })    
@@ -237,7 +237,7 @@ export class ListMappeComponentF {
             // console.log('YouTube1', res.json().items, 'Page: ', res.json().pageInfo, res.json().nextPageToken, this.boxService.nextPage);
             // // return res.json().items
             // console.log('solo_zani1: ', solo_zani);
-            console.log('Zanichelli', res.json().items);
+            // console.log('Zanichelli', res.json().items);
             return res.json().items
                   })
             .subscribe(response => {
@@ -295,7 +295,7 @@ export class ListMappeComponentF {
                 })
 
               .map(res => {
-                console.log('Mondadori', res.json().items);
+                // console.log('Mondadori', res.json().items);
 
             //   let solo_zani = [];
             //   console.log('In loop');
@@ -326,7 +326,7 @@ export class ListMappeComponentF {
               })
             .subscribe(response => {
                 for (let item of response) {
-                    console.log(item.snippet.description);
+                    // console.log(item.snippet.description);
                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                     // else {
                     //     this.resultsSum_NO.push(item)
@@ -337,7 +337,7 @@ export class ListMappeComponentF {
                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
                 // })
                 // this.resultsSum.concat(this.resultsSum_NO)
-                console.log('Outside this.resultsBis_2: ', this.resultsSum);
+                // console.log('Outside this.resultsBis_2: ', this.resultsSum);
 
             })
 
@@ -358,7 +358,7 @@ export class ListMappeComponentF {
                 })
 
               .map(res => {
-                console.log('Skuola', res.json().items);
+                // console.log('Skuola', res.json().items);
 
             //   let solo_zani = [];
             //   console.log('In loop');
@@ -389,7 +389,7 @@ export class ListMappeComponentF {
               })
             .subscribe(response => {
                 for (let item of response) {
-                    console.log(item.snippet.description);
+                    // console.log(item.snippet.description);
                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                     // else {
                     //     this.resultsSum_NO.push(item)
@@ -400,7 +400,7 @@ export class ListMappeComponentF {
                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
                 // })
                 // this.resultsSum.concat(this.resultsSum_NO)
-                console.log('Outside this.resultsBis_3: ', this.resultsSum);
+                // console.log('Outside this.resultsBis_3: ', this.resultsSum);
 
             })
 
@@ -422,7 +422,7 @@ export class ListMappeComponentF {
                 })
 
               .map(res => {
-                console.log('Kha', res.json().items);
+                // console.log('Kha', res.json().items);
 
             //   let solo_zani = [];
             //   console.log('In loop');
@@ -453,7 +453,7 @@ export class ListMappeComponentF {
               })
             .subscribe(response => {
                 for (let item of response) {
-                    console.log(item.snippet.description);
+                    // console.log(item.snippet.description);
                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                     // else {
                     //     this.resultsSum_NO.push(item)
@@ -464,7 +464,7 @@ export class ListMappeComponentF {
                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
                 // })
                 // this.resultsSum.concat(this.resultsSum_NO)
-                console.log('Outside this.resultsBis_4: ', this.resultsSum);
+                // console.log('Outside this.resultsBis_4: ', this.resultsSum);
 
             })
 
@@ -485,20 +485,20 @@ export class ListMappeComponentF {
               })
 
             .map(res => {
-              console.log('Studenti.it', res.json().items);
+            //   console.log('Studenti.it', res.json().items);
             
              return res.json().items
              
             })
           .subscribe(response => {
               for (let item of response) {
-                  console.log(item.snippet.description);
+                //   console.log(item.snippet.description);
                   if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                   
                   
               }
               
-              console.log('Outside this.resultsBis_5: ', this.resultsSum);
+            //   console.log('Outside this.resultsBis_5: ', this.resultsSum);
 
           })
 
@@ -520,20 +520,20 @@ export class ListMappeComponentF {
               })
 
             .map(res => {
-              console.log('De Agostini', res.json().items);
+            //   console.log('De Agostini', res.json().items);
             
              return res.json().items
              
             })
           .subscribe(response => {
               for (let item of response) {
-                  console.log(item.snippet.description);
+                //   console.log(item.snippet.description);
                   if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                   
                   
               }
               
-              console.log('Outside this.resultsBis_6: ', this.resultsSum);
+            //   console.log('Outside this.resultsBis_6: ', this.resultsSum);
 
           })
             
@@ -554,20 +554,20 @@ export class ListMappeComponentF {
             })
 
           .map(res => {
-            console.log('Treccani', res.json().items);
+            // console.log('Treccani', res.json().items);
           
            return res.json().items
            
           })
         .subscribe(response => {
             for (let item of response) {
-                console.log(item.snippet.description);
+                // console.log(item.snippet.description);
                 if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                 
                 
             }
             
-            console.log('Outside this.resultsBis_7: ', this.resultsSum);
+            // console.log('Outside this.resultsBis_7: ', this.resultsSum);
 
         })
             ////INIZIO
