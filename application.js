@@ -25,7 +25,8 @@ var app = express();
 //mongoose.connect('dea-lab-user:pwd-dea-lab@ds161793.mlab.com:61793/dea-lab');
 //mongoose.connect('localhost:27017/bibblo');
 //mongoose.connect('localhost:27017/testYOUTube');
-mongoose.connect('localhost:27017/SpaggiariPage');
+var options = { server: { socketOptions: { connectTimeoutMS: 100000 } } };
+mongoose.connect('localhost:27017/SpaggiariPage', options);
 // mongoose.connect('localhost:27017/Spaggiari');
 
 
