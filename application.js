@@ -26,7 +26,14 @@ var app = express();
 //mongoose.connect('localhost:27017/bibblo');
 //mongoose.connect('localhost:27017/testYOUTube');
 // var options = { server: { socketOptions: { connectTimeoutMS: 100000 } } };
-mongoose.connect('localhost:27017/SpaggiariPage&autoReconnect=true&socketTimeoutMS=360000&connectTimeoutMS=360000');
+mongoose.connect('localhost:27017/SpaggiariPage', {
+    server: {
+        auto_reconnect: true,
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 1000,
+        socketOptions: { keepAlive: 1, connectTimeoutMS: 60000 }
+    }
+});
 
 // mongoose.connect('localhost:27017/Spaggiari');
 
