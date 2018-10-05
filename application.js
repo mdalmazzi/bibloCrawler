@@ -29,8 +29,9 @@ var app = express();
 mongoose.connect('localhost:27017/SpaggiariPage', {
     server: {
         auto_reconnect: true,
-        reconnectTries: Number.MAX_VALUE,
-        reconnectInterval: 1000,
+        // reconnectTries: Number.MAX_VALUE,
+        reconnectTries: 5,
+        reconnectInterval: 500,
         socketOptions: { keepAlive: 1, connectTimeoutMS: 60000 }
     }
 });
