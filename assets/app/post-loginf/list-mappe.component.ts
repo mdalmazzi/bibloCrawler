@@ -157,379 +157,379 @@ export class ListMappeComponentF {
 //search multiplo partendo da TUTTO YOUTube
         
     // this.resultsBis_1 = this.searchForm.controls.search.valueChanges 
-    this.resultsBis_1 = this.searchForm.controls.search.valueChanges 
+//     this.resultsBis_1 = this.searchForm.controls.search.valueChanges 
       
-          .filter(value => value.length > 4)
-          .debounceTime(500)
-          //use distictUntilChanged: Only emit when the current value is different than the last.
-          .distinctUntilChanged()
-          //use Switchmap: it works perfect for scenarios like typeaheads
-          //where you are no longer concerned with the response of the previous request when a new input arrives.
+//           .filter(value => value.length > 4)
+//           .debounceTime(500)
+//           //use distictUntilChanged: Only emit when the current value is different than the last.
+//           .distinctUntilChanged()
+//           //use Switchmap: it works perfect for scenarios like typeaheads
+//           //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-          .switchMap(searchTerm => {
-            //    let search1 = this.http.get(
-            //   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video&channelId=UCbFv_gbFN9UvNHJJjGavF6g`);
+//           .switchMap(searchTerm => {
+//             //    let search1 = this.http.get(
+//             //   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video&channelId=UCbFv_gbFN9UvNHJJjGavF6g`);
             
-            this.resultsSum = [];
-            // this.resultsSum_NO = [];
+//             this.resultsSum = [];
+//             // this.resultsSum_NO = [];
 
-            let search1 = this.http.get(
-                `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCbFv_gbFN9UvNHJJjGavF6g`);                  
+//             let search1 = this.http.get(
+//                 `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCbFv_gbFN9UvNHJJjGavF6g`);                  
             
-                return search1
+//                 return search1
 
-            })
+//             })
 
-          .map(res => {
-            //   let solo_zani = [];
+//           .map(res => {
+//             //   let solo_zani = [];
              
-            //   for (let item of res.json().items) {
-            //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]       
+//             //   for (let item of res.json().items) {
+//             //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]       
 
-            //     if (array_edi.includes(item.snippet.channelId)) {
-            //         solo_zani.push(item);
-            //     }
+//             //     if (array_edi.includes(item.snippet.channelId)) {
+//             //         solo_zani.push(item);
+//             //     }
 
-            //   }
-            // this.boxService.nextPage = res.json().nextPageToken;
+//             //   }
+//             // this.boxService.nextPage = res.json().nextPageToken;
 
-            // console.log('YouTube1', res.json().items, 'Page: ', res.json().pageInfo, res.json().nextPageToken, this.boxService.nextPage);
-            // // return res.json().items
-            // console.log('solo_zani1: ', solo_zani);
-            // console.log('Zanichelli', res.json().items);
-            return res.json().items
-                  })
-            .subscribe(response => {
-                    for (let item of response) {
-                        // console.log(item.snippet.description);
-                        if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
-                        // else {
-                        //     this.resultsSum_NO.push(item)
-                        // }
-                    }
-                    // let results_FilterSearch = this.resultsSum.filter(item => {
-                    //     item.snippet.description.search(this.searchForm.controls.search.value)
-                    // })
-                    // this.resultsSum.concat(this.resultsSum_NO)
-                    // console.log('Outside this.resultsBis_1: ', this.resultsSum);
+//             // console.log('YouTube1', res.json().items, 'Page: ', res.json().pageInfo, res.json().nextPageToken, this.boxService.nextPage);
+//             // // return res.json().items
+//             // console.log('solo_zani1: ', solo_zani);
+//             // console.log('Zanichelli', res.json().items);
+//             return res.json().items
+//                   })
+//             .subscribe(response => {
+//                     for (let item of response) {
+//                         // console.log(item.snippet.description);
+//                         if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//                         // else {
+//                         //     this.resultsSum_NO.push(item)
+//                         // }
+//                     }
+//                     // let results_FilterSearch = this.resultsSum.filter(item => {
+//                     //     item.snippet.description.search(this.searchForm.controls.search.value)
+//                     // })
+//                     // this.resultsSum.concat(this.resultsSum_NO)
+//                     // console.log('Outside this.resultsBis_1: ', this.resultsSum);
     
-                })
+//                 })
 
 
            
 
-    //per testare merge forkjoin di due Observable
+//     //per testare merge forkjoin di due Observable
 
-    // let resultsBis_1 = this.http.get(
-    //                  `${API_URL}?q=${this.searchForm.controls.search.value}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCbFv_gbFN9UvNHJJjGavF6g`).map(res => res.json());
-    // let resultsBis_2 = this.http.get(`${API_URL}?q=${this.searchForm.controls.search.value}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCofo3ZNdYI5CqNgmMyF_7Cw`).map(res => res.json());
+//     // let resultsBis_1 = this.http.get(
+//     //                  `${API_URL}?q=${this.searchForm.controls.search.value}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCbFv_gbFN9UvNHJJjGavF6g`).map(res => res.json());
+//     // let resultsBis_2 = this.http.get(`${API_URL}?q=${this.searchForm.controls.search.value}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCofo3ZNdYI5CqNgmMyF_7Cw`).map(res => res.json());
 
 
-    //         Observable.forkJoin(resultsBis_1, resultsBis_2).subscribe(results => {
-    //             // results[0] is our character
-    //             // results[1] is our character homeworld
-    //             console.log('Observable', results);
-    //             this.resultsBis_1 = resultsBis_1
-    //             return this.resultsBis_1
-    //           });
+//     //         Observable.forkJoin(resultsBis_1, resultsBis_2).subscribe(results => {
+//     //             // results[0] is our character
+//     //             // results[1] is our character homeworld
+//     //             console.log('Observable', results);
+//     //             this.resultsBis_1 = resultsBis_1
+//     //             return this.resultsBis_1
+//     //           });
 
-//per testare merge forkjoin di due Observable
+// //per testare merge forkjoin di due Observable
      
             
-            this.resultsBis_2 = this.searchForm.controls.search.valueChanges
-              .filter(value => value.length > 4)
-              .debounceTime(500)
-              //use distictUntilChanged: Only emit when the current value is different than the last.
-              .distinctUntilChanged()
-              //use Switchmap: it works perfect for scenarios like typeaheads
-              //where you are no longer concerned with the response of the previous request when a new input arrives.
+//             this.resultsBis_2 = this.searchForm.controls.search.valueChanges
+//               .filter(value => value.length > 4)
+//               .debounceTime(500)
+//               //use distictUntilChanged: Only emit when the current value is different than the last.
+//               .distinctUntilChanged()
+//               //use Switchmap: it works perfect for scenarios like typeaheads
+//               //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-              .switchMap(searchTerm => {
+//               .switchMap(searchTerm => {
              
                 
-                let search2 = this.http.get(
-                    `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCofo3ZNdYI5CqNgmMyF_7Cw`)
+//                 let search2 = this.http.get(
+//                     `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCofo3ZNdYI5CqNgmMyF_7Cw`)
 
             
-               return search2
-                })
+//                return search2
+//                 })
 
-              .map(res => {
-                // console.log('Mondadori', res.json().items);
+//               .map(res => {
+//                 // console.log('Mondadori', res.json().items);
 
-            //   let solo_zani = [];
-            //   console.log('In loop');
+//             //   let solo_zani = [];
+//             //   console.log('In loop');
              
-            //   for (let item of res.json().items) {
-            //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
+//             //   for (let item of res.json().items) {
+//             //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
               
 
-            //         if (array_edi.includes(item.snippet.channelId)) {
-            //             solo_zani.push(item);
-            //         }
-            //       }         
+//             //         if (array_edi.includes(item.snippet.channelId)) {
+//             //             solo_zani.push(item);
+//             //         }
+//             //       }         
 
-            //   if (res.json().items.length == 0) {
-            //     this.boxService.nextPage = null;
-            //     }
-            //   else {
-            //     this.boxService.nextPage = res.json().nextPageToken;       
-            //         }
+//             //   if (res.json().items.length == 0) {
+//             //     this.boxService.nextPage = null;
+//             //     }
+//             //   else {
+//             //     this.boxService.nextPage = res.json().nextPageToken;       
+//             //         }
 
-            //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
+//             //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
        
-            //     // return res.json().items
-            //     console.log('solo_zani2: ', solo_zani);
+//             //     // return res.json().items
+//             //     console.log('solo_zani2: ', solo_zani);
                 
-               return res.json().items
+//                return res.json().items
                
-              })
-            .subscribe(response => {
-                for (let item of response) {
-                    // console.log(item.snippet.description);
-                    if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
-                    // else {
-                    //     this.resultsSum_NO.push(item)
-                    // }
+//               })
+//             .subscribe(response => {
+//                 for (let item of response) {
+//                     // console.log(item.snippet.description);
+//                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//                     // else {
+//                     //     this.resultsSum_NO.push(item)
+//                     // }
                     
-                }
-                // let results_FilterSearch = this.resultsSum.filter(item => {
-                //     item.snippet.description.includes(this.searchForm.controls.search.value)
-                // })
-                // this.resultsSum.concat(this.resultsSum_NO)
-                // console.log('Outside this.resultsBis_2: ', this.resultsSum);
+//                 }
+//                 // let results_FilterSearch = this.resultsSum.filter(item => {
+//                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
+//                 // })
+//                 // this.resultsSum.concat(this.resultsSum_NO)
+//                 // console.log('Outside this.resultsBis_2: ', this.resultsSum);
 
-            })
+//             })
 
-            this.resultsBis_3 = this.searchForm.controls.search.valueChanges
-              .filter(value => value.length > 4)
-              .debounceTime(500)
-              //use distictUntilChanged: Only emit when the current value is different than the last.
-              .distinctUntilChanged()
-              //use Switchmap: it works perfect for scenarios like typeaheads
-              //where you are no longer concerned with the response of the previous request when a new input arrives.
+//             this.resultsBis_3 = this.searchForm.controls.search.valueChanges
+//               .filter(value => value.length > 4)
+//               .debounceTime(500)
+//               //use distictUntilChanged: Only emit when the current value is different than the last.
+//               .distinctUntilChanged()
+//               //use Switchmap: it works perfect for scenarios like typeaheads
+//               //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-              .switchMap(searchTerm => {       
+//               .switchMap(searchTerm => {       
                 
-                let search2 = this.http.get(
-                    `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCA1t5LNIyfmXZqGuUaY2oww`)
+//                 let search2 = this.http.get(
+//                     `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCA1t5LNIyfmXZqGuUaY2oww`)
  
-               return search2
-                })
+//                return search2
+//                 })
 
-              .map(res => {
-                // console.log('Skuola', res.json().items);
+//               .map(res => {
+//                 // console.log('Skuola', res.json().items);
 
-            //   let solo_zani = [];
-            //   console.log('In loop');
+//             //   let solo_zani = [];
+//             //   console.log('In loop');
              
-            //   for (let item of res.json().items) {
-            //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
+//             //   for (let item of res.json().items) {
+//             //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
               
 
-            //         if (array_edi.includes(item.snippet.channelId)) {
-            //             solo_zani.push(item);
-            //         }
-            //       }         
+//             //         if (array_edi.includes(item.snippet.channelId)) {
+//             //             solo_zani.push(item);
+//             //         }
+//             //       }         
 
-            //   if (res.json().items.length == 0) {
-            //     this.boxService.nextPage = null;
-            //     }
-            //   else {
-            //     this.boxService.nextPage = res.json().nextPageToken;       
-            //         }
+//             //   if (res.json().items.length == 0) {
+//             //     this.boxService.nextPage = null;
+//             //     }
+//             //   else {
+//             //     this.boxService.nextPage = res.json().nextPageToken;       
+//             //         }
 
-            //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
+//             //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
        
-            //     // return res.json().items
-            //     console.log('solo_zani2: ', solo_zani);
+//             //     // return res.json().items
+//             //     console.log('solo_zani2: ', solo_zani);
                 
-               return res.json().items
+//                return res.json().items
                
-              })
-            .subscribe(response => {
-                for (let item of response) {
-                    // console.log(item.snippet.description);
-                    if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
-                    // else {
-                    //     this.resultsSum_NO.push(item)
-                    // }
+//               })
+//             .subscribe(response => {
+//                 for (let item of response) {
+//                     // console.log(item.snippet.description);
+//                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//                     // else {
+//                     //     this.resultsSum_NO.push(item)
+//                     // }
                     
-                }
-                // let results_FilterSearch = this.resultsSum.filter(item => {
-                //     item.snippet.description.includes(this.searchForm.controls.search.value)
-                // })
-                // this.resultsSum.concat(this.resultsSum_NO)
-                // console.log('Outside this.resultsBis_3: ', this.resultsSum);
+//                 }
+//                 // let results_FilterSearch = this.resultsSum.filter(item => {
+//                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
+//                 // })
+//                 // this.resultsSum.concat(this.resultsSum_NO)
+//                 // console.log('Outside this.resultsBis_3: ', this.resultsSum);
 
-            })
+//             })
 
 
-            this.resultsBis_4 = this.searchForm.controls.search.valueChanges
-              .filter(value => value.length > 4)
-              .debounceTime(500)
-              //use distictUntilChanged: Only emit when the current value is different than the last.
-              .distinctUntilChanged()
-              //use Switchmap: it works perfect for scenarios like typeaheads
-              //where you are no longer concerned with the response of the previous request when a new input arrives.
+//             this.resultsBis_4 = this.searchForm.controls.search.valueChanges
+//               .filter(value => value.length > 4)
+//               .debounceTime(500)
+//               //use distictUntilChanged: Only emit when the current value is different than the last.
+//               .distinctUntilChanged()
+//               //use Switchmap: it works perfect for scenarios like typeaheads
+//               //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-              .switchMap(searchTerm => {       
+//               .switchMap(searchTerm => {       
                 
-                let search2 = this.http.get(
-                    `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UC8gOYnHAEY31dqrmYFX0tJg`)
+//                 let search2 = this.http.get(
+//                     `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UC8gOYnHAEY31dqrmYFX0tJg`)
  
-               return search2
-                })
+//                return search2
+//                 })
 
-              .map(res => {
-                // console.log('Kha', res.json().items);
+//               .map(res => {
+//                 // console.log('Kha', res.json().items);
 
-            //   let solo_zani = [];
-            //   console.log('In loop');
+//             //   let solo_zani = [];
+//             //   console.log('In loop');
              
-            //   for (let item of res.json().items) {
-            //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
+//             //   for (let item of res.json().items) {
+//             //       let array_edi = ['UCbFv_gbFN9UvNHJJjGavF6g', 'UCofo3ZNdYI5CqNgmMyF_7Cw', 'UCA1t5LNIyfmXZqGuUaY2oww',  ]
               
 
-            //         if (array_edi.includes(item.snippet.channelId)) {
-            //             solo_zani.push(item);
-            //         }
-            //       }         
+//             //         if (array_edi.includes(item.snippet.channelId)) {
+//             //             solo_zani.push(item);
+//             //         }
+//             //       }         
 
-            //   if (res.json().items.length == 0) {
-            //     this.boxService.nextPage = null;
-            //     }
-            //   else {
-            //     this.boxService.nextPage = res.json().nextPageToken;       
-            //         }
+//             //   if (res.json().items.length == 0) {
+//             //     this.boxService.nextPage = null;
+//             //     }
+//             //   else {
+//             //     this.boxService.nextPage = res.json().nextPageToken;       
+//             //         }
 
-            //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
+//             //   console.log('YouTube2', res.json().items, 'Page: ', res.json().pageInfo, this.boxService.nextPage);
        
-            //     // return res.json().items
-            //     console.log('solo_zani2: ', solo_zani);
+//             //     // return res.json().items
+//             //     console.log('solo_zani2: ', solo_zani);
                 
-               return res.json().items
+//                return res.json().items
                
-              })
-            .subscribe(response => {
-                for (let item of response) {
-                    // console.log(item.snippet.description);
-                    if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
-                    // else {
-                    //     this.resultsSum_NO.push(item)
-                    // }
+//               })
+//             .subscribe(response => {
+//                 for (let item of response) {
+//                     // console.log(item.snippet.description);
+//                     if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//                     // else {
+//                     //     this.resultsSum_NO.push(item)
+//                     // }
                     
-                }
-                // let results_FilterSearch = this.resultsSum.filter(item => {
-                //     item.snippet.description.includes(this.searchForm.controls.search.value)
-                // })
-                // this.resultsSum.concat(this.resultsSum_NO)
-                // console.log('Outside this.resultsBis_4: ', this.resultsSum);
+//                 }
+//                 // let results_FilterSearch = this.resultsSum.filter(item => {
+//                 //     item.snippet.description.includes(this.searchForm.controls.search.value)
+//                 // })
+//                 // this.resultsSum.concat(this.resultsSum_NO)
+//                 // console.log('Outside this.resultsBis_4: ', this.resultsSum);
 
-            })
+//             })
 
-            this.resultsBis_5 = this.searchForm.controls.search.valueChanges
-            .filter(value => value.length > 4)
-            .debounceTime(500)
-            //use distictUntilChanged: Only emit when the current value is different than the last.
-            .distinctUntilChanged()
-            //use Switchmap: it works perfect for scenarios like typeaheads
-            //where you are no longer concerned with the response of the previous request when a new input arrives.
+//             this.resultsBis_5 = this.searchForm.controls.search.valueChanges
+//             .filter(value => value.length > 4)
+//             .debounceTime(500)
+//             //use distictUntilChanged: Only emit when the current value is different than the last.
+//             .distinctUntilChanged()
+//             //use Switchmap: it works perfect for scenarios like typeaheads
+//             //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-            .switchMap(searchTerm => {       
+//             .switchMap(searchTerm => {       
               
-              let search2 = this.http.get(
-                  `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCz0FXf3xffWcu4038J7k17w`)
+//               let search2 = this.http.get(
+//                   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCz0FXf3xffWcu4038J7k17w`)
 
-             return search2
-              })
+//              return search2
+//               })
 
-            .map(res => {
-            //   console.log('Studenti.it', res.json().items);
+//             .map(res => {
+//             //   console.log('Studenti.it', res.json().items);
             
-             return res.json().items
+//              return res.json().items
              
-            })
-          .subscribe(response => {
-              for (let item of response) {
-                //   console.log(item.snippet.description);
-                  if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//             })
+//           .subscribe(response => {
+//               for (let item of response) {
+//                 //   console.log(item.snippet.description);
+//                   if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                   
                   
-              }
+//               }
               
-            //   console.log('Outside this.resultsBis_5: ', this.resultsSum);
+//             //   console.log('Outside this.resultsBis_5: ', this.resultsSum);
 
-          })
+//           })
 
 
-          this.resultsBis_7 = this.searchForm.controls.search.valueChanges
-            .filter(value => value.length > 4)
-            .debounceTime(500)
-            //use distictUntilChanged: Only emit when the current value is different than the last.
-            .distinctUntilChanged()
-            //use Switchmap: it works perfect for scenarios like typeaheads
-            //where you are no longer concerned with the response of the previous request when a new input arrives.
+//           this.resultsBis_7 = this.searchForm.controls.search.valueChanges
+//             .filter(value => value.length > 4)
+//             .debounceTime(500)
+//             //use distictUntilChanged: Only emit when the current value is different than the last.
+//             .distinctUntilChanged()
+//             //use Switchmap: it works perfect for scenarios like typeaheads
+//             //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-            .switchMap(searchTerm => {       
+//             .switchMap(searchTerm => {       
               
-              let search2 = this.http.get(
-                  `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCZTPemJj_RULY9L_rnpGgEQ`)
+//               let search2 = this.http.get(
+//                   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCZTPemJj_RULY9L_rnpGgEQ`)
 
-             return search2
-              })
+//              return search2
+//               })
 
-            .map(res => {
-            //   console.log('De Agostini', res.json().items);
+//             .map(res => {
+//             //   console.log('De Agostini', res.json().items);
             
-             return res.json().items
+//              return res.json().items
              
-            })
-          .subscribe(response => {
-              for (let item of response) {
-                //   console.log(item.snippet.description);
-                  if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//             })
+//           .subscribe(response => {
+//               for (let item of response) {
+//                 //   console.log(item.snippet.description);
+//                   if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                   
                   
-              }
+//               }
               
-            //   console.log('Outside this.resultsBis_6: ', this.resultsSum);
+//             //   console.log('Outside this.resultsBis_6: ', this.resultsSum);
 
-          })
+//           })
             
-          this.resultsBis_6 = this.searchForm.controls.search.valueChanges
-          .filter(value => value.length > 4)
-          .debounceTime(500)
-          //use distictUntilChanged: Only emit when the current value is different than the last.
-          .distinctUntilChanged()
-          //use Switchmap: it works perfect for scenarios like typeaheads
-          //where you are no longer concerned with the response of the previous request when a new input arrives.
+//           this.resultsBis_6 = this.searchForm.controls.search.valueChanges
+//           .filter(value => value.length > 4)
+//           .debounceTime(500)
+//           //use distictUntilChanged: Only emit when the current value is different than the last.
+//           .distinctUntilChanged()
+//           //use Switchmap: it works perfect for scenarios like typeaheads
+//           //where you are no longer concerned with the response of the previous request when a new input arrives.
 
-          .switchMap(searchTerm => {       
+//           .switchMap(searchTerm => {       
             
-            let search2 = this.http.get(
-                `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCZTPemJj_RULY9L_rnpGgEQ`)
+//             let search2 = this.http.get(
+//                 `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=50&part=snippet&type=video&relevanceLanguage=it&channelId=UCZTPemJj_RULY9L_rnpGgEQ`)
 
-           return search2
-            })
+//            return search2
+//             })
 
-          .map(res => {
-            // console.log('Treccani', res.json().items);
+//           .map(res => {
+//             // console.log('Treccani', res.json().items);
           
-           return res.json().items
+//            return res.json().items
            
-          })
-        .subscribe(response => {
-            for (let item of response) {
-                // console.log(item.snippet.description);
-                if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
+//           })
+//         .subscribe(response => {
+//             for (let item of response) {
+//                 // console.log(item.snippet.description);
+//                 if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                 
                 
-            }
+//             }
             
-            // console.log('Outside this.resultsBis_7: ', this.resultsSum);
+//             // console.log('Outside this.resultsBis_7: ', this.resultsSum);
 
-        })
+//         })
 
         this.results = this.searchForm.controls.search.valueChanges
            
