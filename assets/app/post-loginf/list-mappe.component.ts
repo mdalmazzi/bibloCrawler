@@ -96,7 +96,48 @@ export class ListMappeComponentF {
             search: ['', Validators.required],
           });
           
-          
+          this.results = this.searchForm.controls.search.valueChanges
+           
+          .filter(value => value.length > 4)
+          .debounceTime(500)
+          //use distictUntilChanged: Only emit when the current value is different than the last.
+          .distinctUntilChanged()
+          //use Switchmap: it works perfect for scenarios like typeaheads
+          //where you are no longer concerned with the response of the previous request when a new input arrives.
+          .switchMap(searchTerm =>
+
+            this.http.get(this.path_to_server + '/home-info/' + searchTerm + '/' + 'all' + '/' + 'all' + '/' + 'all' + '/' + 'all' + '/' + 'all')
+            // this.http.get(
+            //   `${API_URL}?q=${searchTerm}&key=${API_KEY}&maxResults=10&part=snippet&type=video`
+            // )
+          )
+        //   .map(res => res.json().items);
+        .map((response: Response) => {
+            const words = response.json().obj;
+            console.log('words', words);
+            // console.log('typed: ', this.searchForm.controls.search.valueChanges, this.searchForm.controls.search);
+            this.transformedWords = [];
+           
+            // for (let word of words) {
+                for (var i=0; i<(words.length-1); i++) 
+                {
+                // var word = words[i];
+                if ( (words[i+1].titolo == words[i].titolo )) {}
+                else {
+                // this.transformedWords.push(new Word(word.word, word.titolo, word.body, word.path, word.meta1, word.meta2, word.meta3, word.images, word.type, word._id, word.licenza, word.scuola, word.controllato, word.quality))
+
+                this.transformedWords.push(new Word(words[i].word, words[i].titolo, words[i].body, words[i].path, words[i].meta1, words[i].meta2, words[i].meta3, words[i].images, words[i].type, words[i]._id, words[i].licenza, words[i].scuola, words[i].controllato, words[i].quality))
+            
+            }
+
+                // this.words = this.transformedWords;           
+                // return this.transformedWords;
+
+            }
+            // console.log('Trasformed: ', this.transformedWords);
+               
+            return this.transformedWords;
+        })    
 
 //search multiplo partendo da TUTTO YOUTube
         // this.searchForm.controls.search.valueChanges.subscribe((valueSearch) => {
@@ -214,7 +255,6 @@ export class ListMappeComponentF {
                     // console.log('Outside this.resultsBis_1: ', this.resultsSum);
     
                 })
-
 
            
 
@@ -530,8 +570,6 @@ export class ListMappeComponentF {
             // console.log('Outside this.resultsBis_7: ', this.resultsSum);
 
         })
-
-        
             ////INIZIO
         //     this.resultsBis_3 = this.searchForm.controls.search.valueChanges
            
