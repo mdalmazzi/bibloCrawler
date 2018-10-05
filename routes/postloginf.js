@@ -177,7 +177,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                     //     "$regex": req.params.risorsa
                     // }
 
-                }, { timeout: true }, { score: { $meta: "textScore" } },
+                }, { score: { $meta: "textScore" } },
                 function(err, messages) {
                     if (err) {
                         return res.status(500).json({
@@ -188,7 +188,7 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                 })
             .sort({ score: { $meta: 'textScore' } })
             .limit(25)
-            .maxTime(90000)
+            .maxTimeMS(90000)
 
         //.sort({ quality: -1 })
 
