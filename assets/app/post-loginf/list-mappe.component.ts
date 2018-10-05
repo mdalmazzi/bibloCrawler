@@ -242,7 +242,7 @@ export class ListMappeComponentF {
                   })
             .subscribe(response => {
                     for (let item of response) {
-                        console.log(item.snippet.description);
+                        // console.log(item.snippet.description);
                         if ((item.snippet.description.search(this.searchForm.controls.search.value) != -1) || (item.snippet.title.search(this.searchForm.controls.search.value) != -1)) {this.resultsSum.push(item)}
                         // else {
                         //     this.resultsSum_NO.push(item)
@@ -811,11 +811,11 @@ export class ListMappeComponentF {
 
             if (this.signupForm.value[key]) {
                 
-                console.log('Quelli settati sono: ', key);
+                // console.log('Quelli settati sono: ', key);
 
                 if ((this.array_scuola.indexOf(key)) != -1) { 
                     this.search_scuola = this.search_scuola + '&'+ key;    
-                     console.log('Key', key, this.search_scuola)    
+                    //  console.log('Key', key, this.search_scuola)    
                 } else {}
 
                 if ((this.array_risorsa.indexOf(key)) != -1) { 
