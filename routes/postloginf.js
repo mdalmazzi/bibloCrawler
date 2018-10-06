@@ -159,24 +159,12 @@ youtube.crop('0:05', '0:25', './file.mp4')
 router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res, next) {
 
     if ((req.params.materia == 'all') && (req.params.scuola == 'all') && (req.params.risorsa == 'all') && (req.params.fonte == 'all') && (req.params.licenza == 'all')) {
-        // Word.find({
-        //         "word": req.params.word
 
-        //     })
-        console.log('1 word:', req.params.word);
+        console.log('cambiato word:', req.params.word);
         Page.find({
                     $text: { $search: req.params.word, $caseSensitive: false },
 
-                    // inserito Cairo
-                    //'titolo': req.params.word
-                    // inserito Cairo
 
-                    // "scuola": { $in: req.params.scuola.split("&") },
-
-                    // "type": (req.params.risorsa == 'all') ? { $exists: true } : {
-                    //     // $in: req.params.risorsa.split("&")
-                    //     "$regex": req.params.risorsa
-                    // }
 
                 }, { score: { $meta: "textScore" } },
                 function(err, messages) {
@@ -189,10 +177,6 @@ router.get('/:word/:scuola/:risorsa/:fonte/:materia/:licenza', function(req, res
                 })
             // .sort({ score: { $meta: 'textScore' } })
             .limit(25)
-
-
-        //.sort({ quality: -1 })
-
 
 
         .exec(function(err, messages) {
