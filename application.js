@@ -32,7 +32,7 @@ mongoose.connect('localhost:27017/SpaggiariPage', {
         // reconnectTries: Number.MAX_VALUE,
         reconnectTries: 5,
         reconnectInterval: 500,
-        socketOptions: { keepAlive: 1, connectTimeoutMS: 60000 }
+        socketOptions: { keepAlive: 1, connectTimeoutMS: 600000 }
     }
 });
 
