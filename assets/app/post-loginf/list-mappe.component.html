@@ -806,29 +806,27 @@
 
                 <br>
 
-                <!-- <pagination-controls (pageChange)="p = $event">
+                
 
-                </pagination-controls> -->
+                <div class="row">
 
-            <div class="row">
+                    <div class="card-columns col col-12">
 
-                <div class="card-columns col col-12">
-
-                    <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="20" [page]="p" *ngFor="let word of words  |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
-                    </app-postlogin-f>
+                        <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="20" [page]="p" *ngFor="let word of words  |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
+                        </app-postlogin-f>
 
 
 
 
+                    </div>
                 </div>
-            </div>
-            <pagination-controls (pageChange)="p = $event">
+                <pagination-controls (pageChange)="p = $event">
 
-            </pagination-controls>
+                </pagination-controls>
 
 
-            </form> -->
-            <!-- <div class="row">
+            </form> 
+             <div class="row">
                 <pagination-controls (pageChange)="p = $event">
 
                 </pagination-controls>
@@ -841,15 +839,13 @@
             -->
                 <!-- <div class="card-columns col col-12"> -->
 
-                <!-- <div class="cards">
+                <div class="cards">
 
                     <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
                     </app-postlogin-f>
 
                 </div>
-                
-                    Qui reinserire
-                -->
+
 
                 <!-- <div class="cards">
                     <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of results | async">
@@ -872,11 +868,11 @@
                 </div> -->
 
 
-            </div> -->
+            </div>
             <div class="row">
-                <!-- <pagination-controls (pageChange)="p = $event">
+                <pagination-controls (pageChange)="p = $event">
 
-                </pagination-controls> -->
+                </pagination-controls>
             </div>
 
         </div>
