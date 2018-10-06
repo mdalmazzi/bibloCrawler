@@ -44,6 +44,7 @@ export class ListMappeComponentF {
     searchFormBis: FormGroup;
     
    // resultsBis: Observable<{}>;  
+    avemgers;
     resultsBis;  
     resultsBis_Sub;  
     resultsBis_1;
@@ -58,12 +59,7 @@ export class ListMappeComponentF {
     resultsBis_5;
     resultsBis_6;
     resultsBis_7;
-    // resultsBis_1;  
-    // resultsBis_2; 
-    
-    // resultsBis;     
-    // resultsBis_1;   
-    // resultsBis_2;  
+   
 
     trasformedYouTubeItems = [];
     transformedWords: Word[] = [];
