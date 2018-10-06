@@ -115,9 +115,11 @@ export class ListMappeComponentF {
             this.transformedWords = [];
            
             // for (let word of words) {
+                // Se è unico //
                 if (words.length == 1) {
                     this.transformedWords.push(new Word(words[0].word, words[0].titolo, words[0].body, words[0].path, words[0].meta1, words[0].meta2, words[0].meta3, words[0].images, words[0].type, words[0]._id, words[0].licenza, words[0].scuola, words[0].controllato, words[0].quality))
                 }
+                 // Se è unico //
                 for (var i=0; i<(words.length-1); i++) 
                 {
                 // var word = words[i];
