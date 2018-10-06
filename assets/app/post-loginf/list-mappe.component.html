@@ -118,7 +118,7 @@
             <br>
             <br>
 
-            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="row">
                     <div class="col col-3">
                         <div class="row text-muted ">
@@ -810,24 +810,24 @@
 
                 </pagination-controls> -->
 
-                <div class="row">
+            <div class="row">
 
-                    <div class="card-columns col col-12">
+                <div class="card-columns col col-12">
 
-                        <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="20" [page]="p" *ngFor="let word of words  |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
-                        </app-postlogin-f>
-
-
+                    <app-postlogin-f [length_word]="words?.length" [index_word]="i" [word]="word" [itemsPerPage]="20" [page]="p" *ngFor="let word of words  |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
+                    </app-postlogin-f>
 
 
-                    </div>
+
+
                 </div>
-                <pagination-controls (pageChange)="p = $event">
+            </div>
+            <pagination-controls (pageChange)="p = $event">
 
-                </pagination-controls>
+            </pagination-controls>
 
 
-            </form>
+            </form> -->
             <!-- <div class="row">
                 <pagination-controls (pageChange)="p = $event">
 
@@ -841,13 +841,13 @@
             -->
                 <!-- <div class="card-columns col col-12"> -->
 
-                <div class="cards">
+                <!-- <div class="cards">
 
                     <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
                     </app-postlogin-f>
 
                 </div>
-                <!-- 
+                
                     Qui reinserire
                 -->
 
@@ -872,7 +872,7 @@
                 </div> -->
 
 
-            </div>
+            </div> -->
             <div class="row">
                 <!-- <pagination-controls (pageChange)="p = $event">
 
