@@ -827,9 +827,9 @@
 
             <div class="row">
 
-                <div class="col col-12">
+                <!-- <div class="col col-12"> -->
 
-                    <!-- <div class="cards"> -->
+                <div class="cards">
 
                     <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
                     </app-postlogin-f>
