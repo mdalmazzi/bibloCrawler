@@ -825,20 +825,20 @@
             <br>
             <br>
 
-            <div class="row">
+            <!-- <div class="row"> -->
 
-                <!-- <div class="col col-12"> -->
+            <!-- <div class="col col-12"> -->
 
-                <div class="cards">
+            <div class="cards">
 
-                    <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
-                    </app-postlogin-f>
+                <app-postlogin-f [length_word]="results?.length" [index_word]="i" [word]="result" [itemsPerPage]="20" [page]="p" *ngFor="let result of results | async |paginate: { itemsPerPage: 20, currentPage: p }; let i=index ">
+                </app-postlogin-f>
 
-                    <!-- </div> -->
-                </div>
+                <!-- </div> -->
+            </div>
 
 
-                <!-- <div class="cards">
+            <!-- <div class="cards">
                     <mat-card style="background-color:rgb(220, 220, 220)" *ngFor="let result of results | async">
                         <mat-card-title class="text-warning">
                             <small>
@@ -859,7 +859,7 @@
                 </div> -->
 
 
-            </div>
+            <!-- </div> -->
             <div class="row">
                 <pagination-controls (pageChange)="p = $event">
 
