@@ -22,7 +22,7 @@ export class CrawlerComponent {
     public crawlers: Crawler[];
     public crawler: Crawler;
 
-    placeholderVar = "Scrivi il nome del crawler qui..."
+    placeholderVar = "Scrivi il nome del nuovo progetto..."
     nomeCrawler: string = '';
     nomeProgetto: string = '';
 
