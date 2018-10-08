@@ -18,6 +18,7 @@ export class PostLoginService {
     constructor(private http: Http) {}
 
     addBox(word: Word) {
+        console.log():
         
                 const body = JSON.stringify(word);
               
