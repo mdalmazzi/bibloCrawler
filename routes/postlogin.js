@@ -44,18 +44,18 @@ router.get('/:id', function(req, res, next) {
 
 });
 
-// router.use('/', function(req, res, next) {
-//     jwt.verify(req.query.token, 'secret', function(err, decoded) {
-//         if (err) {
-//             return res.status(401).json({
-//                 title: 'Non autenticato',
-//                 error: err
-//             });
-//         }
-//         next();
-//     })
+router.use('/', function(req, res, next) {
+    jwt.verify(req.query.token, 'secret', function(err, decoded) {
+        if (err) {
+            return res.status(401).json({
+                title: 'Non autenticato',
+                error: err
+            });
+        }
+        next();
+    })
 
-// });
+});
 
 
 router.post('/', function(req, res, next) {

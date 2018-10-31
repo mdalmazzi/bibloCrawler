@@ -40,6 +40,7 @@ module.exports.crawl = function(callback) {
 
         if (!todo) {
             // console.log('todo: ', todo);
+            // il crawler ha già girato una volta
             return //gestire meglio
         } else {
             var myCrawlerUrl = todo.text;
@@ -56,9 +57,11 @@ module.exports.crawl = function(callback) {
             // myCrawler.interval = 10000; // Ten seconds
             myCrawler.interval = 1000; // One second
             // myCrawler.depth = 2;
-            myCrawler.maxConcurrency = 3;
+            myCrawler.maxConcurrency = 2;
             myCrawler.timeout = 300000;
             myCrawler.maxResourceSize = 8388608;
+            myCrawler.maxDepth = 3;
+
 
             // var siti;
             // messages.sito.forEach((element) => {
@@ -90,8 +93,6 @@ module.exports.crawl = function(callback) {
 
         });
 
-
-
         myCrawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 
             // console.log("Fetched completed! At: ", queueItem);
@@ -99,11 +100,8 @@ module.exports.crawl = function(callback) {
             callback(responseBuffer, queueItem.url, queueItem.stateData.contentType, todo);
         });
 
-
-
-
         myCrawler.on("complete", function() {
-            // console.log(`Crawler ${myCrawlerUrl} completed!`);
+            console.log(`Crawler ${myCrawlerUrl} completed!`);
 
             // console.log('myCrawler', myCrawler);
 
@@ -147,8 +145,18 @@ module.exports.crawl = function(callback) {
 
         });
 
+        myCrawler.on("fetchstart", function(queueItem, requestOptions) {
+            // console.log(`Fertch started!`, queueItem);
+
+        });
+
+        myCrawler.on("fetchcomplete", function(queueItem, responseBody, responseObject) {
+            console.log(`Fetch Completed!`, queueItem);
+
+        });
+
         myCrawler.on("queueerror", function(error, URLData) {
-            // console.log(`Errore in queue`, error);
+            console.log(`Errore in queue`, error);
 
         });
 

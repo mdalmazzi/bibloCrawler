@@ -16,6 +16,7 @@ var postloginRoutesF = require('./routes/postloginf');
 var imagesRoutes = require('./routes/images');
 
 var progettoRoutes = require('./routes/progetto');
+var youtubeRoutes = require('./routes/youtube');
 var crawlerRoutes = require('./routes/crawler');
 
 var Page = require('./models/page');
@@ -66,6 +67,7 @@ app.use('/idee', ideeRoutes);
 app.use('/scaletta', scalettaRoutes);
 app.use('/dettaglio', postloginRoutes);
 app.use('/infoprogetto', progettoRoutes);
+app.use('/infoyoutube', youtubeRoutes);
 app.use('/crawler', crawlerRoutes);
 app.use('/home-info', postloginRoutesF);
 app.use('/images', imagesRoutes);

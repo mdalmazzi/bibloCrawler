@@ -27,5 +27,286 @@
 
         </div>
     </div>
+</div>
 
-    <!--  -->
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Fonti Canali YouTube:
+
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success" (click)="AddFonte()">Inserisci dati nuovo canale</button>
+                </div>
+
+                <hr>
+
+                <div class="row" *ngIf="addFonteVisibility">
+                    <div class="col-md-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Inserimento Fonte</h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- URL  -->
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <h3><span class="label label-primary">URL Fonte:</span></h3>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h3>
+                                                    <medium-editor [(editorModel)]="fonteUrl" [editorOptions]="{'toolbar': false}" [editorPlaceholder]="editorPlaceholder" (editorModelChange)="OneditorModelChangeUrl($event)">
+                                                    </medium-editor>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Tipo di scuola  -->
+
+                                <div class="panel panel-default" (click)="closeSchool($event)">
+                                    <div class="panel-body">
+
+                                        <div class="dropdown">
+                                            <button (click)="selectSchool($event)" class="dropbtn">Tipologie scuola: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                                            <div id="myDropdownSchool" class="dropdown-content">
+                                                <!-- Primaria -->
+                                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[0])}" (click)="setSchool(typeSchoolValue[0])">{{typeSchoolValue[0]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[1])}" (click)="setSchool(typeSchoolValue[1])">{{typeSchoolValue[1]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorSchool(typeSchoolValue[2])}" (click)="setSchool(typeSchoolValue[2])">{{typeSchoolValue[2]}}</a>
+
+                                            </div>
+                                        </div>
+
+                                        <h3> <span class="label label-success">{{typeSchool2String }}</span></h3>
+                                    </div>
+                                </div>
+
+                                <!--TYpe Language  -->
+
+                                <div class="panel panel-default" (click)="closeLanguage($event)">
+                                    <div class="panel-body">
+
+                                        <div class="dropdown">
+                                            <button (click)="selectLanguage($event)" class="dropbtn">Tipologie lingue: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+                                            <div id="myDropdownLanguage" class="dropdown-content">
+                                                <!-- Italiano -->
+                                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[0])}" (click)="setLanguage(typeLanguageValue[0])">{{typeLanguageValue[0]}} </a>
+
+                                                <!-- Francese -->
+                                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[1])}" (click)="setLanguage(typeLanguageValue[1])">{{typeLanguageValue[1]}}</a>
+
+                                                <!-- Inglese -->
+                                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[2])}" (click)="setLanguage(typeLanguageValue[2])">{{typeLanguageValue[2]}}</a>
+
+                                                <!-- Tedesco -->
+                                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[3])}" (click)="setLanguage(typeLanguageValue[3])">{{typeLanguageValue[3]}}</a>
+
+                                                <!-- Spagnolo -->
+                                                <a [ngStyle]="{ 'background-color': setColorLanguage(typeLanguageValue[4])}" (click)="setLanguage(typeLanguageValue[4])">{{typeLanguageValue[4]}}</a>
+
+                                            </div>
+                                        </div>
+                                        <h3> <span class="label label-success">{{typeLanguage2String }}</span></h3>
+
+                                    </div>
+                                </div>
+
+                                <!-- Licenza  -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body" (click)="closeLicenza($event)">
+
+                                        <div class="dropdown">
+                                            <button (click)="selectLicenza($event)" class="dropbtn">Tipologie licenze: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                                            <div id="myDropdownLicenza" class="dropdown-content">
+                                                <!-- Primaria -->
+                                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[0])}" (click)="setLicenza(typeLicenzaValue[0])">{{typeLicenzaValue[0]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[1])}" (click)="setLicenza(typeLicenzaValue[1])">{{typeLicenzaValue[1]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorLicenza(typeLicenzaValue[2])}" (click)="setLicenza(typeLicenzaValue[2])">{{typeLicenzaValue[2]}}</a>
+
+                                            </div>
+                                        </div>
+                                        <h3> <span class="label label-success">{{typeLicenza2String }}</span></h3>
+                                    </div>
+                                </div>
+
+
+                                <!-- Tipologia fonte  -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body" (click)="closeFonte($event)">
+
+                                        <div class="dropdown">
+                                            <button (click)="selectFonte($event)" class="dropbtn">Tipologie fonte: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                                            <div id="myDropdownFonte" class="dropdown-content">
+                                                <!-- Primaria -->
+                                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[0])}" (click)="setFonte(typeFonteValue[0])">{{typeFonteValue[0]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[1])}" (click)="setFonte(typeFonteValue[1])">{{typeFonteValue[1]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorFonte(typeFonteValue[2])}" (click)="setFonte(typeFonteValue[2])">{{typeFonteValue[2]}}</a>
+
+                                            </div>
+                                        </div>
+                                        <h3> <span class="label label-success">{{typeFonte2String }}</span></h3>
+
+                                    </div>
+                                </div>
+
+                                <!-- Tipologia Materia  -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body" (click)="closeMateria($event)">
+
+                                        <div class="dropdown">
+                                            <button (click)="selectMateria($event)" class="dropbtn">Tipologie materia: <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                                            <div id="myDropdownMateria" class="dropdown-content">
+                                                <!-- Primaria -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[0])}" (click)="setMateria(typeMateriaValue[0])">{{typeMateriaValue[0]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[1])}" (click)="setMateria(typeMateriaValue[1])">{{typeMateriaValue[1]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[2])}" (click)="setMateria(typeMateriaValue[2])">{{typeMateriaValue[2]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[3])}" (click)="setMateria(typeMateriaValue[3])">{{typeMateriaValue[3]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[4])}" (click)="setMateria(typeMateriaValue[4])">{{typeMateriaValue[4]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[5])}" (click)="setMateria(typeMateriaValue[5])">{{typeMateriaValue[5]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[6])}" (click)="setMateria(typeMateriaValue[6])">{{typeMateriaValue[6]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[7])}" (click)="setMateria(typeMateriaValue[7])">{{typeMateriaValue[7]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[8])}" (click)="setMateria(typeMateriaValue[8])">{{typeMateriaValue[8]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[9])}" (click)="setMateria(typeMateriaValue[9])">{{typeMateriaValue[9]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[10])}" (click)="setMateria(typeMateriaValue[10])">{{typeMateriaValue[10]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[11])}" (click)="setMateria(typeMateriaValue[11])">{{typeMateriaValue[11]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[12])}" (click)="setMateria(typeMateriaValue[12])">{{typeMateriaValue[12]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[13])}" (click)="setMateria(typeMateriaValue[13])">{{typeMateriaValue[13]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[14])}" (click)="setMateria(typeMateriaValue[14])">{{typeMateriaValue[14]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[15])}" (click)="setMateria(typeMateriaValue[15])">{{typeMateriaValue[15]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[16])}" (click)="setMateria(typeMateriaValue[16])">{{typeMateriaValue[16]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[17])}" (click)="setMateria(typeMateriaValue[17])">{{typeMateriaValue[17]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[18])}" (click)="setMateria(typeMateriaValue[18])">{{typeMateriaValue[18]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[19])}" (click)="setMateria(typeMateriaValue[19])">{{typeMateriaValue[19]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[20])}" (click)="setMateria(typeMateriaValue[20])">{{typeMateriaValue[20]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[21])}" (click)="setMateria(typeMateriaValue[21])">{{typeMateriaValue[21]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[22])}" (click)="setMateria(typeMateriaValue[22])">{{typeMateriaValue[22]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[23])}" (click)="setMateria(typeMateriaValue[23])">{{typeMateriaValue[23]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[24])}" (click)="setMateria(typeMateriaValue[24])">{{typeMateriaValue[24]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[25])}" (click)="setMateria(typeMateriaValue[25])">{{typeMateriaValue[25]}}</a>
+
+                                                <!-- //Secondaria 2 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[26])}" (click)="setMateria(typeMateriaValue[26])">{{typeMateriaValue[26]}}</a>
+
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[27])}" (click)="setMateria(typeMateriaValue[27])">{{typeMateriaValue[27]}} </a>
+
+                                                <!-- //Secondaria 1 Grado -->
+                                                <a [ngStyle]="{ 'background-color': setColorMateria(typeMateriaValue[28])}" (click)="setMateria(typeMateriaValue[28])">{{typeMateriaValue[28]}}</a>
+
+                                            </div>
+                                        </div>
+                                        <h3> <span class="label label-success">{{typeMateria2String }}</span></h3>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- Completato crawler?  -->
+                                <!-- <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3><span class="label label-primary">Crawler SI/NO:</span></h3>
+                                    </div>
+                                </div> -->
+
+
+
+                                <!-- Data last crawler -->
+                                <!-- <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3><span class="label label-primary">Crawler lat time:</span></h3>
+                                    </div>
+                                </div> -->
+
+                                <button type="button" class="btn btn-warning" (click)="onSubmit()">Conferma fonte al progetto</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                </div>
+                <div class="panel-title">
+                    <h3><span class="label label-primary">Elenco canali YouTube inserite nel Crawler: </span>
+                    </h3>
+
+                    <app-sito [sito]="sito" class="" *ngFor="let sito of canali">
+                    </app-sito>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--  -->

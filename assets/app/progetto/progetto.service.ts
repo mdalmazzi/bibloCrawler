@@ -4,6 +4,7 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
 import {Sito} from "./sito.model";
+import {YouTube} from "./youtube.model";
 import {Progetto} from "./progetto.model";
 import {Crawler} from "./crawler.model";
 
@@ -12,6 +13,7 @@ import {Crawler} from "./crawler.model";
 @Injectable()
 export class ProgettoService {
     public siti: Sito[] = [];
+    public youtubeChannel: YouTube[] = [];
     public progetti: Progetto[];
     public crawlers: Crawler[];
     public crawler: Crawler;
@@ -25,6 +27,23 @@ export class ProgettoService {
 
   
     constructor(private http: Http) {}
+
+    getElencoYouTube() {
+
+        return this.http.get(this.path_to_server + '/infoyoutube/')
+            .map((response: Response) => {
+                const siti = response.json().obj;
+               
+                let transformedSiti: YouTube[] = [];
+                for (let sito of siti) {                   
+                    transformedSiti.push(new Sito( sito.text, sito.tipologia, sito.licenza, sito.scuola, sito.lingua, sito.materia))
+                }
+                this.siti = transformedSiti;      
+                return transformedSiti;
+                
+            })
+             .catch((error: Response) => Observable.throw(error.json()));
+    }
 
     getElencoSiti() {
 
@@ -96,6 +115,34 @@ export class ProgettoService {
                 
             })
              .catch((error: Response) => Observable.throw(error.json()));
+    }
+
+
+    addYouTube(sito: YouTube) {
+        
+        const body = JSON.stringify(sito);
+        
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.path_to_server + '/infoyoutube/' , body, {headers: headers})
+            .map((response: Response) => {
+                
+                const result = response.json();
+                const sito = new YouTube(result.obj.text, result.obj.tipologia, result.obj.licenza,  result.obj.scuola, result.obj.lingua,result.obj.materia);
+
+
+                console.log('result', result);
+                
+                // this.siti.push(sito);
+                // console.log('Elenco siti progetto: ', this.siti);
+                // this.progetti[0].sito.push(sito);
+                // console.log('Service progetto: ', this.progetti);
+                
+                return sito;
+
+                
+           })
+            .catch((error: Response) => Observable.throw(error.json()));   
     }
 
     addTodo(sito: Sito, progettoName: string) {

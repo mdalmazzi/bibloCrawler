@@ -32,9 +32,9 @@ module.exports.extractData = function(html, url, contentType, todo) {
             lingua: todo.language,
             materia: todo.materia
         });
-
-        searchForImage($images, $, page);
-
+        // Tolto 12102018
+        //   searchForImage($images, $, page);
+        // Tolto 12102018
         // Page.findOne({})
         Page.findOne({ path: url }, function(err, obj) {
             if (err) {

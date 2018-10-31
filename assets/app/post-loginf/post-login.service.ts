@@ -43,8 +43,7 @@ export class PostLoginServiceF {
                 
                 return transformedWords;
             })
-             .catch((error: Response) => Observable.throw(error.json()));
-             
+             .catch((error: Response) => Observable.throw(error.json()));       
 
     }
 
@@ -70,8 +69,7 @@ export class PostLoginServiceF {
                 return solo_Publisher;
             })
 
-             .catch((error: Response) => Observable.throw(error.json()));
-             
+             .catch((error: Response) => Observable.throw(error.json()));      
 
     }
 
