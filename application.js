@@ -29,7 +29,8 @@ var app = express();
 // var options = { server: { socketOptions: { connectTimeoutMS: 100000 } } };
 
 // mongoose.connect('localhost:27017/SpaggiariPage');
-mongoose.connect('192.168.140.44:27017/SpaggiariPage');
+// mongoose.connect('192.168.140.44:27017/SpaggiariPage');
+mongoose.connect('213.26.180.210:27017/SpaggiariPage');
 
 // mongoose.connect('localhost:27017/SpaggiariPage', {
 //     server: {
