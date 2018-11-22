@@ -17,8 +17,9 @@ export class PostLoginServiceF {
 
 
     // private path_to_server: string = 'http://localhost:3000';
-    private path_to_server: string = 'http://localhost:8880';
+    // private path_to_server: string = 'http://localhost:8880';
     // private path_to_server: string = 'http://192.168.140.44:8880';
+    private path_to_server: string = 'http://192.168.140.46:8880';
   
     constructor(private http: Http) {}
 
