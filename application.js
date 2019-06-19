@@ -28,9 +28,10 @@ var app = express();
 //mongoose.connect('localhost:27017/testYOUTube');
 // var options = { server: { socketOptions: { connectTimeoutMS: 100000 } } };
 
-mongoose.connect('localhost:27017/SpaggiariPage');
+//mongoose.connect('localhost:27017/SpaggiariPage');
 // mongoose.connect('http://192.168.140.44:27017/SpaggiariPage');
 // mongoose.connect('192.168.140.44:27017/SpaggiariPage');
+mongoose.connect('192.168.140.46:27017/SpaggiariPage');
 
 // mongoose.connect('localhost:27017/SpaggiariPage', {
 //     server: {
